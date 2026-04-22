@@ -160,9 +160,7 @@ nav a{
 }
 
 
-/* =========================
-   BUSCADOR
-========================= */
+/* ==== BUSCADOR ======== */
 
 .barra-busqueda{
     display:flex;
@@ -307,3 +305,5 @@ nav a{
 .btn-carrito:hover{
     background:#8c6534;
 }
+
+/* Categoria Hombre*/
