@@ -10,7 +10,7 @@
     </div>
 
     <div class="producto">
-        <img src="{{ asset('img/zapanike.png') }}">
+        <img src="{{ asset('img/zapatillas/zapanike.png') }}">
         <h3>Nike Jordan retro 1</h3>
         <p class="precio">$110.000</p>
         <button class="btn-carrito agregar-carrito">Agregar al carrito</button>

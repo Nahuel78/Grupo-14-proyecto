@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ropa Hombre - Modape Sport</title>
+<title> Ropa - Modape Sport</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/estilo.css') }}">
@@ -42,9 +42,9 @@
 <div class="menu">
 
 <a href="/inicio">Inicio</a>
-<a href="/hombre/ropa">Ropa</a>
-<a href="/hombre/zapatillas">Zapatillas</a>
-<a href="/hombre/botines">Botines</a>
+<a href="/niños/ropa">Ropa</a>
+<a href="/niños/zapatillas">Zapatillas</a>
+<a href="/niños/botines">Botines</a>
 
 <form class="barra-busqueda">
 <input type="text" placeholder="Buscar productos...">
@@ -55,111 +55,94 @@
 
 </nav>
 
-<h2 class="titulo-seccion">⭐⭐ Ropa - Hombre ⭐⭐</h2>
+<h2 class="titulo-productos">⭐⭐ Ropa ⭐⭐</h2>
 
 <!-- FILTROS -->
 
 <div class="filtros">
 
 <button onclick="filtrar('todos')">Todos</button>
+<button onclick="filtrar('niño')">Niño</button>
+<button onclick="filtrar('niña')">Niña</button>
 <button onclick="filtrar('nike')">Nike</button>
 <button onclick="filtrar('adidas')">Adidas</button>
 <button onclick="filtrar('puma')">Puma</button>
+<button onclick="filtrar('kappa')">Kappa</button>
 
 </div>
 
 <div class="contenedor-productos">
 
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/ropa/camperanike.png') }}">
-<h3> Campera Nike</h3>
+<div class="producto" data-marca="adidas" data-genero="niño">
+<img src="{{ asset('img/ninos/conjuntoseleccionniño.png') }}">
+<h3> Conjunto Adidas Niño</h3>
 <p class="precio">$120.000</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/carruselimagenes/camisetaArg2026.png') }}">
-<h3>Camiseta Argentina</h3>
-<p class="precio">$95.000</p>
+<div class="producto" data-marca="adidas" data-genero="unisex">
+<img src="{{ asset('img/ninos/conjuntoadidax2.png') }}">
+<h3> Conjunto Adidas Niño/Niña</h3>
+<p class="precio">$120.000</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/carruselimagenes/conjuntoSeleccion.png') }}">
-<h3>Conjunto Selección</h3>
-<p class="precio">$140.000</p>
+<div class="producto" data-marca="adidas" data-genero="unisex">
+<img src="{{ asset('img/ninos/conjuntoseleccionniño.png') }}">
+<h3> Conjunto Adidas Seleccion Niño/Niña</h3>
+<p class="precio">$120.000</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/conjunto-seleccion-invierno.png') }}">
-<h3>Conjunto Selección</h3>
-<p class="precio">$200.000</p>
+<div class="producto" data-marca="adidas" data-genero="unisex">
+<img src="{{ asset('img/ninos/camisetadebocaniño.png') }}">
+<h3> Camiseta Adidas Boca Niño/Niña</h3>
+<p class="precio">$100.000</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/campera-boca.png') }}">
-<h3>Campera Boca</h3>
-<p class="precio">$150.000</p>
+<div class="producto" data-marca="puma" data-genero="unisex">
+<img src="{{ asset('img/ninos/camisetaindependienteniño.png') }}">
+<h3> Camiseta Puma Independiente Niño/Niña</h3>
+<p class="precio">$100.000</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/buzo-river.png') }}">
-<h3>Buzo river</h3>
-<p class="precio">$150.000</p>
+<div class="producto" data-marca="adidas" data-genero="unisex">
+<img src="{{ asset('img/ninos/camisetariverniño.png') }}">
+<h3> Camiseta Adidas River Niño/Niña</h3>
+<p class="precio">$100.000</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/camisetabocatitular1.png') }}">
-<h3>Camiseta Boca</h3>
+<div class="producto" data-marca="adidas" data-genero="niño">
+<img src="{{ asset('img/ninos/pantalonjoggeradidasniño.png') }}">
+<h3>Pantalon jogger Adidas Niño</h3>
 <p class="precio">$130.000</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/camisetarivertitular.png') }}">
-<h3>Camiseta River</h3>
-<p class="precio">$130.000</p>
+<div class="producto" data-marca="adidas" data-genero="unisex">
+<img src="{{ asset('img/ninos/pantalonriverniño.png') }}">
+<h3>Pantalon Adidas River Niño</h3>
+<p class="precio">$90.000</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/ropa/joginnike.png') }}">
-<h3>Pantalon joggin Nike retro</h3>
-<p class="precio">$80.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/buzoadidasuplente.png') }}">
-<h3> Conjunto Seleccion</h3>
-<p class="precio">$180.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/ropa/buzocangurowhite.png') }}">
-<h3> Buzo canguro Nike</h3>
+<div class="producto" data-marca="adidas" data-genero="unisex">
+<img src="{{ asset('img/ninos/buzoargentinaniño.png') }}">
+<h3>Buzo Adidas Seleccion Niño</h3>
 <p class="precio">$100.000</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/buzoadidasliverpol.png') }}">
-<h3> Buzo Adidas Liverpool</h3>
-<p class="precio">$100.000</p>
+<div class="producto" data-marca="adidas" data-genero="niña">
+<img src="{{ asset('img/ninos/remeraadidasdisneyniña.png') }}">
+<h3>Remera Adidas Disney Niña</h3>
+<p class="precio">$40.000</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
-<div class="producto" data-marca="puma">
-<img src="{{ asset('img/ropa/pantalonmachestercity.png') }}">
-<h3> Pantalon Deportivo Manchester City</h3>
-<p class="precio">$100.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
 </div>
 
 @include('footer')
@@ -182,18 +165,23 @@ carrito.textContent = contador;
 
 <script>
 
-function filtrar(marca){
+function filtrar(filtro){
 
 let productos = document.querySelectorAll(".producto");
 
 productos.forEach(producto => {
 
-if(marca === "todos"){
-producto.style.display = "block";
+let marca = producto.dataset.marca;
+let genero = producto.dataset.genero;
+
+if(filtro === "todos"){
+producto.style.display = "";
 }
-else if(producto.dataset.marca === marca){
-producto.style.display = "block";
+
+else if(filtro === marca || filtro === genero){
+producto.style.display = "";
 }
+
 else{
 producto.style.display = "none";
 }

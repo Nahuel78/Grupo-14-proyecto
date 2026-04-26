@@ -1,15 +1,11 @@
-/* =========================
-   GENERAL
-========================= */
+/* ==== General ==== */
 
 body{
     background-color:#031926;
+
 }
 
-
-/* =========================
-   HEADER
-========================= */
+/* ==== Header ==== */
 
 .header{
     height:180px;
@@ -46,11 +42,57 @@ body{
     z-index:0;
     opacity:0.8;
 }
+/*==== Eslogan ====*/
 
+.frase-header {
+    text-align: center;
+    margin-top: 5px;
+}
 
-/* =========================
-   ICONOS
-========================= */
+/*==== Animacion de Slogan*/
+
+@keyframes sloganFade {
+    0% {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.95);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    35% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    45% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+}
+
+.frase-header h2 {
+    display: inline-block;
+    background: linear-gradient(135deg, #836234, #8a642f);
+    color: rgba(255, 255, 255, 0.479);
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+    animation: sloganFade 8s ease-in-out infinite;
+}
+
+/* ===== Iconos ===== */
 
 .top-icons{
     display:flex;
@@ -104,9 +146,7 @@ body{
 }
 
 
-/* =========================
-   MENU
-========================= */
+/*===== Menu ==== */
 
 nav{
     background-color:#A67C42;
@@ -232,26 +272,51 @@ nav a{
 
 /*==== Footer ====*/
 .footer{
-    background-color:#031926;
-    color:white;
-    padding:30px;
-    margin-top:50px;
+background:#031926;
+color:white;
+padding:40px 0;
+margin-top:40px;
 }
 
 .footer-contenido{
-    display:flex;
-    justify-content:space-around;
-    text-align:center;
+display:flex;
+justify-content:space-around;
+flex-wrap:wrap;
+max-width:1200px;
+margin:auto;
+gap:40px;
+}
+
+.footer-contenido div{
+width:200px;
 }
 
 .footer h4{
-    color:#A67C42;
+color:#A67C42;
+margin-bottom:15px;
+border-bottom:2px solid #A67C42;
+padding-bottom:5px;
+}
+
+.footer p{
+margin:8px 0;
+}
+
+.footer a{
+color:white;
+text-decoration:none;
+}
+
+.footer a:hover{
+color:#A67C42;
 }
 
 .copyright{
-    text-align:center;
-    margin-top:20px;
-    font-size:14px;
+text-align:center;
+margin-top:30px;
+font-size:14px;
+border-top:1px solid #555;
+padding-top:20px;
 }
 
 /* Seccion de Productos */
@@ -278,6 +343,13 @@ nav a{
     padding:15px;
     border-radius:10px;
     color:white;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 .producto img{
@@ -306,4 +378,274 @@ nav a{
     background:#8c6534;
 }
 
-/* Categoria Hombre*/
+/*==== Quienes somos ====*/
+.quienes-somos{
+    width:70%;
+    margin:60px auto;
+    color:white;
+    line-height:1.7;
+}
+
+.quienes-somos h1{
+    text-align:center;
+    margin-bottom:30px;
+    font-size:40px;
+}
+
+.quienes-somos h2{
+    margin-top:30px;
+    color:#A67C42;
+}
+
+.quienes-somos p{
+    text-align: justify;
+}
+
+/*====Comercializacion ====*/
+.comercializacion{
+    width:70%;
+    margin:60px auto;
+    color:white;
+    line-height:1.7;
+}
+
+.comercializacion h1{
+    text-align:center;
+    margin-bottom:30px;
+    font-size:40px;
+}
+
+.comercializacion h2{
+    margin-top:30px;
+    color:#A67C42;
+}
+
+.comercializacion p{
+    text-align: justify;
+}
+
+/*==== Contacto ====*/
+.titulo-contacto{
+text-align:center;
+color:white;
+margin:40px 0;
+}
+
+.form-contacto{
+width:400px;
+margin:0 auto;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.form-contacto label {
+    color: white;
+}
+
+.form-contacto input,
+.form-contacto textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.form-contacto button{
+background:#A67C42;
+color:white;
+border:none;
+padding:10px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.form-contacto button:hover{
+background:#8a642f;
+}
+
+/*==== Info Contacto ====*/
+.info-contacto {
+    width: 400px;
+    margin: 20px auto;
+    color: white;
+    text-align: center;
+}
+
+.info-contacto h3 {
+    margin-bottom: 15px;
+}
+
+/*==== Mensaje exito ====*/
+.mensaje-exito {
+    text-align: center;
+    color: white;
+    margin-top: 120px;
+}
+
+.mensaje-exito h1 {
+    margin-bottom: 15px;
+    font-size: 32px;
+}
+
+.mensaje-exito p {
+    margin-bottom: 25px;
+    font-size: 18px;
+}
+
+.mensaje-exito a {
+    display: inline-block;
+    background: #A67C42;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+.mensaje-exito a:hover {
+    background: #8a642f;
+}
+
+/*==== Términos y Condiciones ====*/
+
+.contenedor-terminos{
+    width:70%;
+    margin:60px auto;
+    color:white;
+    line-height:1.7;
+}
+
+.contenedor-terminos h2{
+    text-align:center;
+    margin-bottom:30px;
+    font-size:40px;
+}
+
+.contenedor-terminos h3{
+    margin-top:30px;
+    color:#A67C42;
+}
+
+.contenedor-terminos p{
+    text-align: justify;
+}
+/*==== Baner de oferta ====*/
+
+.promo{
+    text-align: center;
+    background: #A67C42;
+    padding: 40px;
+    color: white;
+}
+
+.btn-promo{
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/*==== Marcas ==== */
+
+.marcas{
+    text-align: center;
+    padding: 40px 0;
+}
+
+.marcas-img img{
+    width:200px;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
+}
+
+.marcas-img img:hover{
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+/*==== Beneficios ====*/
+
+.beneficios{
+    display:flex;
+    justify-content:center;
+    gap:80px;
+    padding:80px;
+    text-align:center;
+}
+
+.beneficio{
+    color:white;
+    width:250px;
+}
+
+
+/*==== Responsive Celular ====*/
+
+@media (max-width: 400px){
+
+.header{
+    flex-direction:column;
+    height:auto;
+    padding:20px;
+    gap:15px;
+    text-align:center;
+}
+
+.frase-header h2{
+    font-size:15px;
+    padding:8px 15px;
+    border-radius:20px;
+    letter-spacing:1px;
+}
+
+.top-icons{
+    width:100%;
+    display:flex;
+    justify-content:flex-end;
+}
+
+/* titulo más chico */
+.titulo{
+    font-size:32px;
+}
+
+/* imagen de fondo del titulo */
+.fondo-img{
+    width:250px;
+    left:-30px;
+}
+
+/* slogan */
+.frase-header h2{
+    font-size:16px;
+    padding:10px 20px;
+}
+
+/* menu */
+nav{
+    top:0;
+}
+
+.menu{
+    flex-direction:row;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+    padding-left:0;
+}
+
+/* buscador */
+.barra-busqueda input{
+    width:200px;
+}
+
+section{
+    margin-top:60px;
+}
+
+}

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ropa Hombre - Modape Sport</title>
+<title>Zapatillas Hombre - Modape Sport</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/estilo.css') }}">
@@ -55,7 +54,7 @@
 
 </nav>
 
-<h2 class="titulo-seccion">⭐⭐ Ropa - Hombre ⭐⭐</h2>
+<h2 class="titulo-seccion">⭐⭐ Zapatillas - Hombre ⭐⭐</h2>
 
 <!-- FILTROS -->
 
@@ -68,98 +67,72 @@
 
 </div>
 
+
 <div class="contenedor-productos">
 
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/ropa/camperanike.png') }}">
-<h3> Campera Nike</h3>
-<p class="precio">$120.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
 <div class="producto" data-marca="adidas">
-<img src="{{ asset('img/carruselimagenes/camisetaArg2026.png') }}">
-<h3>Camiseta Argentina</h3>
-<p class="precio">$95.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/carruselimagenes/conjuntoSeleccion.png') }}">
-<h3>Conjunto Selección</h3>
-<p class="precio">$140.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/conjunto-seleccion-invierno.png') }}">
-<h3>Conjunto Selección</h3>
-<p class="precio">$200.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/campera-boca.png') }}">
-<h3>Campera Boca</h3>
+<img src="{{ asset('/img/zapatillas/zapaadidas.png') }}">
+<h3> Zapatillas Adidas Urbanas</h3>
 <p class="precio">$150.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/buzo-river.png') }}">
-<h3>Buzo river</h3>
-<p class="precio">$150.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/camisetabocatitular1.png') }}">
-<h3>Camiseta Boca</h3>
-<p class="precio">$130.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/camisetarivertitular.png') }}">
-<h3>Camiseta River</h3>
-<p class="precio">$130.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/ropa/joginnike.png') }}">
-<h3>Pantalon joggin Nike retro</h3>
-<p class="precio">$80.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/buzoadidasuplente.png') }}">
-<h3> Conjunto Seleccion</h3>
-<p class="precio">$180.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/ropa/buzocangurowhite.png') }}">
-<h3> Buzo canguro Nike</h3>
-<p class="precio">$100.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/buzoadidasliverpol.png') }}">
-<h3> Buzo Adidas Liverpool</h3>
-<p class="precio">$100.000</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
 <div class="producto" data-marca="puma">
-<img src="{{ asset('img/ropa/pantalonmachestercity.png') }}">
-<h3> Pantalon Deportivo Manchester City</h3>
+<img src="{{ asset('/img/zapatillas/zapapuma.png') }}">
+<h3> Zapatillas Puma Urbanas</h3>
 <p class="precio">$100.000</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
+
+<div class="producto" data-marca="nike">
+<img src="{{ asset('/img/zapatillas/zapanikenegra.png') }}">
+<h3> Zapatillas Nike Air Max black</h3>
+<p class="precio">$200.000</p>
+<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-marca="nike">
+<img src="{{ asset('/img/zapatillas/zapasnikeairmaxnegra.png') }}">
+<h3> Zapatillas Nike air Max black and Orange</h3>
+<p class="precio">$200.000</p>
+<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-marca="nike">
+<img src="{{ asset('/img/zapatillas/zapasnikeairmax.png') }}">
+<h3> Zapatillas Nike Air Max White and Orange </h3>
+<p class="precio">$150.000</p>
+<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-marca="adidas">
+<img src="{{ asset('/img/zapatillas/zpatillaadidasrunning.png') }}">
+<h3> Zapatillas Adidas Runnig </h3>
+<p class="precio">$200.000</p>
+<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-marca="nike">
+<img src="{{ asset('img/zapatillas/zapanike.png') }}">
+<h3>Zapatillas Nike Jordan Retro 1</h3>
+<p class="precio">$110.000</p>
+<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-marca="nike">
+<img src="{{ asset('img/zapatillas/zapasnikeJordanretro1.png') }}">
+<h3>Zapatillas Nike Jordan Retro 1</h3>
+<p class="precio">$110.000</p>
+<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-marca="nike">
+<img src="{{ asset('img/zapatillas/zapatillasnike1.png') }}">
+<h3>Zapatillas Nike Urbanas</h3>
+<p class="precio">$90.000</p>
+<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
+</div>
+
 </div>
 
 @include('footer')
