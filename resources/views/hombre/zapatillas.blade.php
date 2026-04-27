@@ -54,7 +54,7 @@
 
 </nav>
 
-<h2 class="titulo-seccion">⭐⭐ Zapatillas - Hombre ⭐⭐</h2>
+<h2 class="titulo-seccion">⭐⭐ Zapatillas ⭐⭐</h2>
 
 <!-- FILTROS -->
 

@@ -42,9 +42,9 @@
 <div class="menu">
 
 <a href="/inicio">Inicio</a>
-<a href="/hombre/ropa">Ropa</a>
-<a href="/hombre/zapatillas">Zapatillas</a>
-<a href="/hombre/botines">Botines</a>
+<a href="/niños/ropa">Ropa</a>
+<a href="/niños/zapatillas">Zapatillas</a>
+<a href="/niños/botines">Botines</a>
 
 <form class="barra-busqueda">
 <input type="text" placeholder="Buscar productos...">
@@ -55,7 +55,7 @@
 
 </nav>
 
-<h2 class="titulo-productos">⭐⭐ Niños ⭐⭐</h2>
+<h2 class="titulo-productos">⭐⭐ Niños / Niñas⭐⭐</h2>
 
 <!-- FILTROS -->
 

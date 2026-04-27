@@ -54,7 +54,7 @@
 
 </nav>
 
-<h2 class="titulo-seccion">⭐⭐ Botines - Hombre ⭐⭐</h2>
+<h2 class="titulo-seccion">⭐⭐ Botines ⭐⭐</h2>
 
 <!-- FILTROS -->
 
