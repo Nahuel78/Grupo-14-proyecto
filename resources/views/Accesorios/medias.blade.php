@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Zapatillas Hombre - Modape Sport</title>
+<title>medias - Modape Sport</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/estilo.css') }}">
@@ -40,10 +41,12 @@
 
 <div class="menu">
 
-<a href="/inicio">Inicio</a>
-<a href="/hombre/ropa">Ropa</a>
-<a href="/hombre/zapatillas">Zapatillas</a>
-<a href="/hombre/botines">Botines</a>
+<a href="/">Inicio</a>
+<a href="/accesorios/mochila">Mochila</a>
+<a href="/accesorios/medias">Medias</a>
+<a href="/accesorios/pelotas">Pelotas</a>
+<a href="/accesorios/gorras">Gorras</a>
+<a href="/accesorios/paletas">Paletas</a>
 
 <form class="barra-busqueda">
 <input type="text" placeholder="Buscar productos...">
@@ -54,9 +57,7 @@
 
 </nav>
 
-<h2 class="titulo-productos">⭐⭐ Zapatillas ⭐⭐</h2>
-
-<!-- FILTROS -->
+<h2 class="titulo-productos">⭐⭐Medias⭐⭐</h2>
 
 <div class="filtros">
 
@@ -65,71 +66,69 @@
 <button onclick="filtrar('adidas')">Adidas</button>
 <button onclick="filtrar('puma')">Puma</button>
 
+
 </div>
 
 
+<!-- PRODUCTOS -->
+
 <div class="contenedor-productos">
 
+
+
+<div class="producto" data-marca="nike">
+<img src="{{ asset('img/accesorios/medias nike mujer.png') }}">
+<h3>Medias nike</h3>
+<p class="precio">$15.000</p>
+<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-marca="nike">
+<img src="{{ asset('img/accesorios/medias largas nike.png') }}">
+<h3>Medias largas nike</h3>
+<p class="precio">$20.000</p>
+<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
+</div>
+
 <div class="producto" data-marca="adidas">
-<img src="{{ asset('/img/zapatillas/zapaadidas.png') }}">
-<h3> Zapatillas Adidas Urbanas</h3>
-<p class="precio">$150.000</p>
+<img src="{{ asset('img/accesorios/medias blancas adidas.png') }}">
+<h3>Medias adidas</h3>
+<p class="precio">$15.000</p>
+<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-marca="adidas">
+<img src="{{ asset('img/accesorios/medias blancas adidas l.png') }}">
+<h3>Medias largas Adidas</h3>
+<p class="precio">$20.000</p>
+<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
+</div>
+
+<div class="producto" data-marca="adidas">
+<img src="{{ asset('img/accesorios/medias negras adidas.png') }}">
+<h3>Medias negras Adidas</h3>
+<p class="precio">$20.500</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
 <div class="producto" data-marca="puma">
-<img src="{{ asset('/img/zapatillas/zapapuma.png') }}">
-<h3> Zapatillas Puma Urbanas</h3>
-<p class="precio">$100.000</p>
+<img src="{{ asset('img/accesorios/medias puma azul.png') }}">
+<h3>Medias Puma azul</h3>
+<p class="precio">$17.500</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
-<div class="producto" data-marca="nike">
-<img src="{{ asset('/img/zapatillas/zapanikenegra.png') }}">
-<h3> Zapatillas Nike Air Max black</h3>
-<p class="precio">$200.000</p>
+<div class="producto" data-marca="puma">
+<img src="{{ asset('img/accesorios/medias puma negra.png') }}">
+<h3>Medias Puma negra</h3>
+<p class="precio">$14.500</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
-<div class="producto" data-marca="nike">
-<img src="{{ asset('/img/zapatillas/zapasnikeairmaxnegra.png') }}">
-<h3> Zapatillas Nike air Max black and Orange</h3>
-<p class="precio">$200.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('/img/zapatillas/zapasnikeairmax.png') }}">
-<h3> Zapatillas Nike Air Max White and Orange </h3>
-<p class="precio">$150.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('/img/zapatillas/zpatillaadidasrunning.png') }}">
-<h3> Zapatillas Adidas Runnig </h3>
-<p class="precio">$200.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/zapatillas/zapanike.png') }}">
-<h3>Zapatillas Nike Jordan Retro 1</h3>
-<p class="precio">$110.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/zapatillas/zapasnikeJordanretro1.png') }}">
-<h3>Zapatillas Nike Jordan Retro 1</h3>
-<p class="precio">$110.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/zapatillas/zapatillasnike1.png') }}">
-<h3>Zapatillas Nike Urbanas</h3>
-<p class="precio">$90.000</p>
+<div class="producto" data-marca="puma">
+<img src="{{ asset('img/accesorios/medias puma roja.png') }}">
+<h3>Medias Puma roja</h3>
+<p class="precio">$17.500</p>
 <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
 </div>
 
@@ -176,6 +175,7 @@ producto.style.display = "none";
 }
 
 </script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 

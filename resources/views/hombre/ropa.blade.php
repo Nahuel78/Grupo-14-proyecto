@@ -55,7 +55,7 @@
 
 </nav>
 
-<h2 class="titulo-seccion">⭐⭐ Ropa ⭐⭐</h2>
+<h2 class="titulo-productos">⭐⭐ Ropa Hombre ⭐⭐</h2>
 
 <!-- FILTROS -->
 

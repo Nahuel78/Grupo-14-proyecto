@@ -96,8 +96,8 @@
 <p><strong>Titular:</strong> Modape Sport S.A.</p>
 <p><strong>Razón social:</strong> Venta de indumentaria deportiva</p>
 <p><strong>Domicilio:</strong> Corrientes, Argentina</p>
-<p><strong>Teléfono:</strong> +54 379 XXX XXXX</p>
-<p><strong>Email:</strong> contacto@modapesport.com</p>
+<p><strong>Teléfono:</strong> +54 3772 564 956</p>
+<p><strong>Gmail:</strong> modapeSport@gmail.com</p>
 
 </div>
 
@@ -105,10 +105,10 @@
 
 @csrf
 
-<label>Nombre:</label>
+<label>Nombre y Apellido:</label>
 <input type="text" name="nombre" required>
 
-<label>Email:</label>
+<label>Gmail:</label>
 <input type="email" name="email" required>
 
 <label>Mensaje:</label>

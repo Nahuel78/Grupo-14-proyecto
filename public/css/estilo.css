@@ -364,7 +364,9 @@ transition:0.3s;
 
 .producto{
     background:#031926;
-    width:220px;
+    width:100%;
+    max-width:220px;
+    box-sizing:border-box;
     text-align:center;
     padding:15px;
     border-radius:10px;
@@ -609,6 +611,7 @@ background:#8a642f;
 
 @media (max-width: 400px){
 
+/* ==== HEADER ==== */
 .header{
     flex-direction:column;
     height:auto;
@@ -617,37 +620,33 @@ background:#8a642f;
     text-align:center;
 }
 
+/* titulo */
+.titulo{
+    font-size:32px;
+}
+
+/* imagen fondo titulo */
+.fondo-img{
+    width:250px;
+    left:-30px;
+}
+
+/* slogan (unificado, sin duplicado) */
 .frase-header h2{
-    font-size:15px;
-    padding:8px 15px;
+    font-size:16px;
+    padding:10px 20px;
     border-radius:20px;
     letter-spacing:1px;
 }
 
+/* iconos */
 .top-icons{
     width:100%;
     display:flex;
     justify-content:flex-end;
 }
 
-/* titulo más chico */
-.titulo{
-    font-size:32px;
-}
-
-/* imagen de fondo del titulo */
-.fondo-img{
-    width:250px;
-    left:-30px;
-}
-
-/* slogan */
-.frase-header h2{
-    font-size:16px;
-    padding:10px 20px;
-}
-
-/* menu */
+/* NAV */
 nav{
     top:0;
 }
@@ -665,8 +664,89 @@ nav{
     width:200px;
 }
 
+/* separación general */
 section{
     margin-top:60px;
 }
 
+/* ==== PRODUCTOS (CLAVE) ==== */
+.contenedor-productos{
+    width:95%;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:15px;
+    justify-items:center;
+}
+
+.producto{
+    width:100%;
+    box-sizing:border-box;
+    max-width:none;
+}
+
+/* imagen producto */
+.producto img{
+    width:100%;
+    height:auto;
+    display:block;
+}
+.beneficios{
+        flex-direction:column;
+        gap:25px;
+        padding:30px 15px;
+    }
+
+    .beneficio{
+        width:100%;
+    }
+
+    .beneficio h3{
+        font-size:18px;
+    }
+
+    .beneficio p{
+        font-size:14px;
+    }
+}
+
+/* estilo de login */
+.login-container{
+    width:350px;
+    margin:100px auto;
+    background:#031926;
+    padding:30px;
+    border-radius:10px;
+    color:white;
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
+    text-align:center;
+}
+
+.login-container h2{
+    margin-bottom:20px;
+    color:#A67C42;
+}
+
+.login-container input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:6px;
+    border:none;
+    outline:none;
+}
+
+.login-container button{
+    width:100%;
+    padding:10px;
+    background:#A67C42;
+    border:none;
+    color:white;
+    font-weight:bold;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.login-container button:hover{
+    background:#8a642f;
 }

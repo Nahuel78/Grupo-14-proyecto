@@ -23,7 +23,7 @@
         </div>
 
         <div class="carousel-item">
-            <img src="{{ asset('img/carruselimagenes/camisetas-boca.png') }}" class="d-block w-100">
+            <img src="{{ asset('img/carruselimagenes/boca camiseta nueva.png') }}" class="d-block w-100">
         </div>
 
         <div class="carousel-item">

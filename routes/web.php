@@ -31,6 +31,20 @@ Route::get('/hombre/zapatillas', function () { return view('hombre.zapatillas');
 Route::get('/hombre/botines', function () { return view('hombre.botines'); });
 
 /*==== Links categoria mujer ====*/
+Route::get('/mujer', function () {
+    return view('mujer.index');
+});
+Route::get('/mujer/ropa', function () {
+    return view('mujer.ropa');
+});
+
+Route::get('/mujer/zapatillas', function () {
+    return view('mujer.zapatillas');
+});
+
+Route::get('/mujer/accesorios', function () {
+    return view('mujer.accesorios');
+});
 
 /*==== Links categoria niño ====*/
 Route::get('/niños', function () { return view('niños.index'); });
@@ -42,3 +56,18 @@ Route::get('/niños/zapatillas', function () { return view('niños.zapatillas');
 Route::get('/niños/botines', function () { return view('niños.botines'); });
 
 /*==== Links categoria accesorios ====*/
+Route::get('/accesorios',function () { return view('accesorios.index'); });
+
+Route::get('/accesorios/mochila',function (){ return view('accesorios.mochila'); });
+
+Route::get('/accesorios/medias',function (){ return view('accesorios.medias'); });
+
+Route::get('/accesorios/pelotas',function (){ return view('accesorios.pelotas'); });
+
+Route::get('/accesorios/gorras',function (){ return view('accesorios.gorras'); });
+
+Route::get('/accesorios/paletas',function (){ return view('accesorios.paletas'); });
+
+Route::get('/login', function () {
+    return view('login');
+});

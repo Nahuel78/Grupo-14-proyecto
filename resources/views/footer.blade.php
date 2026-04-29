@@ -25,7 +25,7 @@
 
 <div>
 <h4>Ubicación</h4>
-<p>Av.3 de abril y Uruguay, Corrientes, Argentina</p>
+<p>Av. 3 de abril y Uruguay, Corrientes, Argentina</p>
 </div>
 
 </div>
