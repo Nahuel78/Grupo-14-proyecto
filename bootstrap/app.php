@@ -11,7 +11,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        
+        // Registramos el alias 'rol' para que Laravel sepa qué archivo usar
+        $middleware->alias([
+            'rol' => \App\Http\Middleware\SoloAdmin::class,
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
