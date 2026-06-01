@@ -40,6 +40,9 @@
 <nav>
 
 <div class="menu">
+    <button class="menu-toggle">
+    ☰ Menú
+    </button>
 
 <a href="/inicio">Inicio</a>
 <a href="/niños/ropa">Ropa</a>

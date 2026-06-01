@@ -7,7 +7,7 @@
     <title>Modape Sport</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/estilo.css') }}?v=3">
+    <link rel="stylesheet" href="{{ asset('css/estilo.css') }}?v=5">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
@@ -23,21 +23,54 @@
         <h2>Tu estilo, tu gusto, lo encontras en la mejor tienda</h2>
     </div>
 
-    <div class="top-icons">
-        <a href="/login" class="icono user">
-            <i class="bi bi-person"></i>
-        </a>
+    <div class="top-icons" style="display: flex; align-items: center; gap: 12px;">
+        @auth
+            <div style="text-align: right; line-height: 1.2; max-width: 130px; color: white; font-size: 14px; margin-right: 4px;">
+                <span>Hola,</span><br>
+                <strong style="font-weight: bold;">{{ auth()->user()->name }}</strong>
+            </div>
 
-        <a href="/carrito" class="icono cart">
-            <i class="bi bi-bag"></i>
-            <span class="cart-count">0</span>
-        </a>
+            @if(auth()->user()->rol === 'admin')
+                <a href="/admin" class="icono user" title="Panel Administrador">
+                    <i class="bi bi-shield-lock-fill"></i>
+                </a>
+            @else
+                <a href="/login" class="icono user" title="Mi Cuenta">
+                    <i class="bi bi-person-check-fill"></i>
+                </a>
+            @endif
+
+            <a href="/carrito" class="icono cart">
+                <i class="bi bi-bag"></i>
+                <span class="cart-count">0</span>
+            </a>
+
+            <form action="/logout" method="POST" style="display: inline; margin-left: 4px;">
+                @csrf
+                <button type="submit" class="btn btn-sm btn-outline-danger" style="padding: 2px 6px; font-size: 11px;">
+                    Salir
+                </button>
+            </form>
+
+        @else
+            <a href="/login" class="icono user" title="Iniciar Sesión">
+                <i class="bi bi-person"></i>
+            </a>
+
+            <a href="/carrito" class="icono cart">
+                <i class="bi bi-bag"></i>
+                <span class="cart-count">0</span>
+            </a>
+        @endauth
     </div>
-
 </header>
 
 <nav>
-   
+
+   <button class="menu-toggle">
+    ☰ Menú
+    </button>
+
     <div class="menu">
 
         <a href="/">Inicio</a>

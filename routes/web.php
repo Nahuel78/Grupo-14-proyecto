@@ -2,6 +2,11 @@
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\contactoController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ProductoController;
+
 
 /*==== Links de las paginas ====*/
 
@@ -69,6 +74,7 @@ Route::get('/accesorios/gorras',function (){ return view('accesorios.gorras'); }
 
 Route::get('/accesorios/paletas',function (){ return view('accesorios.paletas'); });
 
+
 Route::get('/login', function () {
     return view('login');
 });
@@ -94,3 +100,43 @@ Route::middleware(['auth', 'rol:cliente'])->group(function () {
           return view('backend.usuarios.compra-confirmada'); 
           })->name('compra.confirmada'); 
           }); 
+
+
+/* === Links de Sistema de Autenticación === */
+Route::get('/registro', [AuthController::class, 'formularioRegistro']);
+Route::post('/registro', [AuthController::class, 'registrar']);
+
+Route::get('/login', [AuthController::class, 'formularioLogin']);
+Route::post('/login', [AuthController::class, 'autenticar']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+/* === Paneles de Usuario (Clientes) === */
+Route::get('/cliente', [ClienteController::class, 'index'])->middleware('auth');
+
+/* === GRUPO ADMINISTRADOR (Protegido) === */
+Route::middleware(['auth', 'rol:admin'])->prefix('admin')->group(function () {
+    
+    // 1. Panel principal: Llama a 'mostrarPanel' (no a 'dashboard')
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.panel');
+
+    // 2. Gestión de Productos: Llama a 'gestionarProductos' en ProductoController
+    Route::get('/productos', [ProductoController::class, 'gestionarProductos'])->name('admin.productos');
+    
+   /* === GRUPO ADMINISTRADOR (Protegido) === */
+Route::middleware(['auth', 'rol:admin'])->prefix('admin')->group(function () {
+
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.panel');
+
+    Route::get('/productos', [ProductoController::class, 'gestionarProductos'])->name('admin.productos');
+
+    Route::get('/pedidos', function () {
+        return view('backend.admin.pedidos');
+    })->name('admin.pedidos');
+
+    Route::get('/productos/crear', function () {
+    return view('backend.admin.crear-producto');
+    })->name('admin.productos.crear');
+    });
+});
+

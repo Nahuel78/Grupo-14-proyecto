@@ -2,7 +2,8 @@
 
 body{
     background-color:#031926;
-
+    margin:0;
+    padding:0;
 }
 
 /* ==== Header ==== */
@@ -321,11 +322,6 @@ padding-top:20px;
 
 /* Seccion de Productos */
 
-body{
-margin:0;
-padding:0;
-}
-
 .categorias{
     text-align:center;
     margin:10px 0;
@@ -573,7 +569,8 @@ background:#8a642f;
 }
 
 .marcas-img img{
-    width:200px;
+    width:150px;
+    max-width:100%;
     filter: grayscale(100%);
     transition: all 0.3s ease;
 }
@@ -598,10 +595,33 @@ background:#8a642f;
     width:250px;
 }
 
+/* ===== BOTON MENU SOLO CELULAR ===== */
+
+.menu-toggle{
+    display:none;
+}
 
 /*==== Responsive Celular ====*/
 
-@media (max-width: 400px){
+@media (max-width: 768px){
+
+html,
+body{
+    width:100%;
+    overflow-x:hidden;
+}
+
+.header,
+nav,
+.carousel,
+.contenedor-productos,
+.promo,
+.marcas,
+.beneficios,
+.footer{
+    width:100%;
+    max-width:100%;
+}
 
 /* ==== HEADER ==== */
 .header{
@@ -643,30 +663,80 @@ nav{
     top:0;
 }
 
+.menu-toggle{
+    display:block;
+    background:#031926;
+    color:white;
+    border:2px solid #A67C42;
+    padding:10px 15px;
+    font-size:20px;
+    font-family:Impact;
+    border-radius:8px;
+    margin:10px auto;
+}
+
+.menu-toggle:hover{
+    background:#A67C42;
+    color:black;
+    transition:0.3s;
+}
+
 .menu{
-    flex-direction:row;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:20px;
-    padding-left:0;
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    gap:15px;
+    padding:20px 0;
+    width:100%;
+}
+
+.menu.active{
+    display:flex;
+}
+
+.submenu{
+    position:static;
+    display:none;
+    background:none;
+    padding:5px 0;
+    text-align:center;
+}
+
+.dropdown.active .submenu{
+    display:flex;
 }
 
 /* buscador */
 .barra-busqueda input{
-    width:200px;
+    width:100%;
+    max-width:250px;
+}
+
+.carousel-item img{
+    height:250px;
+}
+
+.login-container{
+    width:90%;
 }
 
 /* separación general */
 section{
     margin-top:60px;
 }
+.marcas-img{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
 
-/* ==== PRODUCTOS (CLAVE) ==== */
+/* ==== PRODUCTOS ==== */
 .contenedor-productos{
     width:95%;
     margin:0 auto;
     display:grid;
-    grid-template-columns:repeat(2, 1fr);
+    grid-template-columns:1fr;
     gap:15px;
     justify-items:center;
 }
@@ -684,9 +754,10 @@ section{
     display:block;
 }
 .beneficios{
-        flex-direction:column;
-        gap:25px;
-        padding:30px 15px;
+     flex-direction:column;
+     gap:25px;
+     padding:30px 15px;
+
     }
 
     .beneficio{
@@ -700,6 +771,39 @@ section{
     .beneficio p{
         font-size:14px;
     }
+
+
+/* evitar desbordes */
+body{
+    overflow-x:hidden;
+}
+
+/* menu */
+.menu{
+    width:100%;
+}
+
+/* buscador completo */
+.barra-busqueda{
+    width:100%;
+    justify-content:center;
+}
+
+.barra-busqueda input{
+    width:70%;
+}
+
+/* footer responsive */
+.footer-contenido{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+}
+
+/* formularios */
+.form-contacto,
+.info-contacto{
+    width:90%;
 }
 
 /* estilo de login */
@@ -741,4 +845,206 @@ section{
 
 .login-container button:hover{
     background:#8a642f;
+}
+
+}
+
+/* === Página de login ===*/
+
+/* Centrado del cuadro en toda la pantalla */
+.body-login {
+    background-color: #031926 !important; /* Mismo azul oscuro de tu tienda */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* La tarjeta del login bien proporcionada */
+.login-card {
+    width: 100%;
+    max-width: 400px; /* 👈 Esto hace que no se vea gigante */
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05); /* Efecto moderno semitransparente */
+    border: 1px solid rgba(166, 124, 66, 0.3); /* Bordes con tu dorado sutil */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin: 20px;
+    color: white;
+}
+
+/* Título principal */
+.login-card h2 {
+    font-family: Impact, sans-serif;
+    color: white;
+    letter-spacing: 1px;
+}
+
+/* Subtítulo en dorado */
+.login-card h5 {
+    color: #A67C42;
+    font-weight: bold;
+}
+
+/* Campos de texto (Email y Contraseña) */
+.login-card .form-control {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid #ccc !important;
+    color: white !important;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+/* El marcador de posición (placeholder) en gris claro */
+.login-card .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Botón de ingresar con tu dorado original */
+.login-card .btn-dark {
+    background: #A67C42 !important;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+}
+
+.login-card .btn-dark:hover {
+    background: #8a642f !important; /* Dorado más oscuro al pasar el mouse */
+}
+
+/* Enlace para volver a la tienda */
+.login-card a {
+    color: #A67C42 !important;
+    text-decoration: none;
+}
+
+.login-card a:hover {
+    color: white !important;
+}
+
+/* === Estilos del panel de administracion  === */
+
+.body-admin {
+    background-color: #f4f6f9 !important;
+}
+
+/* Color de texto corporativo */
+.text-azul-modape {
+    color: #031926 !important;
+}
+
+.text-dorado-modape {
+    color: #A67C42 !important;
+}
+
+/* Barra lateral */
+.sidebar-admin {
+    min-height: 100vh;
+    background-color: #031926; 
+    color: white;
+}
+
+.sidebar-brand-admin {
+    font-family: Impact, sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Links del menú lateral */
+.nav-link-admin {
+    color: rgba(255, 255, 255, 0.8) !important;
+    text-decoration: none;
+    padding: 12px 20px;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.nav-link-admin:hover, 
+.nav-link-admin.active {
+    background-color: #A67C42 !important; 
+    color: white !important;
+    padding-left: 25px;
+}
+
+/*=== Tarjetas de reportes ===*/
+.card-stats-admin {
+    border: none !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.card-stats-admin:hover {
+    transform: translateY(-5px);
+}
+
+/*=== Clientes ===*/
+
+/* Estructura limpia para la Navbar sin cortes superiores */
+.navbar-modape {
+    margin-top: 0 !important;
+    top: 0 !important;
+    padding-top: 15px !important;    /* Controla el espacio arriba del texto */
+    padding-bottom: 15px !important; /* Controla el espacio abajo del texto */
+    min-height: 75px !important;     /* Altura mínima ideal */
+}
+
+/* Limpieza absoluta de herencias raras del CSS base */
+.navbar-modape, .navbar-modape * {
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+
+/* Centrado vertical perfecto nativo sin forzar alturas mágicas */
+.navbar-modape .navbar-nav,
+.navbar-modape .navbar-collapse {
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Corrección de la tipografía para que no flote hacia arriba */
+.navbar-modape .nav-link, 
+.navbar-modape .navbar-brand {
+    display: inline-block !important;
+    line-height: 1.2 !important;     /* Modifica la altura de línea para centrar el texto verticalmente */
+    padding-top: 5px !important;     /* Pequeño ajuste para acomodar las letras */
+    padding-bottom: 5px !important;
+}
+
+/* Efecto moderno y deportivo para el Banner sin depender de imágenes externas */
+.banner-deportivo {
+    background: radial-gradient(circle at 80% 20%, #1a334d 0%, #0d1e2d 100%) !important;
+    border-bottom: 3px solid #c5a059 !important;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0 !important;        
+    padding: 60px 0 !important;      
+}       
+
+/* Líneas de cancha / patrón deportivo sutil de fondo */
+.banner-deportivo::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/*=== Tarjetas de productos estilo Sport Store */
+.card-producto-sport {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid rgba(0,0,0,0.08) !important;
+}
+.card-producto-sport:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(13, 30, 45, 0.1) !important;
 }
