@@ -65,6 +65,153 @@
     </header>
 
     <main class="container my-5">
+        <!-- PANEL CLIENTE -->
+            <div class="card border-0 shadow-sm mb-5">
+
+                <div class="card-body p-4">
+
+                    <div class="row align-items-center">
+
+                        <div class="col-md-6">
+
+                            <h3 class="fw-bold mb-1">
+                                Mi Cuenta
+                            </h3>
+
+                            <p class="text-muted mb-0">
+                                {{ Auth::user()->name }}
+                            </p>
+
+                            <small class="text-secondary">
+                                {{ Auth::user()->email }}
+                            </small>
+
+                        </div>
+
+                        <div class="col-md-6 text-md-end mt-3 mt-md-0">
+
+                            <span class="badge bg-dark p-2">
+                                Cliente desde
+                                {{ Auth::user()->created_at->format('d/m/Y') }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="row g-3">
+
+                        <!-- CARRITO -->
+                        <div class="col-md-3">
+
+                            <div class="card h-100 text-center border-0 shadow-sm">
+
+                                <div class="card-body">
+
+                                    <i class="bi bi-cart3 fs-1"></i>
+
+                                    <h5 class="mt-3">Mi Carrito</h5>
+
+                                    <p class="text-muted">
+                                        0 productos
+                                    </p>
+
+                                    <a href="#"
+                                    class="btn btn-warning">
+                                        Ver carrito
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- PEDIDOS -->
+                        <div class="col-md-3">
+
+                            <div class="card h-100 text-center border-0 shadow-sm">
+
+                                <div class="card-body">
+
+                                    <i class="bi bi-box-seam fs-1"></i>
+
+                                    <h5 class="mt-3">Mis Pedidos</h5>
+
+                                    <p class="text-muted">
+                                        0 pedidos
+                                    </p>
+
+                                    <a href="{{ route('cliente.pedidos') }}"
+                                    class="btn btn-primary">
+                                        Ver pedidos
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- PRODUCTOS -->
+                        <div class="col-md-3">
+
+                            <div class="card h-100 text-center border-0 shadow-sm">
+
+                                <div class="card-body">
+
+                                    <i class="bi bi-shop fs-1"></i>
+
+                                    <h5 class="mt-3">Productos</h5>
+
+                                    <p class="text-muted">
+                                        Explorar catálogo
+                                    </p>
+
+                                    <a href="/inicio"
+                                    class="btn btn-dark">
+                                        Ver productos
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- PERFIL -->
+                        <div class="col-md-3">
+
+                            <div class="card h-100 text-center border-0 shadow-sm">
+
+                                <div class="card-body">
+
+                                    <i class="bi bi-person-circle fs-1"></i>
+
+                                    <h5 class="mt-3">Mi Perfil</h5>
+
+                                    <p class="text-muted">
+                                        Administrar cuenta
+                                    </p>
+
+                                    <a href="{{ route('cliente.perfil') }}"
+                                    class="btn btn-secondary">
+                                        Editar perfil
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
         <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
             <h2 class="fw-bold text-dark mb-0" style="font-family: 'Poppins', sans-serif;">Novedades Destacadas</h2>
             <span class="text-muted small fw-medium bg-white px-2 py-1 rounded shadow-sm">Modape Catalog 2026</span>

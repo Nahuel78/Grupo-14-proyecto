@@ -7,7 +7,7 @@
     <title>Modape Sport</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/estilo.css') }}?v=5">
+    <link rel="stylesheet" href="{{ asset('css/estilo.css') }}?v=10">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
@@ -24,45 +24,120 @@
     </div>
 
     <div class="top-icons" style="display: flex; align-items: center; gap: 12px;">
-        @auth
-            <div style="text-align: right; line-height: 1.2; max-width: 130px; color: white; font-size: 14px; margin-right: 4px;">
-                <span>Hola,</span><br>
-                <strong style="font-weight: bold;">{{ auth()->user()->name }}</strong>
-            </div>
 
-            @if(auth()->user()->rol === 'admin')
-                <a href="/admin" class="icono user" title="Panel Administrador">
+    @auth
+
+        <div style="text-align: right; line-height: 1.2; max-width: 130px; color: white; font-size: 14px; margin-right: 4px;">
+            <span>Hola,</span><br>
+            <strong>{{ auth()->user()->name }}</strong>
+        </div>
+
+        <div class="dropdown menu-usuario">
+
+           @if(auth()->check() && strtolower(auth()->user()->rol) === 'admin')
+
+                <a href="#" class="icono user dropdown-toggle"
+                   data-bs-toggle="dropdown">
                     <i class="bi bi-shield-lock-fill"></i>
                 </a>
+
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <a class="dropdown-item"
+                           href="{{ route('admin.panel') }}">
+                            Panel Admin
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item"
+                           href="{{ route('admin.perfil') }}">
+                            Mi Perfil
+                        </a>
+                    </li>
+
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item">
+                                Cerrar Sesión
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+
             @else
-                <a href="/login" class="icono user" title="Mi Cuenta">
+
+                <a href="#" class="icono user dropdown-toggle"
+                   data-bs-toggle="dropdown">
                     <i class="bi bi-person-check-fill"></i>
                 </a>
+
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <a class="dropdown-item"
+                         href="{{ route('cliente') }}">
+                         Panel Cliente
+                         </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item"
+                           href="{{ route('cliente.perfil') }}">
+                            Mi Perfil
+                        </a>
+                    </li>
+
+                         <li>
+                        <a class="dropdown-item"
+                        href="{{ route('cliente.pedidos') }}">
+                        Mis Pedidos
+                    </a>
+                </li>
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item">
+                                Cerrar Sesión
+                            </button>
+                        </form>
+                    </li>
+
+                </ul>
+
             @endif
 
-            <a href="/carrito" class="icono cart">
-                <i class="bi bi-bag"></i>
-                <span class="cart-count">0</span>
-            </a>
+        </div>
 
-            <form action="/logout" method="POST" style="display: inline; margin-left: 4px;">
-                @csrf
-                <button type="submit" class="btn btn-sm btn-outline-danger" style="padding: 2px 6px; font-size: 11px;">
-                    Salir
-                </button>
-            </form>
+    @else
 
-        @else
-            <a href="/login" class="icono user" title="Iniciar Sesión">
-                <i class="bi bi-person"></i>
-            </a>
+        <a href="{{ route('login') }}"
+           class="icono user"
+           title="Iniciar Sesión">
+            <i class="bi bi-person"></i>
+        </a>
 
-            <a href="/carrito" class="icono cart">
-                <i class="bi bi-bag"></i>
-                <span class="cart-count">0</span>
-            </a>
-        @endauth
-    </div>
+    @endauth
+
+    @auth
+
+    @if(strtolower(auth()->user()->rol) !== 'admin')
+        <a href="/carrito" class="icono cart">
+            <i class="bi bi-bag"></i>
+            <span class="cart-count">0</span>
+        </a>
+    @endif
+
+@else
+
+    <a href="/carrito" class="icono cart">
+        <i class="bi bi-bag"></i>
+        <span class="cart-count">0</span>
+    </a>
+
+@endauth
+</div>
+
 </header>
 
 <nav>
@@ -113,8 +188,8 @@
             </div>
         </div>
 
-        <form class="barra-busqueda">
-            <input type="text" placeholder="Buscar productos...">
+        <form action="{{ route('buscar') }}" method="GET" class="barra-busqueda">
+             <input type="text" name="q" placeholder="Buscar productos...">
             <button type="submit">🔍</button>
         </form>
 
@@ -172,17 +247,27 @@
 
 
 <script>
-    let contador = 0;
+  let contador = parseInt(localStorage.getItem("carritoCount")) || 0;
 
-    const botones = document.querySelectorAll(".agregar-carrito");
-    const carrito = document.querySelector(".cart-count");
+const carrito = document.querySelector(".cart-count");
+const botones = document.querySelectorAll(".agregar-carrito");
 
-    botones.forEach(boton => {
-        boton.addEventListener("click", () => {
-            contador++;
+// inicializa visualmente
+if (carrito) {
+    carrito.textContent = contador;
+}
+
+botones.forEach(boton => {
+    boton.addEventListener("click", () => {
+        contador++;
+
+        localStorage.setItem("carritoCount", contador);
+
+        if (carrito) {
             carrito.textContent = contador;
-        });
+        }
     });
+});
 </script>
 
 <script>
@@ -194,7 +279,7 @@
     });
 
     // dropdown en celular
-    document.querySelectorAll('.dropdown > a').forEach(link => {
+    document.querySelectorAll('nav .dropdown > a').forEach(link => {
         link.addEventListener('click', function(e) {
             if (window.innerWidth <= 768) {
                 e.preventDefault();

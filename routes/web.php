@@ -5,6 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProductoController;
+use App\Models\Producto;
+
+
 
 /*==== Links de las paginas ====*/
 
@@ -26,87 +29,232 @@ Route::view('/terminos', 'termino');
 Route::get('/inicio', function () { return view('inicio'); });
 
 /*==== Links categoria hombre ====*/
-Route::get('/hombre', function () { return view('hombre.index'); });
+Route::get('/hombre', function () {
+    $productos = Producto::where('categoria', 'hombre')->get();
+    return view('hombre.index', compact('productos'));
+});
 
-Route::get('/hombre/ropa', function () { return view('hombre.ropa'); });
+Route::get('/hombre/ropa', function () {
 
-Route::get('/hombre/zapatillas', function () { return view('hombre.zapatillas'); });
+    $productos = Producto::where('categoria', 'Hombre')
+        ->where('subcategoria', 'ropa')
+        ->get();
 
-Route::get('/hombre/botines', function () { return view('hombre.botines'); });
+    return view('hombre.ropa', compact('productos'));
+});
+
+Route::get('/hombre/zapatillas', function () {
+
+    $productos = Producto::where('categoria', 'Hombre')
+        ->where('subcategoria', 'zapatillas')
+        ->get();
+
+    return view('hombre.zapatillas', compact('productos'));
+});
+
+Route::get('/hombre/botines', function () {
+
+    $productos = Producto::where('categoria', 'Hombre')
+        ->where('subcategoria', 'botines')
+        ->get();
+
+    return view('hombre.botines', compact('productos'));
+});
 
 /*==== Links categoria mujer ====*/
 Route::get('/mujer', function () {
-    return view('mujer.index');
+    $productos = Producto::where('categoria', 'mujer')->get();
+    return view('mujer.index', compact('productos'));
 });
+
 Route::get('/mujer/ropa', function () {
-    return view('mujer.ropa');
+
+    $productos = Producto::where('categoria', 'Mujer')
+        ->where('subcategoria', 'ropa')
+        ->get();
+
+    return view('mujer.ropa', compact('productos'));
 });
 
 Route::get('/mujer/zapatillas', function () {
-    return view('mujer.zapatillas');
+    $productos = Producto::where('categoria', 'Mujer')
+        ->where('subcategoria', 'zapatillas')
+        ->get();
+
+    return view('mujer.zapatillas', compact('productos'));
 });
 
 Route::get('/mujer/accesorios', function () {
-    return view('mujer.accesorios');
+    $productos = Producto::where('categoria', 'Mujer')
+        ->where('subcategoria', 'accesorios')
+        ->get();
+
+    return view('mujer.accesorios', compact('productos'));
 });
 
 /*==== Links categoria niño ====*/
-Route::get('/niños', function () { return view('niños.index'); });
+Route::get('/niños', function () {
+    $productos = Producto::where('categoria', 'niños')->get();
+    return view('niños.index', compact('productos'));
+});
 
-Route::get('/niños/ropa', function () { return view('niños.ropa'); });
+Route::get('/niños/ropa', function () {
+    $productos = Producto::where('categoria', 'Niños')
+        ->where('subcategoria', 'ropa')
+        ->get();
 
-Route::get('/niños/zapatillas', function () { return view('niños.zapatillas'); });
+    return view('niños.ropa', compact('productos'));
+});
 
-Route::get('/niños/botines', function () { return view('niños.botines'); });
+Route::get('/niños/zapatillas', function () {
+    $productos = Producto::where('categoria', 'Niños')
+        ->where('subcategoria', 'zapatillas')
+        ->get();
+
+    return view('niños.zapatillas', compact('productos'));
+});
+
+Route::get('/niños/botines', function () {
+    $productos = Producto::where('categoria', 'Niños')
+        ->where('subcategoria', 'botines')
+        ->get();
+
+    return view('niños.botines', compact('productos'));
+});
 
 /*==== Links categoria accesorios ====*/
-Route::get('/accesorios',function () { return view('accesorios.index'); });
+Route::get('/accesorios', function () {
+    $productos = Producto::where('categoria', 'accesorios')->get();
+    return view('accesorios.index', compact('productos'));
+});
 
-Route::get('/accesorios/mochila',function (){ return view('accesorios.mochila'); });
+Route::get('/accesorios/mochila', function () {
+    $productos = Producto::where('categoria', 'Accesorios')
+        ->where('subcategoria', 'mochila')
+        ->get();
 
-Route::get('/accesorios/medias',function (){ return view('accesorios.medias'); });
+    return view('accesorios.mochila', compact('productos'));
+});
 
-Route::get('/accesorios/pelotas',function (){ return view('accesorios.pelotas'); });
+Route::get('/accesorios/medias', function () {
+    $productos = Producto::where('categoria', 'Accesorios')
+        ->where('subcategoria', 'medias')
+        ->get();
 
-Route::get('/accesorios/gorras',function (){ return view('accesorios.gorras'); });
+    return view('accesorios.medias', compact('productos'));
+});
 
-Route::get('/accesorios/paletas',function (){ return view('accesorios.paletas'); });
+Route::get('/accesorios/pelotas', function () {
+    $productos = Producto::where('categoria', 'Accesorios')
+        ->where('subcategoria', 'pelotas')
+        ->get();
+
+    return view('accesorios.pelotas', compact('productos'));
+});
+
+Route::get('/accesorios/gorras', function () {
+    $productos = Producto::where('categoria', 'Accesorios')
+        ->where('subcategoria', 'gorras')
+        ->get();
+
+    return view('accesorios.gorras', compact('productos'));
+});
+
+Route::get('/accesorios/paletas', function () {
+    $productos = Producto::where('categoria', 'Accesorios')
+        ->where('subcategoria', 'paletas')
+        ->get();
+
+    return view('accesorios.paletas', compact('productos'));
+});
 
 
 /* === Links de Sistema de Autenticación === */
 Route::get('/registro', [AuthController::class, 'formularioRegistro']);
 Route::post('/registro', [AuthController::class, 'registrar']);
 
-Route::get('/login', [AuthController::class, 'formularioLogin']);
+Route::get('/login', [AuthController::class, 'formularioLogin'])
+    ->name('login');
 Route::post('/login', [AuthController::class, 'autenticar']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 /* === Paneles de Usuario (Clientes) === */
-Route::get('/cliente', [ClienteController::class, 'index'])->middleware('auth');
+Route::get('/cliente', [ClienteController::class, 'index'])
+    ->middleware('auth')
+    ->name('cliente');
 
 /* === GRUPO ADMINISTRADOR (Protegido) === */
-Route::middleware(['auth', 'rol:admin'])->prefix('admin')->group(function () {
-    
-    // 1. Panel principal: Llama a 'mostrarPanel' (no a 'dashboard')
-    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.panel');
 
-    // 2. Gestión de Productos: Llama a 'gestionarProductos' en ProductoController
-    Route::get('/productos', [ProductoController::class, 'gestionarProductos'])->name('admin.productos');
-    
-   /* === GRUPO ADMINISTRADOR (Protegido) === */
 Route::middleware(['auth', 'rol:admin'])->prefix('admin')->group(function () {
 
-    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.panel');
+    Route::get('/', [AdminController::class, 'dashboard'])
+        ->name('admin.panel');
 
-    Route::get('/productos', [ProductoController::class, 'gestionarProductos'])->name('admin.productos');
+    Route::get('/productos', [ProductoController::class, 'gestionarProductos'])
+        ->name('admin.productos');
+
+    Route::post('/productos', [ProductoController::class, 'guardarProducto'])
+        ->name('admin.productos.guardar');
+
+    Route::get('/productos/crear', function () {
+        return view('backend.admin.crear-producto');
+        })->name('admin.productos.crear');
 
     Route::get('/pedidos', function () {
         return view('backend.admin.pedidos');
-    })->name('admin.pedidos');
+        })->name('admin.pedidos');
 
-    Route::get('/productos/crear', function () {
-    return view('backend.admin.crear-producto');
-    })->name('admin.productos.crear');
-    });
+    Route::put('/productos/{id}', [ProductoController::class, 'update'])
+    ->name('admin.productos.update');
+
+    Route::get('/productos/{id}/editar', [ProductoController::class, 'edit'])
+    ->name('admin.productos.editar');
+
+    Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])
+    ->name('admin.productos.destroy');
+
+  Route::get('/perfil', function () {
+    return view('backend.admin.perfil-admin');
+    })->name('admin.perfil');
+
+Route::get('/perfil/editar',
+    [AdminController::class, 'editarPerfil'])
+    ->name('admin.perfil.editar');
+
+Route::put('/perfil/actualizar',
+    [AdminController::class, 'actualizarPerfil'])
+    ->name('admin.perfil.actualizar');
+});
+
+/*=== Cliente ===*/
+
+Route::get('/cliente/pedidos', function () {
+    return view('backend.usuarios.pedidos');
+})->middleware('auth')->name('cliente.pedidos');
+
+Route::get('/cliente/perfil', function () {
+    return view('backend.usuarios.perfil');
+})->middleware('auth')->name('cliente.perfil');
+
+Route::get('/cliente/perfil/editar', [ClienteController::class, 'editarPerfil'])
+    ->middleware('auth')
+    ->name('cliente.perfil.editar');
+
+Route::put('/cliente/perfil', [ClienteController::class, 'actualizarPerfil'])
+    ->middleware('auth')
+    ->name('cliente.perfil.actualizar');
+
+/*=== Buscador del menu ===*/
+Route::get('/buscar', [ProductoController::class, 'buscar'])->name('buscar');
+
+
+/*=== Carrito ===*/
+Route::get('/carrito', function () {
+
+    if (auth()->check() && strtolower(auth()->user()->rol) === 'admin') {
+        return redirect()->route('admin.panel');
+    }
+
+    return view('carrito');
 });

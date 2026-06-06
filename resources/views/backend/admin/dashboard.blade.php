@@ -74,11 +74,12 @@
 
                 <hr class="text-secondary my-4">
 
-                <!-- PERFIL -->
-                <div class="d-flex align-items-center mb-4">
+               <!-- PERFIL -->
+                <a href="{{ route('admin.perfil') }}"
+                class="d-flex align-items-center mb-4 text-decoration-none">
 
                     <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white"
-                         style="width:45px; height:45px; background:#c9a35d;">
+                        style="width:45px; height:45px; background:#c9a35d;">
 
                         {{ strtoupper(substr(Auth::user()->name,0,1)) }}
 
@@ -96,7 +97,7 @@
 
                     </div>
 
-                </div>
+                </a>
 
                 <!-- LOGOUT -->
                 <form action="{{ route('logout') }}" method="POST">
@@ -268,51 +269,61 @@
 
                     <table class="table table-hover align-middle mb-0">
 
+
                         <thead class="table-light">
-
-                            <tr>
-
-                                <th>ID</th>
-                                <th>Cliente</th>
-                                <th>Fecha</th>
-                                <th>Total</th>
-                                <th>Estado</th>
-
-                            </tr>
+                        <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        </tr>
 
                         </thead>
 
                         <tbody>
 
-                            <tr>
+                        @forelse($ultimosPedidos as $pedido)
 
-                                <td>#1001</td>
-                                <td>Nahuel Gomez</td>
-                                <td>29/05/2026</td>
-                                <td>$85.000</td>
+                        <tr>
 
-                                <td>
+                            <td>#{{ $pedido->id }}</td>
+
+                            <td>{{ $pedido->usuario->name }}</td>
+
+                            <td>{{ $pedido->created_at->format('d/m/Y') }}</td>
+
+                            <td>${{ number_format($pedido->total, 0, ',', '.') }}</td>
+
+                            <td>
+
+                                @if($pedido->estado == 'Completado')
                                     <span class="badge bg-success">
-                                        Completado
+                                        {{ $pedido->estado }}
                                     </span>
-                                </td>
-
-                            </tr>
-
-                            <tr>
-
-                                <td>#1002</td>
-                                <td>Patricio Gonzales</td>
-                                <td>29/05/2026</td>
-                                <td>$120.000</td>
-
-                                <td>
+                                @elseif($pedido->estado == 'Pendiente')
                                     <span class="badge bg-warning text-dark">
-                                        Pendiente
+                                        {{ $pedido->estado }}
                                     </span>
-                                </td>
+                                @else
+                                    <span class="badge bg-secondary">
+                                        {{ $pedido->estado }}
+                                    </span>
+                                @endif
 
-                            </tr>
+                            </td>
+
+                        </tr>
+
+                        @empty
+
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                No hay pedidos registrados
+                            </td>
+                        </tr>
+
+                        @endforelse
 
                         </tbody>
 
@@ -373,23 +384,24 @@
 
                         </div>
 
-                        <!-- REGISTRO -->
+                        <!-- VOLVER AL INICIO -->
                         <div class="col-md-4">
 
-                            <a href="{{ url('/registro') }}"
-                               class="btn btn-outline-dark w-100 p-4 shadow-sm">
+                            <a href="{{ url('/') }}"
+                            class="btn btn-outline-dark w-100 p-4 shadow-sm">
 
-                                <i class="bi bi-person-plus fs-1"></i>
+                                <i class="bi bi-house-door fs-1"></i>
 
                                 <br><br>
 
                                 <span class="fw-bold">
-                                    Añadir Usuario
+                                    Volver al Inicio
                                 </span>
 
                             </a>
 
                         </div>
+
 
                     </div>
 
@@ -407,3 +419,4 @@
 
 </body>
 </html>
+
