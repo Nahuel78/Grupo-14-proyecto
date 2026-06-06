@@ -1,11 +1,13 @@
 <?php 
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\contactoController;
+use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
+
 
 
 
@@ -169,6 +171,34 @@ Route::get('/accesorios/paletas', function () {
 });
 
 
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::middleware(['auth', 'rol:cliente'])->group(function () { 
+        // Mostrar el carrito  
+           Route::get('/carrito', [CarritoController::class, 'index'])                          
+            ->name('cliente.carrito');     
+        // Agregar un producto     
+            Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])                                    
+            ->name('carrito.agregar');    
+        // Eliminar un producto     
+             Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])                                            
+             ->name('carrito.eliminar');     
+        // Confirmar la compra     
+             Route::post('/carrito/confirmar', [CarritoController::class, 'confirmar'])                                      
+             ->name('carrito.confirmar'); 
+
+  // Vista de compra confirmada (protegida: redirige si no hay sesión) 
+   Route::get('/compra-confirmada', function () { 
+    if (!session('total')) { 
+         return redirect()->route('cliente.dashboard');
+          } 
+          return view('backend.usuarios.compra-confirmada'); 
+          })->name('compra.confirmada'); 
+          }); 
+
+
 /* === Links de Sistema de Autenticación === */
 Route::get('/registro', [AuthController::class, 'formularioRegistro']);
 Route::post('/registro', [AuthController::class, 'registrar']);
@@ -204,6 +234,7 @@ Route::middleware(['auth', 'rol:admin'])->prefix('admin')->group(function () {
     Route::get('/pedidos', function () {
         return view('backend.admin.pedidos');
         })->name('admin.pedidos');
+
 
     Route::put('/productos/{id}', [ProductoController::class, 'update'])
     ->name('admin.productos.update');
