@@ -171,9 +171,6 @@ Route::get('/accesorios/paletas', function () {
 });
 
 
-Route::get('/login', function () {
-    return view('login');
-});
 
 Route::middleware(['auth', 'rol:cliente'])->group(function () { 
         // Mostrar el carrito  
@@ -205,6 +202,7 @@ Route::post('/registro', [AuthController::class, 'registrar']);
 
 Route::get('/login', [AuthController::class, 'formularioLogin'])
     ->name('login');
+
 Route::post('/login', [AuthController::class, 'autenticar']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
