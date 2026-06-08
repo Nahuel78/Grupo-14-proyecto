@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProductoController;
-
+use App\Models\Producto;
 
 /*==== Links de las paginas ====*/
 
@@ -28,7 +28,12 @@ Route::view('/terminos', 'termino');
 Route::get('/inicio', function () { return view('inicio'); });
 
 /*==== Links categoria hombre ====*/
-Route::get('/hombre', function () { return view('hombre.index'); });
+Route::get('/hombre', function () {
+
+    $productos = Producto::all();
+
+    return view('hombre.index', compact('productos'));
+});
 
 Route::get('/hombre/ropa', function () { return view('hombre.ropa'); });
 
@@ -75,33 +80,24 @@ Route::get('/accesorios/gorras',function (){ return view('accesorios.gorras'); }
 Route::get('/accesorios/paletas',function (){ return view('accesorios.paletas'); });
 
 
-Route::get('/login', function () {
-    return view('login');
+
+
+      /*==== Links Carrito ====*/
+   Route::middleware('auth')->group(function () {
+
+    Route::get('/carrito', [CarritoController::class, 'index'])
+        ->name('backend.carrito');
+
+    Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])
+        ->name('backend.carrito.agregar');
+
+    Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])
+        ->name('backend.carrito.eliminar');
+
+    Route::post('/carrito/confirmar', [CarritoController::class, 'confirmar'])
+        ->name('backend.carrito.confirmar');
+
 });
-
-Route::middleware(['auth', 'rol:cliente'])->group(function () { 
-        // Mostrar el carrito  
-           Route::get('/carrito', [CarritoController::class, 'index'])                          
-            ->name('cliente.carrito');     
-        // Agregar un producto     
-            Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])                                    
-            ->name('carrito.agregar');    
-        // Eliminar un producto     
-             Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])                                            
-             ->name('carrito.eliminar');     
-        // Confirmar la compra     
-             Route::post('/carrito/confirmar', [CarritoController::class, 'confirmar'])                                      
-             ->name('carrito.confirmar'); 
-  // Vista de compra confirmada (protegida: redirige si no hay sesión) 
-   Route::get('/compra-confirmada', function () { 
-    if (!session('total')) { 
-         return redirect()->route('cliente.dashboard');
-          } 
-          return view('backend.usuarios.compra-confirmada'); 
-          })->name('compra.confirmada'); 
-          }); 
-
-
 /* === Links de Sistema de Autenticación === */
 Route::get('/registro', [AuthController::class, 'formularioRegistro']);
 Route::post('/registro', [AuthController::class, 'registrar']);
@@ -118,6 +114,7 @@ Route::get('/cliente', [ClienteController::class, 'index'])->middleware('auth');
 Route::middleware(['auth', 'rol:admin'])->prefix('admin')->group(function () {
     
     // 1. Panel principal: Llama a 'mostrarPanel' (no a 'dashboard')
+
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.panel');
 
     // 2. Gestión de Productos: Llama a 'gestionarProductos' en ProductoController

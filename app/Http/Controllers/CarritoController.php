@@ -10,89 +10,87 @@ use Illuminate\Support\Facades\Auth;
 
 class CarritoController extends Controller
 {
-     // Busca el carrito activo o crea uno nuevo vacío 
-         private function obtenerCarrito()   
-           {        
-             return VentaCabecera::firstOrCreate(      
-             [             
-              'user_id' => Auth::id(),    
-               'estado'  => 'carrito',         
-                     ],          
-                    // Si crea uno nuevo, arranca con total 0      
-                           ['total' => 0]       
-                             );    
-             } 
+    // Obtener o crear carrito activo
+    private function obtenerCarrito()
+    {
+        if (!Auth::check()) {
+            abort(403, 'No autorizado');
+        }
 
-                 public function index()   
-                   {      
-                       $carrito = $this->obtenerCarrito();       
-                         // with('producto') evita N+1: una sola consulta para todos los productos 
-                                 $items = $carrito->detalles()->with('producto')->get();  
-                                        return view('backend.usuarios.carrito', compact('carrito', 'items'));  
-                       }
-                       public function agregar(Request $request)   
-                         {  
-                                    $request->validate([         
-                                    'producto_id' => 'required|exists:productos,id',             
-                                    'cantidad'    => 'required|integer|min:1',        
-                                     ]); 
-                                     $producto = Producto::findOrFail($request->producto_id); 
-                                      // Verificar stock antes de agregar 
-                                      if ($producto->stock < $request->cantidad) { 
-                                         return back()->with('error', 'No hay suficiente stock');     
-                                        } 
-                                        $carrito = $this->obtenerCarrito(); 
-                                        // ¿El producto ya está en el carrito? 
-                                        $item = $carrito->detalles() 
-                                         ->where('producto_id', $producto->id)->first(); 
-                                         if ($item) { 
-                                            // Si ya existe: suma la cantidad 
-                                             $item->cantidad += $request->cantidad; 
-                                             $item->subtotal  = $item->cantidad * $item->precio_unitario; 
-                                             $item->save(); 
-                                             } else { 
-                                                 // Si no existe: crea un nuevo ítem 
-                                                  $carrito->detalles()->create([ 
-                                                    'producto_id'     => $producto->id, 
-                                                     'cantidad'        => $request->cantidad,                 
-                                                     'precio_unitario' => $producto->precio,                 
-                                                     'subtotal'        => $producto->precio * $request->cantidad, 
-                                                  ]);
-                                             }
-                  $this->recalcularTotal($carrito); 
-                   return back()->with('success', 'Producto agregado al carrito'); 
-                         }
+        return VentaCabecera::firstOrCreate(
+            [
+                'user_id' => Auth::id(),
+                'estado'  => 'carrito',
+            ],
+            [
+                'total' => 0
+            ]
+        );
+    }
 
-                          public function eliminar($id)    
-                           {       
-                              $carrito = $this->obtenerCarrito();      
-                                 // where('id',$id) evita eliminar ítems de otro carrito   
-                                       $carrito->detalles()->where('id', $id)->delete();   
-                                             $this->recalcularTotal($carrito);      
-                                                return back()->with('success', 'Producto eliminado');
-                                                } 
-  public function confirmar()    
-   {        
-     $carrito = $this->obtenerCarrito();        
-      if ($carrito->detalles()->count() === 0) {          
-           return back()->with('error', 'Tu carrito está vacío');      
-              }       
-                $items = $carrito->detalles()->with('producto')->get();       
-                  $total = $carrito->total;       
-                    // Cambia estado y guarda fecha exacta de la compra    
-                         $carrito->update([            
-                             'estado'      => 'confirmado',             
-                             'fecha_venta' => now(),        
-                              ]);        
-                               // Pasa los datos por sesión a la vista de confirmación        
-                                return redirect()->route('compra.confirmada')                          
-                                ->with('items', $items)                          
-                                ->with('total', $total);     
-                                } 
- private function recalcularTotal(VentaCabecera $carrito)    
-  {        
-     // sum() suma todos los subtotales de los ítems del carrito        
-      $total = $carrito->detalles()->sum('subtotal');         
-      $carrito->update(['total' => $total]);     
-      }
+    // Mostrar carrito
+    public function index()
+    {
+
+        $carrito = $this->obtenerCarrito();
+
+        $items = VentaDetalle::where('venta_id', $carrito->id)
+            ->with('producto')
+            ->get();
+
+        return view('backend.carrito', compact('carrito', 'items'));
+    }
+
+    // Agregar producto al carrito
+  public function agregar(Request $request)
+{
+    $request->validate([
+        'producto_id' => 'required|exists:productos,id',
+        'cantidad' => 'required|integer|min:1',
+    ]);
+
+    $carrito = VentaCabecera::firstOrCreate([
+        'user_id' => Auth::id(),
+        'estado' => 'carrito',
+    ]);
+
+    $producto = Producto::findOrFail($request->producto_id);
+
+    $insert = VentaDetalle::create([
+        'venta_id' => $carrito->id,
+        'producto_id' => $producto->id,
+        'cantidad' => $request->cantidad,
+        'precio_unitario' => $producto->precio,
+        'subtotal' => $producto->precio * $request->cantidad,
+    ]);
+
+    dd([
+        'INSERT_OK' => true,
+        'data_insertada' => $insert
+    ]);
+}
+       
+
+    // Confirmar compra
+    public function confirmar()
+    {
+        $carrito = $this->obtenerCarrito();
+
+        $items = VentaDetalle::where('venta_id', $carrito->id)
+            ->with('producto')
+            ->get();
+
+        if ($items->isEmpty()) {
+            return back()->with('error', 'Tu carrito está vacío');
+        }
+
+        $carrito->update([
+            'estado' => 'confirmado',
+            'fecha_venta' => now(),
+        ]);
+
+        return redirect()->route('compra.confirmada')
+            ->with('items', $items)
+            ->with('total', $carrito->total);
+    }
 }
