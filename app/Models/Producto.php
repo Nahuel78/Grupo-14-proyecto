@@ -19,6 +19,7 @@ class Producto extends Model
     'marca',
     'talle',
     'categoria',
+    'subcategoria',
     'url_imagen',
     'activo'
 ];

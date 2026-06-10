@@ -186,85 +186,33 @@
 <div class="contenedor-productos">
 
 {{-- Productos de la base de datos --}}
-    @foreach($productos as $producto)
+@foreach($productos as $producto)
 
-        <div class="producto">
+    <div class="producto"
+         data-marca="{{ strtolower($producto->marca) }}">
 
-            @if($producto->url_imagen)
-                <img src="{{ asset($producto->url_imagen) }}"
-                     alt="{{ $producto->nombre }}">
-            @endif
+        @if($producto->url_imagen)
+            <img src="{{ asset($producto->url_imagen) }}"
+                 alt="{{ $producto->nombre }}">
+        @endif
 
-            <h3>{{ $producto->nombre }}</h3>
+        <h3>{{ $producto->nombre }}</h3>
 
-            <p class="precio">
-                ${{ number_format($producto->precio, 0, ',', '.') }}
-            </p>
+        <p class="precio">
+            ${{ number_format($producto->precio, 0, ',', '.') }}
+        </p>
 
-            <button class="btn-carrito agregar-carrito">
-                Agregar al carrito
-            </button>
+        <button class="btn-carrito agregar-carrito">
+            Agregar al carrito
+        </button>
 
-        </div>
+    </div>
 
-    @endforeach
-
-
-{{-- Productos Fijos --}}
-<div class="producto" data-marca="adidas" data-genero="unisex">
-<img src="{{ asset('img/ninos/botinadidasniño.png') }}">
-<h3> Botin Adidas niño/Niña</h3>
-<p class="precio">$80.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas" data-genero="unisex">
-<img src="{{ asset('img/ninos/botinadidasniño2.png') }}">
-<h3> Botin Adidas niño/Niña</h3>
-<p class="precio">$80.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="kappa" data-genero="unisex">
-<img src="{{ asset('img/ninos/botineskappaniño.png') }}">
-<h3> Botin Kappa niño/Niña</h3>
-<p class="precio">$60.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="puma" data-genero="unisex">
-<img src="{{ asset('img/ninos/botinniñoyniña.png') }}">
-<h3> Botin Puma niño/Niña</h3>
-<p class="precio">$60.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="kappa" data-genero="unisex">
-<img src="{{ asset('img/ninos/botinkappadepastoniño.png') }}">
-<h3> Botin Kappa niño/Niña</h3>
-<p class="precio">$60.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
+@endforeach
 
 </div>
 
 @include('footer')
-
-<script>
-
-let contador = 0;
-
-const botones = document.querySelectorAll(".agregar-carrito");
-const carrito = document.querySelector(".cart-count");
-
-botones.forEach(boton => {
-boton.addEventListener("click", () => {
-contador++;
-carrito.textContent = contador;
-});
-});
-
-</script>
 
 <script>
 

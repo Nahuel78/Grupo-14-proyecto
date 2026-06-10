@@ -27,8 +27,6 @@
         <h2>Tu estilo, tu gusto, lo encontras en la mejor tienda</h2>
     </div>
 
-    {{ auth()->user()->rol }}
-
     <div class="top-icons" style="display: flex; align-items: center; gap: 12px;">
 
     @auth
@@ -184,101 +182,36 @@
 </div>
 
 
-<div class="contenedor-productos">
-
 {{-- Productos de la base de datos --}}
-    @foreach($productos as $producto)
+ <div class="contenedor-productos">
 
-        <div class="producto">
+@foreach($productos as $producto)
 
-            @if($producto->url_imagen)
-                <img src="{{ asset($producto->url_imagen) }}"
-                     alt="{{ $producto->nombre }}">
-            @endif
+    <div class="producto"
+         data-marca="{{ strtolower($producto->marca) }}">
 
-            <h3>{{ $producto->nombre }}</h3>
+        @if($producto->url_imagen)
+            <img src="{{ asset($producto->url_imagen) }}"
+                 alt="{{ $producto->nombre }}">
+        @endif
 
-            <p class="precio">
-                ${{ number_format($producto->precio, 0, ',', '.') }}
-            </p>
+        <h3>{{ $producto->nombre }}</h3>
 
-            <button class="btn-carrito agregar-carrito">
-                Agregar al carrito
-            </button>
+        <p class="precio">
+            ${{ number_format($producto->precio, 0, ',', '.') }}
+        </p>
 
-        </div>
+        <button class="btn-carrito agregar-carrito">
+            Agregar al carrito
+        </button>
 
-    @endforeach
+    </div>
 
-
-{{-- Productos Fijos --}}
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('/img/zapatillas/zapaadidas.png') }}">
-<h3> Zapatillas Adidas Urbanas</h3>
-<p class="precio">$150.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="puma">
-<img src="{{ asset('/img/zapatillas/zapapuma.png') }}">
-<h3> Zapatillas Puma Urbanas</h3>
-<p class="precio">$100.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('/img/zapatillas/zapanikenegra.png') }}">
-<h3> Zapatillas Nike Air Max black</h3>
-<p class="precio">$200.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('/img/zapatillas/zapasnikeairmaxnegra.png') }}">
-<h3> Zapatillas Nike air Max black and Orange</h3>
-<p class="precio">$200.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('/img/zapatillas/zapasnikeairmax.png') }}">
-<h3> Zapatillas Nike Air Max White and Orange </h3>
-<p class="precio">$150.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('/img/zapatillas/zpatillaadidasrunning.png') }}">
-<h3> Zapatillas Adidas Runnig </h3>
-<p class="precio">$200.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/zapatillas/zapanike.png') }}">
-<h3>Zapatillas Nike Jordan Retro 1</h3>
-<p class="precio">$110.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/zapatillas/zapasnikeJordanretro1.png') }}">
-<h3>Zapatillas Nike Jordan Retro 1</h3>
-<p class="precio">$110.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/zapatillas/zapatillasnike1.png') }}">
-<h3>Zapatillas Nike Urbanas</h3>
-<p class="precio">$90.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
+@endforeach
 
 </div>
 
 @include('footer')
-
 <script>
 
 let contador = 0;

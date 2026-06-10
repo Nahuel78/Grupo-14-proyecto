@@ -185,140 +185,33 @@
 <div class="contenedor-productos">
 
 {{-- Productos de la base de datos --}}
-    @foreach($productos as $producto)
+@foreach($productos as $producto)
 
-        <div class="producto">
+    <div class="producto"
+         data-marca="{{ strtolower($producto->marca) }}">
 
-            @if($producto->url_imagen)
-                <img src="{{ asset($producto->url_imagen) }}"
-                     alt="{{ $producto->nombre }}">
-            @endif
+        @if($producto->url_imagen)
+            <img src="{{ asset($producto->url_imagen) }}"
+                 alt="{{ $producto->nombre }}">
+        @endif
 
-            <h3>{{ $producto->nombre }}</h3>
+        <h3>{{ $producto->nombre }}</h3>
 
-            <p class="precio">
-                ${{ number_format($producto->precio, 0, ',', '.') }}
-            </p>
+        <p class="precio">
+            ${{ number_format($producto->precio, 0, ',', '.') }}
+        </p>
 
-            <button class="btn-carrito agregar-carrito">
-                Agregar al carrito
-            </button>
+        <button class="btn-carrito agregar-carrito">
+            Agregar al carrito
+        </button>
 
-        </div>
+    </div>
 
-    @endforeach
+@endforeach
 
-
-{{-- Productos Fijos --}}
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/ropa/camperanike.png') }}">
-<h3> Campera Nike</h3>
-<p class="precio">$120.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/carruselimagenes/camisetaArg2026.png') }}">
-<h3>Camiseta Argentina</h3>
-<p class="precio">$95.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/carruselimagenes/conjuntoSeleccion.png') }}">
-<h3>Conjunto Selección</h3>
-<p class="precio">$140.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/conjunto-seleccion-invierno.png') }}">
-<h3>Conjunto Selección</h3>
-<p class="precio">$200.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/campera-boca.png') }}">
-<h3>Campera Boca</h3>
-<p class="precio">$150.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/buzo-river.png') }}">
-<h3>Buzo river</h3>
-<p class="precio">$150.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/camisetabocatitular1.png') }}">
-<h3>Camiseta Boca</h3>
-<p class="precio">$130.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/camisetarivertitular.png') }}">
-<h3>Camiseta River</h3>
-<p class="precio">$130.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/ropa/joginnike.png') }}">
-<h3>Pantalon joggin Nike retro</h3>
-<p class="precio">$80.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/buzoadidasuplente.png') }}">
-<h3> Conjunto Seleccion</h3>
-<p class="precio">$180.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/ropa/buzocangurowhite.png') }}">
-<h3> Buzo canguro Nike</h3>
-<p class="precio">$100.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropa/buzoadidasliverpol.png') }}">
-<h3> Buzo Adidas Liverpool</h3>
-<p class="precio">$100.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="puma">
-<img src="{{ asset('img/ropa/pantalonmachestercity.png') }}">
-<h3> Pantalon Deportivo Manchester City</h3>
-<p class="precio">$100.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
 </div>
 
 @include('footer')
-
-<script>
-
-let contador = 0;
-
-const botones = document.querySelectorAll(".agregar-carrito");
-const carrito = document.querySelector(".cart-count");
-
-botones.forEach(boton => {
-boton.addEventListener("click", () => {
-contador++;
-carrito.textContent = contador;
-});
-});
-
-</script>
 
 <script>
 

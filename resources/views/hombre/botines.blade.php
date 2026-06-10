@@ -184,114 +184,35 @@
 
 
 <div class="contenedor-productos">
-    
+
 {{-- Productos de la base de datos --}}
-    @foreach($productos as $producto)
+@foreach($productos as $producto)
 
-        <div class="producto">
+    <div class="producto"
+         data-marca="{{ strtolower($producto->marca) }}">
 
-            @if($producto->url_imagen)
-                <img src="{{ asset($producto->url_imagen) }}"
-                     alt="{{ $producto->nombre }}">
-            @endif
+        @if($producto->url_imagen)
+            <img src="{{ asset($producto->url_imagen) }}"
+                 alt="{{ $producto->nombre }}">
+        @endif
 
-            <h3>{{ $producto->nombre }}</h3>
+        <h3>{{ $producto->nombre }}</h3>
 
-            <p class="precio">
-                ${{ number_format($producto->precio, 0, ',', '.') }}
-            </p>
+        <p class="precio">
+            ${{ number_format($producto->precio, 0, ',', '.') }}
+        </p>
 
-            <button class="btn-carrito agregar-carrito">
-                Agregar al carrito
-            </button>
+        <button class="btn-carrito agregar-carrito">
+            Agregar al carrito
+        </button>
 
-        </div>
+    </div>
 
-    @endforeach
+@endforeach
 
-
-{{-- Productos Fijos --}}
-<div class="producto" data-marca="puma">
-<img src="{{ asset('img/botines/-PUMA-BLACK-POISON-PINK_1.png') }}">
-<h3>Botin Puma Black and Pink</h3>
-<p class="precio">$90.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="kappa">
-<img src="{{ asset('img/botines/botinkappa.png') }}">
-<h3>Botin Kappa black</h3>
-<p class="precio">$60.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="newbalance">
-<img src="{{ asset('img/botines/botinnewbalance.png') }}">
-<h3>Botin New Balance</h3>
-<p class="precio">$70.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="newbalance">
-<img src="{{ asset('img/botines/botinnewbalance1.png') }}">
-<h3>Botin New Balance</h3>
-<p class="precio">$80.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="kappa">
-<img src="{{ asset('img/botines/botinkappa2.png') }}">
-<h3>Botin Kappa</h3>
-<p class="precio">$60.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/botines/botinnikeamarillo.png') }}">
-<h3>Botin Nike Superfly Amarillo fluor</h3>
-<p class="precio">$150.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/botines/botinesadidaspredator.png') }}">
-<h3>Botin Adidas Predator</h3>
-<p class="precio">$200.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="newbalance">
-<img src="{{ asset('img/botines/newbalance2.png') }}">
-<h3>Botin New Balance f5</h3>
-<p class="precio">$70.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/botines/nikenegrobotin.png') }}">
-<h3>Botin Nike Black</h3>
-<p class="precio">$150.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
 </div>
 
 @include('footer')
-
-<script>
-
-let contador = 0;
-
-const botones = document.querySelectorAll(".agregar-carrito");
-const carrito = document.querySelector(".cart-count");
-
-botones.forEach(boton => {
-boton.addEventListener("click", () => {
-contador++;
-carrito.textContent = contador;
-});
-});
-
-</script>
 
 <script>
 
