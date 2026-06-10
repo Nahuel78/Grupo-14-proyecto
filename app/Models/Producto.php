@@ -19,12 +19,13 @@ class Producto extends Model
     'marca',
     'talle',
     'categoria',
+    'subcategoria',
     'url_imagen',
     'activo'
 ];
 
 public function detallesPedido()
-{
+     {
     return $this->hasMany(DetallePedido::class);
-}
+     }
 }

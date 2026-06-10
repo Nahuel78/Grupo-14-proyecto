@@ -1066,4 +1066,19 @@ body{
 .menu-usuario .dropdown-toggle::after{
     display:none;
 }
+/** = boton de volver al inicio */ 
 
+.btn-volver{
+    display: inline-block;
+    background: #6c757d;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.btn-volver:hover{
+    background: #5c636a;
+    color: white;
+}

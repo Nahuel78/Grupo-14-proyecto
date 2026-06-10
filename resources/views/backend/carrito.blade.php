@@ -103,6 +103,23 @@ body{
     gap: 15px;
     text-align: left;
 }
+/** = boton de volver al inicio */ 
+
+.btn-volver{
+    display: inline-block;
+    background: #6c757d;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.btn-volver:hover{
+    background: #5c636a;
+    color: white;
+}
+
 </style>
 
 <div class="container-carrito">
@@ -141,7 +158,8 @@ body{
                             <div class="producto-info">
 
                                 <img class="imagen-producto"
-                                     src="{{ asset('img/ropa/default.png') }}">
+                              src="{{ asset($item->producto->url_imagen) }}"
+                               alt="{{ $item->producto->nombre }}">
 
                                 <div>
                                     <strong>{{ $item->producto->nombre }}</strong>
@@ -169,7 +187,7 @@ body{
 
                         {{-- ACCIONES --}}
                         <td>
-                            <form action="{{ route('backend.carrito.eliminar',$item->id) }}"
+                            <form action="{{ route('carrito.eliminar',$item->id) }}"
                                   method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -194,13 +212,16 @@ body{
 
         {{-- CONFIRMAR --}}
         <div class="acciones">
-            <form action="{{ route('backend.carrito.confirmar') }}" method="POST">
+            <form action="{{ route('carrito.confirmar') }}" method="POST">
                 @csrf
                 <button type="submit" class="btn-confirmar">
                     Confirmar compra
                 </button>
             </form>
         </div>
+        
+       
+</div>
 
     @else
 
@@ -209,5 +230,9 @@ body{
         </div>
 
     @endif
+     <div class="acciones" style="margin-top:10px;">
+        <a href="/hombre" class="btn-volver">
+         ← Seguir comprando
+        </a>
 
 </div>

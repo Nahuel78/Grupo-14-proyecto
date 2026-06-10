@@ -98,6 +98,7 @@
                         <th>Imagen</th>
                         <th>Nombre</th>
                         <th>Categoría</th>
+                        <th>Subcategoría</th>
                         <th>Marca</th>
                         <th>Talle</th>
                         <th>Descripción</th>
@@ -125,6 +126,7 @@
 
                         <td class="fw-bold">{{ $producto->nombre }}</td>
                         <td>{{ $producto->categoria }}</td>
+                        <td>{{ $producto->subcategoria }}</td>
                         <td>{{ $producto->marca }}</td>
                         <td>{{ $producto->talle }}</td>
                         <td>{{ $producto->descripcion }}</td>
@@ -142,7 +144,7 @@
                 @empty
 
                     <tr>
-                        <td colspan="9" class="text-center py-4 text-secondary">
+                        <td colspan="10" class="text-center py-4 text-secondary">
                             No hay productos cargados.
                         </td>
                     </tr>

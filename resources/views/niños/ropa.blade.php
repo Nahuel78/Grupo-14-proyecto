@@ -126,19 +126,19 @@
 
      @auth
 
-    @if(strtolower(auth()->user()->rol) !== 'admin')
-        <a href="/carrito" class="icono cart">
+     @if(strtolower(auth()->user()->rol) !== 'admin')
+        <a href="{{ route('cliente.carrito') }}" class="icono cart">
             <i class="bi bi-bag"></i>
-            <span class="cart-count">0</span>
+            <span class="cart-count">{{ $cantidadCarrito ?? 0 }}</span>
         </a>
     @endif
 
 @else
 
-    <a href="/carrito" class="icono cart">
-        <i class="bi bi-bag"></i>
-        <span class="cart-count">0</span>
-    </a>
+   <a href="{{ route('cliente.carrito') }}" class="icono cart">
+    <i class="bi bi-bag"></i>
+    <span class="cart-count">{{ $cantidadCarrito ?? 0 }}</span>
+</a>
 
 @endauth
 

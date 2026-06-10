@@ -14,7 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
         
         // Registramos el alias 'rol' para que Laravel sepa qué archivo usar
         $middleware->alias([
-            'rol' => \App\Http\Middleware\SoloAdmin::class,
+            'admin' => \App\Http\Middleware\SoloAdmin::class,
+            'rol'   => \App\Http\Middleware\RolMiddleware::class,
         ]);
 
     })

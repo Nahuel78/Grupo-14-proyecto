@@ -128,17 +128,17 @@
      @auth
 
     @if(strtolower(auth()->user()->rol) !== 'admin')
-        <a href="/carrito" class="icono cart">
+        <a href="{{ route('cliente.carrito') }}" class="icono cart">
             <i class="bi bi-bag"></i>
-            <span class="cart-count">0</span>
+            <span class="cart-count">{{ $cantidadCarrito }}</span>
         </a>
     @endif
 
 @else
 
-    <a href="/carrito" class="icono cart">
+    <a href="{{ route('cliente.carrito') }}" class="icono cart">
         <i class="bi bi-bag"></i>
-        <span class="cart-count">0</span>
+        <span class="cart-count">{{ $cantidadCarrito }}</span>
     </a>
 
 @endauth
@@ -212,68 +212,7 @@
 
 
 {{-- Productos Fijos --}}
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('/img/zapatillas/zapaadidas.png') }}">
-<h3> Zapatillas Adidas Urbanas</h3>
-<p class="precio">$150.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
 
-<div class="producto" data-marca="puma">
-<img src="{{ asset('/img/zapatillas/zapapuma.png') }}">
-<h3> Zapatillas Puma Urbanas</h3>
-<p class="precio">$100.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('/img/zapatillas/zapanikenegra.png') }}">
-<h3> Zapatillas Nike Air Max black</h3>
-<p class="precio">$200.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('/img/zapatillas/zapasnikeairmaxnegra.png') }}">
-<h3> Zapatillas Nike air Max black and Orange</h3>
-<p class="precio">$200.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('/img/zapatillas/zapasnikeairmax.png') }}">
-<h3> Zapatillas Nike Air Max White and Orange </h3>
-<p class="precio">$150.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('/img/zapatillas/zpatillaadidasrunning.png') }}">
-<h3> Zapatillas Adidas Runnig </h3>
-<p class="precio">$200.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/zapatillas/zapanike.png') }}">
-<h3>Zapatillas Nike Jordan Retro 1</h3>
-<p class="precio">$110.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/zapatillas/zapasnikeJordanretro1.png') }}">
-<h3>Zapatillas Nike Jordan Retro 1</h3>
-<p class="precio">$110.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/zapatillas/zapatillasnike1.png') }}">
-<h3>Zapatillas Nike Urbanas</h3>
-<p class="precio">$90.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
 
 </div>
 

@@ -44,6 +44,7 @@ class CarritoController extends Controller
     // Agregar producto al carrito
   public function agregar(Request $request)
 {
+
     $request->validate([
         'producto_id' => 'required|exists:productos,id',
         'cantidad' => 'required|integer|min:1',
@@ -56,21 +57,41 @@ class CarritoController extends Controller
 
     $producto = Producto::findOrFail($request->producto_id);
 
-    $insert = VentaDetalle::create([
+
+   $item = VentaDetalle::where('venta_id', $carrito->id)
+    ->where('producto_id', $producto->id)
+    ->first();
+
+if ($item) {
+
+    $item->cantidad += $request->cantidad;
+    $item->subtotal = $item->cantidad * $item->precio_unitario;
+    $item->save();
+
+} else {
+
+    VentaDetalle::create([
         'venta_id' => $carrito->id,
         'producto_id' => $producto->id,
         'cantidad' => $request->cantidad,
         'precio_unitario' => $producto->precio,
         'subtotal' => $producto->precio * $request->cantidad,
     ]);
+}
+$carrito->total = VentaDetalle::where('venta_id', $carrito->id)
+    ->sum('subtotal');
 
-    dd([
-        'INSERT_OK' => true,
-        'data_insertada' => $insert
+$carrito->save();
+
+   if ($request->ajax()) {
+    return response()->json([
+        'success' => true
     ]);
 }
-       
 
+return back();
+       
+}
     // Confirmar compra
     public function confirmar()
     {
@@ -93,4 +114,22 @@ class CarritoController extends Controller
             ->with('items', $items)
             ->with('total', $carrito->total);
     }
+    public function eliminar($id)
+{
+    $item = VentaDetalle::findOrFail($id);
+
+    $carrito = VentaCabecera::findOrFail($item->venta_id);
+
+    $item->delete();
+
+    // Recalcular total del carrito
+    $carrito->total = VentaDetalle::where('venta_id', $carrito->id)
+        ->sum('subtotal');
+
+    $carrito->save();
+
+    return redirect()
+        ->route('cliente.carrito')
+        ->with('success', 'Producto eliminado del carrito');
+}
 }
