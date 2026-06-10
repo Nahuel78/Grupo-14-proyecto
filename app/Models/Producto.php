@@ -22,4 +22,9 @@ class Producto extends Model
     'url_imagen',
     'activo'
 ];
+
+public function detallesPedido()
+{
+    return $this->hasMany(DetallePedido::class);
+}
 }
