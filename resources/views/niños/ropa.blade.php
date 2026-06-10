@@ -185,122 +185,34 @@
 
 <div class="contenedor-productos">
 
-
 {{-- Productos de la base de datos --}}
-    @foreach($productos as $producto)
+@foreach($productos as $producto)
 
-        <div class="producto">
+    <div class="producto"
+         data-marca="{{ strtolower($producto->marca) }}">
 
-            @if($producto->url_imagen)
-                <img src="{{ asset($producto->url_imagen) }}"
-                     alt="{{ $producto->nombre }}">
-            @endif
+        @if($producto->url_imagen)
+            <img src="{{ asset($producto->url_imagen) }}"
+                 alt="{{ $producto->nombre }}">
+        @endif
 
-            <h3>{{ $producto->nombre }}</h3>
+        <h3>{{ $producto->nombre }}</h3>
 
-            <p class="precio">
-                ${{ number_format($producto->precio, 0, ',', '.') }}
-            </p>
+        <p class="precio">
+            ${{ number_format($producto->precio, 0, ',', '.') }}
+        </p>
 
-            <button class="btn-carrito agregar-carrito">
-                Agregar al carrito
-            </button>
+        <button class="btn-carrito agregar-carrito">
+            Agregar al carrito
+        </button>
 
-        </div>
+    </div>
 
-    @endforeach
-
-
-{{-- Productos Fijos --}}
-<div class="producto" data-marca="adidas" data-genero="niño">
-<img src="{{ asset('img/ninos/conjuntoseleccionniño.png') }}">
-<h3> Conjunto Adidas Niño</h3>
-<p class="precio">$120.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas" data-genero="unisex">
-<img src="{{ asset('img/ninos/conjuntoadidax2.png') }}">
-<h3> Conjunto Adidas Niño/Niña</h3>
-<p class="precio">$120.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas" data-genero="unisex">
-<img src="{{ asset('img/ninos/conjuntoseleccionniño.png') }}">
-<h3> Conjunto Adidas Seleccion Niño/Niña</h3>
-<p class="precio">$120.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas" data-genero="unisex">
-<img src="{{ asset('img/ninos/camisetadebocaniño.png') }}">
-<h3> Camiseta Adidas Boca Niño/Niña</h3>
-<p class="precio">$100.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="puma" data-genero="unisex">
-<img src="{{ asset('img/ninos/camisetaindependienteniño.png') }}">
-<h3> Camiseta Puma Independiente Niño/Niña</h3>
-<p class="precio">$100.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas" data-genero="unisex">
-<img src="{{ asset('img/ninos/camisetariverniño.png') }}">
-<h3> Camiseta Adidas River Niño/Niña</h3>
-<p class="precio">$100.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas" data-genero="niño">
-<img src="{{ asset('img/ninos/pantalonjoggeradidasniño.png') }}">
-<h3>Pantalon jogger Adidas Niño</h3>
-<p class="precio">$130.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas" data-genero="unisex">
-<img src="{{ asset('img/ninos/pantalonriverniño.png') }}">
-<h3>Pantalon Adidas River Niño</h3>
-<p class="precio">$90.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas" data-genero="unisex">
-<img src="{{ asset('img/ninos/buzoargentinaniño.png') }}">
-<h3>Buzo Adidas Seleccion Niño</h3>
-<p class="precio">$100.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas" data-genero="niña">
-<img src="{{ asset('img/ninos/remeraadidasdisneyniña.png') }}">
-<h3>Remera Adidas Disney Niña</h3>
-<p class="precio">$40.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
+@endforeach
 
 </div>
 
 @include('footer')
-
-<script>
-
-let contador = 0;
-
-const botones = document.querySelectorAll(".agregar-carrito");
-const carrito = document.querySelector(".cart-count");
-
-botones.forEach(boton => {
-boton.addEventListener("click", () => {
-contador++;
-carrito.textContent = contador;
-});
-});
-
-</script>
 
 <script>
 

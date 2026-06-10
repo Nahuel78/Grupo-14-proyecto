@@ -183,124 +183,33 @@
 <div class="contenedor-productos">
 
 {{-- Productos de la base de datos --}}
-    @foreach($productos as $producto)
+@foreach($productos as $producto)
 
-        <div class="producto">
+    <div class="producto"
+         data-marca="{{ strtolower($producto->marca) }}">
 
-            @if($producto->url_imagen)
-                <img src="{{ asset($producto->url_imagen) }}"
-                     alt="{{ $producto->nombre }}">
-            @endif
+        @if($producto->url_imagen)
+            <img src="{{ asset($producto->url_imagen) }}"
+                 alt="{{ $producto->nombre }}">
+        @endif
 
-            <h3>{{ $producto->nombre }}</h3>
+        <h3>{{ $producto->nombre }}</h3>
 
-            <p class="precio">
-                ${{ number_format($producto->precio, 0, ',', '.') }}
-            </p>
+        <p class="precio">
+            ${{ number_format($producto->precio, 0, ',', '.') }}
+        </p>
 
-            <button class="btn-carrito agregar-carrito">
-                Agregar al carrito
-            </button>
+        <button class="btn-carrito agregar-carrito">
+            Agregar al carrito
+        </button>
 
-        </div>
+    </div>
 
-    @endforeach
-
-    
-{{-- Productos Fijos --}}
-<div class="producto" data-marca="puma">
-<img src="{{ asset('img/accesorios/pelota puma premier.png') }}">
-<h3>Pelota Puma Futbol</h3>
-<p class="precio">$60.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/accesorios/pelota trionda.png') }}">
-<h3>Pelota Trionda</h3>
-<p class="precio">$80.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/accesorios/pelota adidas UCL.png') }}">
-<h3>Pelota UCL 25/26</h3>
-<p class="precio">$75.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/accesorios/pelota adidas argentum.png') }}">
-<h3>Pelota adidas argentum</h3>
-<p class="precio">$55.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/accesorios/pelota basquet nike t.png') }}">
-<h3>Pelota Basquet Nike</h3>
-<p class="precio">$52.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/accesorios/adidas pelota tango.png') }}">
-<h3>Pelota adidas tango</h3>
-<p class="precio">$62.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="puma">
-<img src="{{ asset('img/accesorios/pelota puma libertadores.png') }}">
-<h3>Pelota puma libertadores 2026</h3>
-<p class="precio">$70.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/accesorios/pelota nike basquet.png') }}">
-<h3>Pelota Basquet Nike negra</h3>
-<p class="precio">$60.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/accesorios/pelota nike 90.png') }}">
-<h3>Pelota Nike 90</h3>
-<p class="precio">$65.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/accesorios/pelota nike voley.png') }}">
-<h3>Pelota Nike voley</h3>
-<p class="precio">$55.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
+@endforeach
 
 </div>
 
 @include('footer')
-
-<script>
-
-let contador = 0;
-
-const botones = document.querySelectorAll(".agregar-carrito");
-const carrito = document.querySelector(".cart-count");
-
-botones.forEach(boton => {
-boton.addEventListener("click", () => {
-contador++;
-carrito.textContent = contador;
-});
-});
-
-</script>
 
 <script>
 

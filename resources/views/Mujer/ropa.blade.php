@@ -182,144 +182,34 @@
 
 <div class="contenedor-productos">
 
-
 {{-- Productos de la base de datos --}}
-    @foreach($productos as $producto)
+@foreach($productos as $producto)
 
-        <div class="producto">
+    <div class="producto"
+         data-marca="{{ strtolower($producto->marca) }}">
 
-            @if($producto->url_imagen)
-                <img src="{{ asset($producto->url_imagen) }}"
-                     alt="{{ $producto->nombre }}">
-            @endif
+        @if($producto->url_imagen)
+            <img src="{{ asset($producto->url_imagen) }}"
+                 alt="{{ $producto->nombre }}">
+        @endif
 
-            <h3>{{ $producto->nombre }}</h3>
+        <h3>{{ $producto->nombre }}</h3>
 
-            <p class="precio">
-                ${{ number_format($producto->precio, 0, ',', '.') }}
-            </p>
+        <p class="precio">
+            ${{ number_format($producto->precio, 0, ',', '.') }}
+        </p>
 
-            <button class="btn-carrito agregar-carrito">
-                Agregar al carrito
-            </button>
+        <button class="btn-carrito agregar-carrito">
+            Agregar al carrito
+        </button>
 
-        </div>
+    </div>
 
-    @endforeach
-
-
-{{-- Productos Fijos --}}
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/ropamujer/Calza nike.png') }}">
-<h3>Calza Nike Mujer</h3>
-<p class="precio">$50.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropamujer/Topadidas.png') }}">
-<h3>Top Adidas Deportivo</h3>
-<p class="precio">$45.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="puma">
-<img src="{{ asset('img/ropamujer/conjuntopumamujer.png') }}">
-<h3>Conjunto Puma</h3>
-<p class="precio">$90.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropamujer/buzo adidas deportivo.png') }}">
-<h3>Buzo adidas deportivo </h3>
-<p class="precio">$80.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropamujer/camiseta de boca.png') }}">
-<h3>Camiseta de boca alternativa</h3>
-<p class="precio">$70.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropamujer/conjunto adidas deportivo rosa.png') }}">
-<h3>Conjunto adidas rosa </h3>
-<p class="precio">$65.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropamujer/conjunto boca f.png') }}">
-<h3>Conjunto de boca </h3>
-<p class="precio">$100.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropamujer/conjunto River f.png') }}">
-<h3>Conjunto de River </h3>
-<p class="precio">$100.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropamujer/Conjunto Seleccion argentina f.png') }}">
-<h3>Conjunto Seleccion argentina</h3>
-<p class="precio">$105.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropamujer/remera de river f.png') }}">
-<h3>Remera de river alternativa</h3>
-<p class="precio">$70.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropamujer/conjunto nike .png') }}">
-<h3>Conjunto nike</h3>
-<p class="precio">$110.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropamujer/camiseta titular seleccion.png') }}">
-<h3>Camiseta de Argentina titular</h3>
-<p class="precio">$85.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/ropamujer/Calza adidas.png') }}">
-<h3>Calza adidas</h3>
-<p class="precio">$50.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
+@endforeach
 
 </div>
 
 @include('footer')
-
-<script>
-
-let contador = 0;
-
-const botones = document.querySelectorAll(".agregar-carrito");
-const carrito = document.querySelector(".cart-count");
-
-botones.forEach(boton => {
-boton.addEventListener("click", () => {
-contador++;
-carrito.textContent = contador;
-});
-});
-
-</script>
 
 <script>
 

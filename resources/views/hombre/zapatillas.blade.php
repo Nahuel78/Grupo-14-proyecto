@@ -27,8 +27,6 @@
         <h2>Tu estilo, tu gusto, lo encontras en la mejor tienda</h2>
     </div>
 
-    {{ auth()->user()->rol }}
-
     <div class="top-icons" style="display: flex; align-items: center; gap: 12px;">
 
     @auth
@@ -184,40 +182,42 @@
 </div>
 
 
-<div class="contenedor-productos">
-
 {{-- Productos de la base de datos --}}
-    @foreach($productos as $producto)
+ <div class="contenedor-productos">
 
-        <div class="producto">
+@foreach($productos as $producto)
 
-            @if($producto->url_imagen)
-                <img src="{{ asset($producto->url_imagen) }}"
-                     alt="{{ $producto->nombre }}">
-            @endif
+    <div class="producto"
+         data-marca="{{ strtolower($producto->marca) }}">
 
-            <h3>{{ $producto->nombre }}</h3>
+        @if($producto->url_imagen)
+            <img src="{{ asset($producto->url_imagen) }}"
+                 alt="{{ $producto->nombre }}">
+        @endif
 
-            <p class="precio">
-                ${{ number_format($producto->precio, 0, ',', '.') }}
-            </p>
+        <h3>{{ $producto->nombre }}</h3>
 
-            <button class="btn-carrito agregar-carrito">
-                Agregar al carrito
-            </button>
+        <p class="precio">
+            ${{ number_format($producto->precio, 0, ',', '.') }}
+        </p>
 
-        </div>
+        <button class="btn-carrito agregar-carrito">
+            Agregar al carrito
+        </button>
 
-    @endforeach
+    </div>
+
 
 
 {{-- Productos Fijos --}}
 
 
+@endforeach
+
+
 </div>
 
 @include('footer')
-
 <script>
 
 let contador = 0;

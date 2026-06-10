@@ -184,132 +184,34 @@
 
 <div class="contenedor-productos">
 
-
 {{-- Productos de la base de datos --}}
-    @foreach($productos as $producto)
+@foreach($productos as $producto)
 
-        <div class="producto">
+    <div class="producto"
+         data-marca="{{ strtolower($producto->marca) }}">
 
-            @if($producto->url_imagen)
-                <img src="{{ asset($producto->url_imagen) }}"
-                     alt="{{ $producto->nombre }}">
-            @endif
+        @if($producto->url_imagen)
+            <img src="{{ asset($producto->url_imagen) }}"
+                 alt="{{ $producto->nombre }}">
+        @endif
 
-            <h3>{{ $producto->nombre }}</h3>
+        <h3>{{ $producto->nombre }}</h3>
 
-            <p class="precio">
-                ${{ number_format($producto->precio, 0, ',', '.') }}
-            </p>
+        <p class="precio">
+            ${{ number_format($producto->precio, 0, ',', '.') }}
+        </p>
 
-            <button class="btn-carrito agregar-carrito">
-                Agregar al carrito
-            </button>
+        <button class="btn-carrito agregar-carrito">
+            Agregar al carrito
+        </button>
 
-        </div>
+    </div>
 
-    @endforeach
-
-
-{{-- Productos Fijos --}}
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/zapatillasmujer/ZapatillasRunningnike.png') }}">
-<h3>Zapatillas Nike Running</h3>
-<p class="precio">$130.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="Puma">
-<img src="{{ asset('img/zapatillasmujer/ZapatillasPumaStreet.png') }}">
-<h3>Zapatillas Puma Street </h3>
-<p class="precio">$90.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/zapatillasmujer/ZapatillasadidasGC.png') }}">
-<h3>Zapatilla Adidas GC</h3>
-<p class="precio">$120.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/zapatillasmujer/Zapatilla nike blazer.png') }}">
-<h3>Zapatilla Nike Blazer</h3>
-<p class="precio">$150.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="puma">
-<img src="{{ asset('img/zapatillasmujer/Zapatilla Puma CA.png') }}">
-<h3>Zapatilla Puma CA</h3>
-<p class="precio">$120.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="puma">
-<img src="{{ asset('img/zapatillasmujer/Zapatilla Puma Pro.png') }}">
-<h3>Zapatilla Puma Pro</h3>
-<p class="precio">$125.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/zapatillasmujer/zapatillasnikeairmax.png') }}">
-<h3>Zapatilla nike airmax</h3>
-<p class="precio">$160.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="puma">
-<img src="{{ asset('img/zapatillasmujer/Zapatillapuma carina.png') }}">
-<h3>Zapatilla Puma Blanca</h3>
-<p class="precio">$135.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-
-<div class="producto" data-marca="adidas">
-<img src="{{ asset('img/zapatillasmujer/ZapatillasRunningGalaxyNegro.png') }}">
-<h3>Zapatilla Running Galaxy</h3>
-<p class="precio">$145.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-<div class="producto" data-marca="nike">
-<img src="{{ asset('img/zapatillasmujer/Zapatillasnikedefy.png') }}">
-<h3>Zapatilla Nike defy</h3>
-<p class="precio">$125.000</p>
-<button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-</div>
-
-
-
-
-
-
-
-
-
+@endforeach
 
 </div>
 
 @include('footer')
-
-<script>
-
-let contador = 0;
-
-const botones = document.querySelectorAll(".agregar-carrito");
-const carrito = document.querySelector(".cart-count");
-
-botones.forEach(boton => {
-boton.addEventListener("click", () => {
-contador++;
-carrito.textContent = contador;
-});
-});
-
-</script>
 
 <script>
 
