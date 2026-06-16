@@ -70,6 +70,22 @@
 
                     </a>
 
+                    <!-- CONSULTAS -->
+                    <a href="{{ route('admin.consultas') }}"
+                         class="list-group-item list-group-item-action border-0 bg-transparent text-white mb-3">
+
+                    <i class="bi bi-envelope me-2"></i>
+                         Consultas
+
+                    </a>
+                    <!-- CLIENTES -->
+                    <a href="{{ route('admin.clientes') }}"
+                    class="list-group-item list-group-item-action border-0 bg-transparent text-white mb-3">
+
+                     <i class="bi bi-people me-2"></i>
+                        Clientes
+                    </a>
+
                 </div>
 
                 <hr class="text-secondary my-4">
@@ -384,24 +400,21 @@
 
                         </div>
 
-                        <!-- VOLVER AL INICIO -->
+                       <!-- VOLVER AL INICIO -->
                         <div class="col-md-4">
 
-                            <a href="{{ url('/') }}"
-                            class="btn btn-outline-dark w-100 p-4 shadow-sm">
+                        <a href="{{ url('/') }}"
+                        class="btn btn-outline-dark w-100 p-4 shadow-sm">
 
-                                <i class="bi bi-house-door fs-1"></i>
+                         <i class="bi bi-house-door fs-1"></i>
 
-                                <br><br>
+                         <br><br>
 
-                                <span class="fw-bold">
-                                    Volver al Inicio
-                                </span>
+                         <span class="fw-bold">
+                              Volver al Inicio
+                        </span>
 
-                            </a>
-
-                        </div>
-
+                        </a>
 
                     </div>
 

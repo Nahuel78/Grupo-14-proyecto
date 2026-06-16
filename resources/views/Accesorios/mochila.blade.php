@@ -150,7 +150,7 @@
 
 <div class="menu">
 
-<a href="/">Inicio</a>
+<a href="{{ url('/') }}">Inicio</a>
 <a href="/accesorios/mochila">Mochila</a>
 <a href="/accesorios/medias">Medias</a>
 <a href="/accesorios/pelotas">Pelotas</a>

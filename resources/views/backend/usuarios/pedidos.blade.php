@@ -26,29 +26,52 @@
 
         </div>
 
-        <div class="card-body text-center py-5">
+       <div class="card-body">
 
-            <i class="bi bi-cart-x"
-               style="font-size:70px;color:#6c757d;"></i>
+@if($pedidos->isEmpty())
 
-            <h4 class="mt-4">
-                No tienes pedidos realizados
-            </h4>
+    <div class="text-center py-5">
 
-            <p class="text-muted">
-                Cuando realices una compra podrás consultar
-                aquí el estado de tus pedidos.
-            </p>
+        <i class="bi bi-cart-x"
+           style="font-size:70px;color:#6c757d;"></i>
 
-            <a href="{{ url('/cliente') }}"
-               class="btn btn-dark mt-3">
+        <h4 class="mt-4">
+            No tienes pedidos realizados
+        </h4>
 
-                <i class="bi bi-arrow-left"></i>
-                Volver a la Tienda
+    </div>
 
-            </a>
+@else
 
-        </div>
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th># Pedido</th>
+            <th>Total</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach($pedidos as $pedido)
+
+        <tr>
+            <td>{{ $pedido->id }}</td>
+            <td>${{ number_format($pedido->total,0,',','.') }}</td>
+            <td>{{ $pedido->estado }}</td>
+        </tr>
+
+        @endforeach
+
+    </tbody>
+
+</table>
+
+@endif
+
+</div>
 
     </div>
 

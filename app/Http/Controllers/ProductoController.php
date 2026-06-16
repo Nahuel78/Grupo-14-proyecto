@@ -46,6 +46,7 @@ class ProductoController extends Controller
             'url_imagen' => $rutaImagen,
             'activo' => 1,
             'subcategoria' => $request->subcategoria,
+            'destacado' => $request->has('destacado') ? 1 : 0,
         ]);
 
         return redirect()->route('admin.productos')
@@ -70,6 +71,7 @@ class ProductoController extends Controller
     $producto->marca = $request->marca;
     $producto->talle = $request->talle;
     $producto->subcategoria = $request->subcategoria;
+    $producto->destacado = $request->has('destacado');
 
 
     // IMAGEN 

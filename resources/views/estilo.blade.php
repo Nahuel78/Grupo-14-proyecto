@@ -198,7 +198,10 @@
 
     @include('carrusel')
 
-    @include('seccion-productos')
+    @include('seccion-productos', ['productos' => $productos])
+
+
+
 
     <section class="promo">
 

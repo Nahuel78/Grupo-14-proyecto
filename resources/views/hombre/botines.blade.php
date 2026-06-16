@@ -26,7 +26,6 @@
         <h2>Tu estilo, tu gusto, lo encontras en la mejor tienda</h2>
     </div>
 
-    {{ auth()->user()->rol }}
 
     <div class="top-icons" style="display: flex; align-items: center; gap: 12px;">
 
@@ -153,7 +152,7 @@
     ☰ Menú
     </button>
 
-<a href="/inicio">Inicio</a>
+<a href="{{ url('/') }}">Inicio</a>
 <a href="/hombre/ropa">Ropa</a>
 <a href="/hombre/zapatillas">Zapatillas</a>
 <a href="/hombre/botines">Botines</a>

@@ -161,6 +161,16 @@
                     @endif
                 </div>
 
+                <!-- ⭐ DESTACADO -->
+                <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" name="destacado" value="1" id="destacado"
+                      {{ isset($producto) && $producto->destacado ? 'checked' : '' }}>
+
+                <label class="form-check-label" for="destacado">
+                      Mostrar como producto destacado
+                </label>
+                </div>
+
                 <button type="submit" class="btn btn-success">
                     {{ isset($producto) ? 'Actualizar Producto' : 'Guardar Producto' }}
                 </button>

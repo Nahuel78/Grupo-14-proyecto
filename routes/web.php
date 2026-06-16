@@ -6,14 +6,18 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ConsultaController;
+
 use App\Models\Producto;
-
-
 
 
 /*==== Links de las paginas ====*/
 
-Route::get('/', function () { return view('inicio'); }); 
+Route::get('/', function () {
+    $productos = Producto::where('destacado', 1)->get();
+    return view('inicio', compact('productos'));
+})->name('inicio');
 
 Route::view('/quienes-somos', 'quienes');
 
@@ -22,13 +26,8 @@ Route::view('/comercializacion', 'comercializacion');
 Route::get('/contacto', function () {
     return view('contacto');
 });
-/*==== Link de mensaje de exito de formulario====*/
-Route::post('/contacto', [ContactoController::class, 'procesar']);
 
 Route::view('/terminos', 'termino');
-
-/*==== Link para volver al inicio ====*/
-Route::get('/inicio', function () { return view('inicio'); });
 
 /*==== Links categoria hombre ====*/
 Route::get('/hombre', function () {
@@ -254,13 +253,24 @@ Route::get('/perfil/editar',
 Route::put('/perfil/actualizar',
     [AdminController::class, 'actualizarPerfil'])
     ->name('admin.perfil.actualizar');
+
+    Route::get('/consultas', [ConsultaController::class, 'index'])
+    ->name('admin.consultas');
+
+Route::put('/consultas/{id}/leer',
+    [ConsultaController::class, 'marcarLeido'])
+    ->name('admin.consultas.leer');
+
+    Route::get('/clientes', [AdminController::class, 'clientes'])
+    ->name('admin.clientes');
 });
 
 /*=== Cliente ===*/
 
-Route::get('/cliente/pedidos', function () {
-    return view('backend.usuarios.pedidos');
-})->middleware('auth')->name('cliente.pedidos');
+Route::get('/cliente/pedidos',
+    [ClienteController::class, 'pedidos'])
+    ->middleware('auth')
+    ->name('cliente.pedidos');
 
 Route::get('/cliente/perfil', function () {
     return view('backend.usuarios.perfil');
@@ -287,3 +297,9 @@ Route::get('/carrito', function () {
 
     return view('carrito');
 });
+
+/*==== Link de mensaje de exito de formulario====*/
+Route::post('/contacto', [ConsultaController::class, 'guardar']);
+
+
+

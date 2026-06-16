@@ -154,7 +154,7 @@
     ☰ Menú
     </button>
 
-<a href="/">Inicio</a>
+<a href="{{ url('/') }}">Inicio</a>
 <a href="/mujer/ropa">Ropa</a>
 <a href="/mujer/zapatillas">Zapatillas</a>
 <a href="/mujer/accesorios">Accesorios</a>

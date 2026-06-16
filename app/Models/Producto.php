@@ -21,7 +21,8 @@ class Producto extends Model
     'categoria',
     'subcategoria',
     'url_imagen',
-    'activo'
+    'activo',
+    'destacado'
 ];
 
 public function detallesPedido()

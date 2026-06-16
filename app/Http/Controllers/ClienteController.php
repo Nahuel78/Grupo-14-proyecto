@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Pedido;
+
 
 class ClienteController extends Controller
 {
@@ -43,5 +45,14 @@ public function actualizarPerfil(Request $request)
     return redirect()
         ->route('cliente.perfil')
         ->with('success', 'Perfil actualizado correctamente');
+}
+
+public function pedidos()
+{
+    $pedidos = Pedido::where('user_id', auth()->id())
+        ->orderBy('id', 'desc')
+        ->get();
+
+    return view('backend.usuarios.pedidos', compact('pedidos'));
 }
 }

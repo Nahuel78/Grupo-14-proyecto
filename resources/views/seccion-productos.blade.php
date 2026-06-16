@@ -2,73 +2,35 @@
 
 <div class="contenedor-productos">
 
-    <div class="producto">
-        <img src="{{ asset('img/ropa/camperanike.png') }}">
-        <h3> Campera Nike</h3>
-        <p class="precio">$120.000</p>
-        <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-    </div>
+    @if(isset($productos) && $productos->count())
 
-    <div class="producto">
-        <img src="{{ asset('img/zapatillas/zapanike.png') }}">
-        <h3>Nike Jordan retro 1</h3>
-        <p class="precio">$110.000</p>
-        <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-    </div>
+        @foreach($productos as $producto)
 
-    <div class="producto">
-        <img src="{{ asset('img/carruselimagenes/camisetaArg2026.png') }}">
-        <h3>Camiseta Argentina</h3>
-          <p class="precio">$95.000</p>
-        <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-    </div>
+            <div class="producto">
 
-    <div class="producto">
-        <img src="{{ asset('img/carruselimagenes/conjuntoSeleccion.png') }}">
-        <h3>Conjunto Selección</h3>
-        <p class="precio">$140.000</p>
-        <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-    </div>
+                @if($producto->url_imagen)
+                    <img src="{{ asset($producto->url_imagen) }}" alt="{{ $producto->nombre }}">
+                @endif
 
-    <div class="producto">
-        <img src="{{ asset('img/ropa/conjunto-seleccion-invierno.png') }}">
-        <h3>Conjunto Selección</h3>
-        <p class="precio">$200.000</p>
-        <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-    </div>
+                <h3>{{ $producto->nombre }}</h3>
 
-    <div class="producto">
-        <img src="{{ asset('img/ropa/campera-boca.png') }}">
-        <h3>Campera Boca</h3>
-        <p class="precio">$150.000</p>
-        <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-    </div>
+                <p>${{ number_format($producto->precio,0,',','.') }}</p>
 
-    <div class="producto">
-        <img src="{{ asset('img/ropa/buzo-river.png') }}">
-        <h3>Buzo river</h3>
-        <p class="precio">$150.000</p>
-        <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-    </div>
+                <!-- BOTÓN CARRITO -->
+                <button class="btn-carrito agregar-carrito">
+                    Agregar al carrito
+                </button>
 
-    <div class="producto">
-        <img src="{{ asset('img/ropa/camisetabocatitular1.png') }}">
-        <h3>Camiseta Boca</h3>
-        <p class="precio">$130.000</p>
-        <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-    </div>
+            </div>
 
-    <div class="producto">
-        <img src="{{ asset('img/ropa/camisetarivertitular.png') }}">
-        <h3>Camiseta River</h3>
-        <p class="precio">$130.000</p>
-        <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-    </div>
+        @endforeach
 
-    <div class="producto">
-        <img src="{{ asset('img/ropa/joginnike.png') }}">
-        <h3>Pantalon joggin Nike retro</h3>
-        <p class="precio">$80.000</p>
-        <button class="btn-carrito agregar-carrito">Agregar al carrito</button>
-    </div>
+    @else
+
+        <p style="text-align:center; width:100%;">
+            No hay productos destacados.
+        </p>
+
+    @endif
+
 </div>

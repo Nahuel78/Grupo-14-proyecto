@@ -69,4 +69,10 @@ class AdminController extends Controller
             ->route('admin.perfil')
             ->with('success', 'Perfil actualizado correctamente');
     }
+
+    public function clientes(){
+    $clientes = User::where('rol', 'cliente')->get();
+
+    return view('backend.admin.clientes', compact('clientes'));
+    }
 }
