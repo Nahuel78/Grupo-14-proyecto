@@ -41,88 +41,185 @@ class CarritoController extends Controller
         return view('backend.carrito', compact('carrito', 'items'));
     }
 
+
+
+
     // Agregar producto al carrito
-  public function agregar(Request $request)
+ public function agregar(Request $request)
 {
+    
+    $producto = Producto::findOrFail($request->producto_id);
 
     $request->validate([
         'producto_id' => 'required|exists:productos,id',
         'cantidad' => 'required|integer|min:1',
     ]);
 
-    $carrito = VentaCabecera::firstOrCreate([
-        'user_id' => Auth::id(),
-        'estado' => 'carrito',
-    ]);
-
-    $producto = Producto::findOrFail($request->producto_id);
-
-
-   $item = VentaDetalle::where('venta_id', $carrito->id)
-    ->where('producto_id', $producto->id)
+    $carrito = VentaCabecera::where('user_id', Auth::id())
+    ->where('estado', 'carrito')
     ->first();
 
-if ($item) {
-
-    $item->cantidad += $request->cantidad;
-    $item->subtotal = $item->cantidad * $item->precio_unitario;
-    $item->save();
-
-} else {
-
-    VentaDetalle::create([
-        'venta_id' => $carrito->id,
-        'producto_id' => $producto->id,
-        'cantidad' => $request->cantidad,
-        'precio_unitario' => $producto->precio,
-        'subtotal' => $producto->precio * $request->cantidad,
-    ]);
-}
-$carrito->total = VentaDetalle::where('venta_id', $carrito->id)
-    ->sum('subtotal');
-
-$carrito->save();
-
-   if ($request->ajax()) {
-    return response()->json([
-        'success' => true
+if (!$carrito) {
+    $carrito = VentaCabecera::create([
+        'user_id' => Auth::id(),
+        'estado' => 'carrito',
+        'total' => 0
     ]);
 }
 
-return back();
-       
-}
-    // Confirmar compra
-    public function confirmar()
-    {
-        $carrito = $this->obtenerCarrito();
 
-        $items = VentaDetalle::where('venta_id', $carrito->id)
-            ->with('producto')
-            ->get();
 
-        if ($items->isEmpty()) {
-            return back()->with('error', 'Tu carrito está vacío');
+    $item = VentaDetalle::where('venta_id', $carrito->id)
+        ->where('producto_id', $producto->id)
+        ->first();
+
+    // 🔥 calcular cantidad total (stock real + carrito)
+    $cantidadEnCarrito = $item ? $item->cantidad : 0;
+    $cantidadSolicitada = $request->cantidad;
+    $cantidadTotal = $cantidadEnCarrito + $cantidadSolicitada;
+
+    // 🚨 VALIDACIÓN DE STOCK GLOBAL
+    if ($cantidadTotal > $producto->stock) {
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No hay suficiente stock disponible'
+            ], 422);
         }
 
-        $carrito->update([
-            'estado' => 'confirmado',
-            'fecha_venta' => now(),
+        return back()->with(
+            'error',
+            'Solo quedan ' . $producto->stock . ' unidades disponibles.'
+        );
+    }
+
+    // 🟢 SI YA EXISTE EN EL CARRITO
+    if ($item) {
+
+        $item->cantidad = $cantidadTotal;
+        $item->subtotal = $item->cantidad * $item->precio_unitario;
+        $item->save();
+
+    } else {
+
+        // 🟢 SI ES NUEVO PRODUCTO EN CARRITO
+        $item = VentaDetalle::create([
+            'venta_id' => $carrito->id,
+            'producto_id' => $producto->id,
+            'cantidad' => $request->cantidad,
+            'precio_unitario' => $producto->precio,
+            'subtotal' => $producto->precio * $request->cantidad,
+        ]);
+    }
+
+    // 🔄 ACTUALIZAR TOTAL DEL CARRITO
+    $carrito->total = VentaDetalle::where('venta_id', $carrito->id)
+        ->sum('subtotal');
+
+    $carrito->save();
+
+    // 🔁 RESPUESTA AJAX
+    if ($request->ajax()) {
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
+    return back();
+    
+
+}
+    // Confirmar compra
+public function confirmar(Request $request)
+{
+    $request->validate([
+        'metodo_pago' => 'required',
+
+        // DATOS DE ENVÍO
+        'nombre_envio' => 'required',
+        'telefono_envio' => 'required',
+        'provincia' => 'required',
+        'ciudad' => 'required',
+        'direccion' => 'required',
+        'numero' => 'required',
+        'departamento' => 'required',
+        'codigo_postal' => 'required',
+        'referencias' => 'required',
+    ]);
+
+    // Si eligió tarjeta, exigir datos de tarjeta
+    if ($request->metodo_pago === 'tarjeta') {
+
+        $request->validate([
+            'numero_tarjeta' => 'required',
+            'titular' => 'required',
+            'vencimiento' => 'required',
+            'cvv' => 'required',
         ]);
 
-        return redirect()->route('compra.confirmada')
-            ->with('items', $items)
-            ->with('total', $carrito->total);
     }
-    public function eliminar($id)
+
+    $carrito = $this->obtenerCarrito();
+
+    $items = VentaDetalle::where('venta_id', $carrito->id)
+        ->with('producto')
+        ->get();
+
+    if ($items->isEmpty()) {
+        return back()->with('error', 'Tu carrito está vacío');
+    }
+
+    // Verificar stock
+    foreach ($items as $item) {
+        if ($item->cantidad > $item->producto->stock) {
+            return back()->with(
+                'error',
+                'No hay stock suficiente para ' . $item->producto->nombre
+            );
+        }
+    }
+
+    // Descontar stock
+    foreach ($items as $item) {
+        $producto = $item->producto;
+        $producto->stock -= $item->cantidad;
+        $producto->save();
+    }
+
+    $carrito->update([
+    'estado' => 'pagado',
+    'fecha_venta' => now(),
+    'metodo_pago' => $request->metodo_pago,
+
+    'nombre_envio' => $request->nombre_envio,
+    'telefono_envio' => $request->telefono_envio,
+    'provincia' => $request->provincia,
+    'ciudad' => $request->ciudad,
+    'direccion' => $request->direccion,
+    'numero' => $request->numero,
+    'departamento' => $request->departamento,
+    'codigo_postal' => $request->codigo_postal,
+    'referencias' => $request->referencias,
+]);
+
+    return redirect()->route('factura', $carrito->id);
+}
+   public function eliminar($id)
 {
     $item = VentaDetalle::findOrFail($id);
 
     $carrito = VentaCabecera::findOrFail($item->venta_id);
 
+    // bloquear si ya fue confirmada la compra
+    if ($carrito->estado !== 'carrito') {
+        return back()->with('error', 'No puedes modificar una compra confirmada');
+    }
+
+    //  eliminar item
     $item->delete();
 
-    // Recalcular total del carrito
+    // recalcular total
     $carrito->total = VentaDetalle::where('venta_id', $carrito->id)
         ->sum('subtotal');
 
@@ -132,4 +229,86 @@ return back();
         ->route('cliente.carrito')
         ->with('success', 'Producto eliminado del carrito');
 }
+
+public function cambiarCantidad(Request $request, $id)
+{
+    $item = VentaDetalle::findOrFail($id);
+     $carrito = VentaCabecera::findOrFail($item->venta_id);
+
+    if ($carrito->estado !== 'carrito') {
+    return back()->with('error', 'No puedes modificar una compra confirmada');
+    }
+    $producto = Producto::findOrFail($item->producto_id);
+
+    $accion = $request->accion;
+
+    if ($accion === 'mas') {
+        $nuevaCantidad = $item->cantidad + 1;
+    } else {
+        $nuevaCantidad = $item->cantidad - 1;
+    }
+
+    // ❌ eliminar si llega a 0
+    if ($nuevaCantidad <= 0) {
+        $item->delete();
+        return back();
+    }
+
+    // 🚨 validar stock
+    if ($nuevaCantidad > $producto->stock) {
+        return back()->with('error', 'No hay suficiente stock disponible');
+    }
+
+    // ✔ actualizar
+    $item->cantidad = $nuevaCantidad;
+    $item->subtotal = $nuevaCantidad * $item->precio_unitario;
+    $item->save();
+
+    // 🔄 actualizar total carrito
+    $carrito = VentaCabecera::find($item->venta_id);
+
+    $carrito->total = VentaDetalle::where('venta_id', $carrito->id)
+        ->sum('subtotal');
+
+    $carrito->save();
+
+    return back();
+
+   
+}
+public function checkout()
+{
+    $carrito = $this->obtenerCarrito();
+
+    $items = VentaDetalle::where('venta_id', $carrito->id)
+        ->with('producto')
+        ->get();
+
+    return view('backend.checkout', compact('items', 'carrito'));
+}
+public function factura($id)
+{
+    $venta = VentaCabecera::with(['detalles.producto'])
+        ->findOrFail($id);
+
+    return view('backend.factura', ['venta' => $venta]);
+}
+
+public function misPedidos()
+{
+    $pedidos = VentaCabecera::with('detalles.producto')
+        ->where('user_id', Auth::id())
+        ->whereIn('estado', [
+    'pendiente_pago',
+    'pagado',
+    'enviado',
+    'cancelado'
+])
+        ->orderBy('id', 'desc')
+        ->get();
+
+    return view('backend.usuarios.pedidos', compact('pedidos'));
+}
+
+
 }

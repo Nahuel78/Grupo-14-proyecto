@@ -148,11 +148,11 @@
 
 <nav>
 
-<div class="menu">
+
     <button class="menu-toggle">
     ☰ Menú
     </button>
-
+<div class="menu">
 <a href="/">Inicio</a>
 <a href="/mujer/ropa">Ropa</a>
 <a href="/mujer/zapatillas">Zapatillas</a>
@@ -198,14 +198,30 @@
         <p class="precio">
             ${{ number_format($producto->precio, 0, ',', '.') }}
         </p>
+         <p class="stock">
+   
+         Stock disponible: {{ $producto->stock }}
+           </p>
 
-        <button class="btn-carrito agregar-carrito">
-            Agregar al carrito
-        </button>
+           <form action="{{ route('carrito.agregar') }}"
+      method="POST"
+      class="form-agregar-carrito">
+    @csrf
+
+    <input type="hidden" name="producto_id" value="{{ $producto->id }}">
+    <input type="hidden" name="cantidad" value="1">
+
+    <button type="submit" class="btn-carrito">
+        Agregar al carrito
+    </button>
+</form>
 
     </div>
 
 @endforeach
+
+
+
 
 </div>
 
@@ -220,10 +236,10 @@ let productos = document.querySelectorAll(".producto");
 productos.forEach(producto => {
 
 if(marca === "todos"){
-producto.style.display = "inline-block";
+producto.style.display = "block";
 }
 else if(producto.dataset.marca === marca){
-producto.style.display = "inline-block";
+producto.style.display = "block";
 }
 else{
 producto.style.display = "none";
@@ -233,6 +249,62 @@ producto.style.display = "none";
 
 }
 
+
+</script>
+<script>
+document.querySelectorAll('.form-agregar-carrito').forEach(form => {
+
+    form.addEventListener('submit', function(e) {
+
+        e.preventDefault();
+
+        fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            let carrito = document.querySelector('.cart-count');
+
+            if (carrito) {
+                carrito.textContent =
+                    parseInt(carrito.textContent) + 1;
+            }
+
+            // MOSTRAR MENSAJE
+            const toast = document.getElementById('toast-carrito');
+
+            toast.classList.add('mostrar');
+
+            setTimeout(() => {
+                toast.classList.remove('mostrar');
+            }, 2000);
+
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    });
+
+});
+</script>
+
+<div id="toast-carrito" class="toast-carrito">
+    ✅ Producto agregado al carrito
+</div>
+
+<script>
+    const toggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+
+    toggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
+    });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -145,6 +145,9 @@
    <button class="menu-toggle">
     ☰ Menú
     </button>
+    <div class="slogan-mobile">
+    Tu estilo, tu gusto, lo encontrás en la mejor tienda
+     </div>
 
     <div class="menu">
 

@@ -11,11 +11,23 @@ class VentaCabecera extends Model
     protected $table = 'ventas_cabecera';
 
     protected $fillable = [
-        'user_id',
-        'estado',
-        'total',
-        'fecha_venta',
-    ];
+    'user_id',
+    'estado',
+    'total',
+    'fecha_venta',
+    'metodo_pago',
+    'fecha_estimada_entrega',
+
+    'nombre_envio',
+    'telefono_envio',
+    'provincia',
+    'ciudad',
+    'direccion',
+    'numero',
+    'departamento',
+    'codigo_postal',
+    'referencias'
+];
 
     protected $casts = [
         'fecha_venta' => 'datetime',

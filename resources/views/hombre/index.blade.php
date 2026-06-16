@@ -149,12 +149,12 @@
 
 <nav>
 
-<div class="menu">
-    
-    <button class="menu-toggle">
+
+  <button class="menu-toggle">
     ☰ Menú
     </button>
-
+    
+<div class="menu">
 <a href="/inicio">Inicio</a>
 <a href="/hombre/ropa">Ropa</a>
 <a href="/hombre/zapatillas">Zapatillas</a>
@@ -203,8 +203,11 @@
         <p class="precio">
             ${{ number_format($producto->precio, 0, ',', '.') }}
         </p>
-
-
+         <p class="stock">
+   
+         Stock disponible: {{ $producto->stock }}
+           </p>
+         @if($producto->stock > 0)
            <form action="{{ route('carrito.agregar') }}"
       method="POST"
       class="form-agregar-carrito">
@@ -217,18 +220,15 @@
         Agregar al carrito
     </button>
 </form>
+@else
 
-        <button class="btn-carrito agregar-carrito">
-            Agregar al carrito
-        </button>
-
-
+<button disabled class="btn-sin-stock">
+    Sin stock
+</button>
+ @endif
     </div>
 
 @endforeach
-
-
-
 
 </div>
 
@@ -282,6 +282,15 @@ document.querySelectorAll('.form-agregar-carrito').forEach(form => {
                     parseInt(carrito.textContent) + 1;
             }
 
+            // MOSTRAR MENSAJE
+            const toast = document.getElementById('toast-carrito');
+
+            toast.classList.add('mostrar');
+
+            setTimeout(() => {
+                toast.classList.remove('mostrar');
+            }, 2000);
+
         })
         .catch(error => {
             console.error(error);
@@ -291,9 +300,22 @@ document.querySelectorAll('.form-agregar-carrito').forEach(form => {
 
 });
 </script>
+<script>
+    const toggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+
+    toggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
+    });
+</script>
+
+<div id="toast-carrito" class="toast-carrito">
+    ✅ Producto agregado al carrito
+</div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
 
 
 

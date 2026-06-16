@@ -151,11 +151,11 @@
 
 <nav>
 
-<div class="menu">
+
     <button class="menu-toggle">
     ☰ Menú
     </button>
-
+<div class="menu">
 <a href="/inicio">Inicio</a>
 <a href="/hombre/ropa">Ropa</a>
 <a href="/hombre/zapatillas">Zapatillas</a>
@@ -200,9 +200,14 @@
         <p class="precio">
             ${{ number_format($producto->precio, 0, ',', '.') }}
         </p>
+         <p class="stock">
+   
+         Stock disponible: {{ $producto->stock }}
+           </p>
 
-
-            <form action="{{ route('carrito.agregar') }}" method="POST">
+           <form action="{{ route('carrito.agregar') }}"
+      method="POST"
+      class="form-agregar-carrito">
     @csrf
 
     <input type="hidden" name="producto_id" value="{{ $producto->id }}">
@@ -213,18 +218,10 @@
     </button>
 </form>
 
-        <button class="btn-carrito agregar-carrito">
-            Agregar al carrito
-        </button>
-
-
     </div>
 
 @endforeach
 
-
-
-{{-- Productos Fijos --}}
 
 
 
@@ -254,7 +251,64 @@ producto.style.display = "none";
 
 }
 
+
 </script>
+<script>
+document.querySelectorAll('.form-agregar-carrito').forEach(form => {
+
+    form.addEventListener('submit', function(e) {
+
+        e.preventDefault();
+
+        fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            let carrito = document.querySelector('.cart-count');
+
+            if (carrito) {
+                carrito.textContent =
+                    parseInt(carrito.textContent) + 1;
+            }
+
+            // MOSTRAR MENSAJE
+            const toast = document.getElementById('toast-carrito');
+
+            toast.classList.add('mostrar');
+
+            setTimeout(() => {
+                toast.classList.remove('mostrar');
+            }, 2000);
+
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    });
+
+});
+</script>
+
+<script>
+    const toggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+
+    toggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
+    });
+</script>
+
+
+<div id="toast-carrito" class="toast-carrito">
+    ✅ Producto agregado al carrito
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 

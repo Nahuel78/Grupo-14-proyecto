@@ -29,17 +29,24 @@ Route::post('/contacto', [ContactoController::class, 'procesar']);
 Route::view('/terminos', 'termino');
 
 /*==== Link para volver al inicio ====*/
-Route::get('/inicio', function () { return view('inicio'); });
+Route::get('/inicio', function () {
+
+    session(['ultima_categoria' => url('/inicio')]);
+
+    return view('inicio');
+});
+
 
 /*==== Links categoria hombre ====*/
 Route::get('/hombre', function () {
-    $productos = Producto::where('categoria', 'hombre')->get();
+   session(['ultima_categoria' => url()->current()]);
+$productos = Producto::where('categoria', 'hombre')->get();
 
     return view('hombre.index', compact('productos'));
 });
 
 Route::get('/hombre/ropa', function () {
-
+session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Hombre')
         ->where('subcategoria', 'ropa')
         ->get();
@@ -48,7 +55,7 @@ Route::get('/hombre/ropa', function () {
 });
 
 Route::get('/hombre/zapatillas', function () {
-
+session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Hombre')
         ->where('subcategoria', 'zapatillas')
         ->get();
@@ -57,7 +64,7 @@ Route::get('/hombre/zapatillas', function () {
 });
 
 Route::get('/hombre/botines', function () {
-
+session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Hombre')
         ->where('subcategoria', 'botines')
         ->get();
@@ -67,12 +74,13 @@ Route::get('/hombre/botines', function () {
 
 /*==== Links categoria mujer ====*/
 Route::get('/mujer', function () {
+    session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'mujer')->get();
     return view('mujer.index', compact('productos'));
 });
 
 Route::get('/mujer/ropa', function () {
-
+session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Mujer')
         ->where('subcategoria', 'ropa')
         ->get();
@@ -81,6 +89,7 @@ Route::get('/mujer/ropa', function () {
 });
 
 Route::get('/mujer/zapatillas', function () {
+    session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Mujer')
         ->where('subcategoria', 'zapatillas')
         ->get();
@@ -89,6 +98,7 @@ Route::get('/mujer/zapatillas', function () {
 });
 
 Route::get('/mujer/accesorios', function () {
+    session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Mujer')
         ->where('subcategoria', 'accesorios')
         ->get();
@@ -98,11 +108,13 @@ Route::get('/mujer/accesorios', function () {
 
 /*==== Links categoria niño ====*/
 Route::get('/niños', function () {
+    session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'niños')->get();
     return view('niños.index', compact('productos'));
 });
 
 Route::get('/niños/ropa', function () {
+    session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Niños')
         ->where('subcategoria', 'ropa')
         ->get();
@@ -111,6 +123,7 @@ Route::get('/niños/ropa', function () {
 });
 
 Route::get('/niños/zapatillas', function () {
+    session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Niños')
         ->where('subcategoria', 'zapatillas')
         ->get();
@@ -119,6 +132,7 @@ Route::get('/niños/zapatillas', function () {
 });
 
 Route::get('/niños/botines', function () {
+    session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Niños')
         ->where('subcategoria', 'botines')
         ->get();
@@ -128,11 +142,13 @@ Route::get('/niños/botines', function () {
 
 /*==== Links categoria accesorios ====*/
 Route::get('/accesorios', function () {
+    session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'accesorios')->get();
     return view('accesorios.index', compact('productos'));
 });
 
 Route::get('/accesorios/mochila', function () {
+    session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Accesorios')
         ->where('subcategoria', 'mochila')
         ->get();
@@ -141,6 +157,7 @@ Route::get('/accesorios/mochila', function () {
 });
 
 Route::get('/accesorios/medias', function () {
+    session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Accesorios')
         ->where('subcategoria', 'medias')
         ->get();
@@ -149,6 +166,7 @@ Route::get('/accesorios/medias', function () {
 });
 
 Route::get('/accesorios/pelotas', function () {
+    session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Accesorios')
         ->where('subcategoria', 'pelotas')
         ->get();
@@ -157,6 +175,7 @@ Route::get('/accesorios/pelotas', function () {
 });
 
 Route::get('/accesorios/gorras', function () {
+    session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Accesorios')
         ->where('subcategoria', 'gorras')
         ->get();
@@ -165,6 +184,7 @@ Route::get('/accesorios/gorras', function () {
 });
 
 Route::get('/accesorios/paletas', function () {
+    session(['ultima_categoria' => url()->current()]);
     $productos = Producto::where('categoria', 'Accesorios')
         ->where('subcategoria', 'paletas')
         ->get();
@@ -178,6 +198,12 @@ Route::middleware(['auth', 'rol:cliente'])->group(function () {
         // Mostrar el carrito  
            Route::get('/backend/carrito', [CarritoController::class, 'index'])                          
             ->name('cliente.carrito');     
+          Route::get('/checkout', [CarritoController::class, 'checkout'])
+        ->name('checkout');
+        Route::middleware(['auth'])->group(function () {
+    Route::get('/factura/{id}', [CarritoController::class, 'factura'])
+        ->name('factura');
+});
         // Agregar un producto     
             Route::post('/backend/carrito/agregar', [CarritoController::class, 'agregar'])                                    
             ->name('carrito.agregar');    
@@ -187,6 +213,10 @@ Route::middleware(['auth', 'rol:cliente'])->group(function () {
         // Confirmar la compra     
              Route::post('/backend/carrito/confirmar', [CarritoController::class, 'confirmar'])                                      
              ->name('carrito.confirmar'); 
+        //cantida de producto  
+             Route::put('/carrito/cantidad/{id}', [CarritoController::class, 'cambiarCantidad'])
+             ->name('carrito.cambiarCantidad');
+            
 
   // Vista de compra confirmada (protegida: redirige si no hay sesión) 
    Route::get('/compra-confirmada', function () { 
@@ -221,6 +251,11 @@ Route::middleware(['auth', 'rol:admin'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])
         ->name('admin.panel');
 
+    // FACTURA ADMIN
+    Route::get('/factura/{id}', [CarritoController::class, 'factura'])
+        ->name('admin.factura');
+
+    // PRODUCTOS
     Route::get('/productos', [ProductoController::class, 'gestionarProductos'])
         ->name('admin.productos');
 
@@ -229,40 +264,44 @@ Route::middleware(['auth', 'rol:admin'])->prefix('admin')->group(function () {
 
     Route::get('/productos/crear', function () {
         return view('backend.admin.crear-producto');
-        })->name('admin.productos.crear');
-
-    Route::get('/pedidos', function () {
-        return view('backend.admin.pedidos');
-        })->name('admin.pedidos');
-
+    })->name('admin.productos.crear');
 
     Route::put('/productos/{id}', [ProductoController::class, 'update'])
-    ->name('admin.productos.update');
+        ->name('admin.productos.update');
 
     Route::get('/productos/{id}/editar', [ProductoController::class, 'edit'])
-    ->name('admin.productos.editar');
+        ->name('admin.productos.editar');
 
     Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])
-    ->name('admin.productos.destroy');
+        ->name('admin.productos.destroy');
 
-  Route::get('/perfil', function () {
-    return view('backend.admin.perfil-admin');
+    // PEDIDOS
+    Route::get('/pedidos', [AdminController::class, 'pedidos'])
+        ->name('admin.pedidos');
+
+        Route::delete('/pedidos/{id}', [AdminController::class, 'eliminarPedido'])
+    ->name('admin.pedidos.eliminar');
+
+    // PERFIL
+    Route::get('/perfil', function () {
+        return view('backend.admin.perfil-admin');
     })->name('admin.perfil');
 
-Route::get('/perfil/editar',
-    [AdminController::class, 'editarPerfil'])
-    ->name('admin.perfil.editar');
+    Route::get('/perfil/editar', [AdminController::class, 'editarPerfil'])
+        ->name('admin.perfil.editar');
 
-Route::put('/perfil/actualizar',
-    [AdminController::class, 'actualizarPerfil'])
-    ->name('admin.perfil.actualizar');
+    Route::put('/perfil/actualizar', [AdminController::class, 'actualizarPerfil'])
+        ->name('admin.perfil.actualizar');
+
+       Route::put('/pedidos/{id}/estado', [AdminController::class, 'cambiarEstado'])
+    ->name('admin.pedidos.estado');
 });
 
 /*=== Cliente ===*/
 
-Route::get('/cliente/pedidos', function () {
-    return view('backend.usuarios.pedidos');
-})->middleware('auth')->name('cliente.pedidos');
+Route::get('/cliente/pedidos', [ClienteController::class, 'misPedidos'])
+    ->middleware('auth')
+    ->name('cliente.pedidos');
 
 Route::get('/cliente/perfil', function () {
     return view('backend.usuarios.perfil');

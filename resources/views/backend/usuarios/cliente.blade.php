@@ -115,19 +115,19 @@
                                     <h5 class="mt-3">Mi Carrito</h5>
 
                                     <p class="text-muted">
-                                        0 productos
+                                  {{ $cantidadCarrito }} productos
                                     </p>
-
-                                    <a href="#"
-                                    class="btn btn-warning">
-                                        Ver carrito
-                                    </a>
+                                <a href="{{ route('cliente.carrito') }}"
+                                class="btn btn-warning">
+                                 Ver carrito
+                                 </a>
 
                                 </div>
 
                             </div>
 
                         </div>
+                                   
 
                         <!-- PEDIDOS -->
                         <div class="col-md-3">
@@ -140,9 +140,10 @@
 
                                     <h5 class="mt-3">Mis Pedidos</h5>
 
-                                    <p class="text-muted">
-                                        0 pedidos
-                                    </p>
+                                   <p class="text-muted">
+                                {{ $cantidadPedidos }}
+                                {{ $cantidadPedidos == 1 ? 'pedido' : 'pedidos' }}
+                                        </p>
 
                                     <a href="{{ route('cliente.pedidos') }}"
                                     class="btn btn-primary">
