@@ -403,7 +403,7 @@
                        <!-- VOLVER AL INICIO -->
                         <div class="col-md-4">
 
-                        <a href="{{ url('/') }}"
+                        <a href="/inicio"
                         class="btn btn-outline-dark w-100 p-4 shadow-sm">
 
                          <i class="bi bi-house-door fs-1"></i>

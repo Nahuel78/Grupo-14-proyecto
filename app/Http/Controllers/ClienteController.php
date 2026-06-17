@@ -6,17 +6,39 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
 use App\Models\Pedido;
+
+use App\Models\VentaCabecera;
+use App\Models\User;
 
 
 class ClienteController extends Controller
 {
     public function index()
-    {
-        $productos = []; // Después los traemos de la base de datos
+{
+    $productos = [];
 
-        return view('backend.usuarios.cliente', compact('productos')); 
+    $cantidadCarrito = 0;
+
+    $carrito = VentaCabecera::where('user_id', Auth::id())
+        ->where('estado', 'carrito')
+        ->first();
+
+    if ($carrito) {
+        $cantidadCarrito = $carrito->detalles()->sum('cantidad');
     }
+     $cantidadPedidos = VentaCabecera::where('user_id', Auth::id())
+    ->where('estado', 'pagado')
+    ->count();
+
+    return view('backend.usuarios.cliente', compact(
+        'productos',
+        'cantidadCarrito',
+        'cantidadPedidos'
+
+    ));
+}
 
     public function editarPerfil()
 {
@@ -40,16 +62,28 @@ public function actualizarPerfil(Request $request)
         $usuario->password = Hash::make($request->password);
     }
 
-    $usuario->save();
+   $user = User::find(Auth::id());
+
+$user->name = $request->name;
+$user->email = $request->email;
+
+if ($request->filled('password')) {
+    $user->password = Hash::make($request->password);
+}
+
+$user->save();
 
     return redirect()
         ->route('cliente.perfil')
         ->with('success', 'Perfil actualizado correctamente');
 }
 
-public function pedidos()
+public function misPedidos()
 {
-    $pedidos = Pedido::where('user_id', auth()->id())
+    $pedidos = VentaCabecera::with('detalles.producto')
+        ->where('user_id', Auth::id())
+        ->where('estado', '!=', 'carrito') 
+
         ->orderBy('id', 'desc')
         ->get();
 

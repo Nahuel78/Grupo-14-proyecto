@@ -5,7 +5,7 @@
 @section('content')
 
 <!-- BOTÓN VOLVER -->
-<a href="{{ url('/') }}" class="btn btn-outline-dark mb-3 position-relative z-3">
+<a href="{{ url('/inicio') }}" class="btn btn-outline-dark mb-3 position-relative z-3">
     ⬅ Volver al inicio
 </a>
 

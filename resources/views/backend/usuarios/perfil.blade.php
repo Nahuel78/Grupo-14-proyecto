@@ -95,7 +95,7 @@
 
             </a>
 
-           <a href="/"
+           <a href="/inicio"
             class="btn btn-dark">
 
             <i class="bi bi-arrow-left"></i>

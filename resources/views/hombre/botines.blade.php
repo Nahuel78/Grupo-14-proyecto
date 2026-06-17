@@ -125,18 +125,18 @@
 
      @auth
 
-    @if(strtolower(auth()->user()->rol) !== 'admin')
-        <a href="/carrito" class="icono cart">
+     @if(strtolower(auth()->user()->rol) !== 'admin')
+        <a href="{{ route('cliente.carrito') }}" class="icono cart">
             <i class="bi bi-bag"></i>
-            <span class="cart-count">0</span>
+            <span class="cart-count">{{ $cantidadCarrito }}</span>
         </a>
     @endif
 
 @else
 
-    <a href="/carrito" class="icono cart">
+    <a href="{{ route('cliente.carrito') }}" class="icono cart">
         <i class="bi bi-bag"></i>
-        <span class="cart-count">0</span>
+        <span class="cart-count">{{ $cantidadCarrito }}</span>
     </a>
 
 @endauth
@@ -152,7 +152,7 @@
     ☰ Menú
     </button>
 
-<a href="{{ url('/') }}">Inicio</a>
+<a href="/inicio">Inicio</a>
 <a href="/hombre/ropa">Ropa</a>
 <a href="/hombre/zapatillas">Zapatillas</a>
 <a href="/hombre/botines">Botines</a>
@@ -200,14 +200,30 @@
         <p class="precio">
             ${{ number_format($producto->precio, 0, ',', '.') }}
         </p>
+         <p class="stock">
+   
+         Stock disponible: {{ $producto->stock }}
+           </p>
 
-        <button class="btn-carrito agregar-carrito">
-            Agregar al carrito
-        </button>
+           <form action="{{ route('carrito.agregar') }}"
+      method="POST"
+      class="form-agregar-carrito">
+    @csrf
+
+    <input type="hidden" name="producto_id" value="{{ $producto->id }}">
+    <input type="hidden" name="cantidad" value="1">
+
+    <button type="submit" class="btn-carrito">
+        Agregar al carrito
+    </button>
+</form>
 
     </div>
 
 @endforeach
+
+
+
 
 </div>
 
@@ -235,7 +251,56 @@ producto.style.display = "none";
 
 }
 
+
 </script>
+<script>
+document.querySelectorAll('.form-agregar-carrito').forEach(form => {
+
+    form.addEventListener('submit', function(e) {
+
+        e.preventDefault();
+
+        fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            let carrito = document.querySelector('.cart-count');
+
+            if (carrito) {
+                carrito.textContent =
+                    parseInt(carrito.textContent) + 1;
+            }
+
+            // MOSTRAR MENSAJE
+            const toast = document.getElementById('toast-carrito');
+
+            toast.classList.add('mostrar');
+
+            setTimeout(() => {
+                toast.classList.remove('mostrar');
+            }, 2000);
+
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    });
+
+});
+</script>
+
+<div id="toast-carrito" class="toast-carrito">
+    ✅ Producto agregado al carrito
+</div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 

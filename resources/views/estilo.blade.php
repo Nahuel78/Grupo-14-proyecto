@@ -121,19 +121,19 @@
 
     @auth
 
-    @if(strtolower(auth()->user()->rol) !== 'admin')
-        <a href="/carrito" class="icono cart">
+   @if(strtolower(auth()->user()->rol) !== 'admin')
+        <a href="{{ route('cliente.carrito') }}" class="icono cart">
             <i class="bi bi-bag"></i>
-            <span class="cart-count">0</span>
+            <span class="cart-count">{{ $cantidadCarrito ?? 0 }}</span>
         </a>
     @endif
 
 @else
 
-    <a href="/carrito" class="icono cart">
-        <i class="bi bi-bag"></i>
-        <span class="cart-count">0</span>
-    </a>
+   <a href="{{ route('cliente.carrito') }}" class="icono cart">
+    <i class="bi bi-bag"></i>
+    <span class="cart-count">{{ $cantidadCarrito ?? 0 }}</span>
+</a>
 
 @endauth
 </div>
@@ -145,7 +145,6 @@
    <button class="menu-toggle">
     ☰ Menú
     </button>
-
     <div class="menu">
 
         <a href="/">Inicio</a>
@@ -201,8 +200,6 @@
     @include('seccion-productos', ['productos' => $productos])
 
 
-
-
     <section class="promo">
 
     <h2>🔥 Ofertas de la Semana 🔥</h2>
@@ -250,30 +247,6 @@
 
 
 <script>
-  let contador = parseInt(localStorage.getItem("carritoCount")) || 0;
-
-const carrito = document.querySelector(".cart-count");
-const botones = document.querySelectorAll(".agregar-carrito");
-
-// inicializa visualmente
-if (carrito) {
-    carrito.textContent = contador;
-}
-
-botones.forEach(boton => {
-    boton.addEventListener("click", () => {
-        contador++;
-
-        localStorage.setItem("carritoCount", contador);
-
-        if (carrito) {
-            carrito.textContent = contador;
-        }
-    });
-});
-</script>
-
-<script>
     const toggle = document.querySelector('.menu-toggle');
     const menu = document.querySelector('.menu');
 
@@ -289,6 +262,62 @@ botones.forEach(boton => {
                 this.parentElement.classList.toggle('active');
             }
         });
+    });
+</script>
+
+<script>
+document.querySelectorAll('.form-agregar-carrito').forEach(form => {
+
+    form.addEventListener('submit', function(e) {
+
+        e.preventDefault();
+
+        fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            let carrito = document.querySelector('.cart-count');
+
+            if (carrito) {
+                carrito.textContent =
+                    parseInt(carrito.textContent) + 1;
+            }
+
+            // MOSTRAR MENSAJE
+            const toast = document.getElementById('toast-carrito');
+
+            toast.classList.add('mostrar');
+
+            setTimeout(() => {
+                toast.classList.remove('mostrar');
+            }, 2000);
+
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    });
+
+});
+</script>
+
+<div id="toast-carrito" class="toast-carrito">
+    ✅ Producto agregado al carrito
+</div>
+
+<script>
+    const toggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+
+    toggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
     });
 </script>
 

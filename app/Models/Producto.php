@@ -26,7 +26,7 @@ class Producto extends Model
 ];
 
 public function detallesPedido()
-{
+     {
     return $this->hasMany(DetallePedido::class);
-}
+     }
 }
