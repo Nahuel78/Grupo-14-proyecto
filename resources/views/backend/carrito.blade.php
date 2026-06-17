@@ -410,8 +410,7 @@ body{
         <strong>${{ number_format($total,2) }}</strong>
     </div>
 
-   <form action="{{ route('carrito.confirmar') }}" method="POST">
-    @csrf
+   <form action="{{ route('checkout') }}" method="GET">
     <button type="submit" class="btn-confirmar">
         Realizar Compra
     </button>

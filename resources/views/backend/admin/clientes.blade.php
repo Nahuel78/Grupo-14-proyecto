@@ -4,6 +4,12 @@
 
 <div class="container">
 
+    <div class="mb-3" style="position: relative; z-index: 9999;">
+    <a href="{{ route('admin.panel') }}" class="btn btn-secondary">
+        ← Volver al Panel
+    </a>
+</div>
+
     <h2 style="color:white;">
         Clientes Registrados
     </h2>

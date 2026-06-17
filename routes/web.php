@@ -209,7 +209,7 @@ Route::middleware(['auth', 'rol:cliente'])->group(function () {
              ->name('carrito.eliminar');     
         // Confirmar la compra     
              Route::post('/backend/carrito/confirmar', [CarritoController::class, 'confirmar'])                                      
-             ->name('carrito.confirmar'); 
+             ->name('carrito.confirmar');
         //cantida de producto  
              Route::put('/carrito/cantidad/{id}', [CarritoController::class, 'cambiarCantidad'])
              ->name('carrito.cambiarCantidad');

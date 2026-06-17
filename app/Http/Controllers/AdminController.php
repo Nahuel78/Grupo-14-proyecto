@@ -56,7 +56,11 @@ $ultimosPedidos = VentaCabecera::with('usuario')
 
  public function actualizarPerfil(Request $request)
 {
-    $user = Auth::user();
+    $user = User::find(Auth::id());
+
+    if (!$user) {
+        return redirect()->back()->with('error', 'Usuario no encontrado');
+    }
 
     $user->name = $request->name;
     $user->email = $request->email;
@@ -71,7 +75,6 @@ $ultimosPedidos = VentaCabecera::with('usuario')
         ->route('admin.perfil')
         ->with('success', 'Perfil actualizado correctamente');
 }
-
 public function clientes()
 {
     $clientes = User::where('rol', 'cliente')->get();

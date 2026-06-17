@@ -12,7 +12,6 @@ return new class extends Migration
    public function up()
 {
     Schema::table('ventas_cabecera', function (Blueprint $table) {
-        $table->string('metodo_pago')->nullable();
         $table->string('nombre_envio')->nullable();
         $table->string('telefono_envio')->nullable();
         $table->string('provincia')->nullable();

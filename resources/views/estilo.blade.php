@@ -312,14 +312,7 @@ document.querySelectorAll('.form-agregar-carrito').forEach(form => {
     ✅ Producto agregado al carrito
 </div>
 
-<script>
-    const toggle = document.querySelector('.menu-toggle');
-    const menu = document.querySelector('.menu');
 
-    toggle.addEventListener('click', () => {
-        menu.classList.toggle('active');
-    });
-</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 

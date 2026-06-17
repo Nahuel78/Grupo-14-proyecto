@@ -133,6 +133,8 @@ if (!$carrito) {
     // Confirmar compra
 public function confirmar(Request $request)
 {
+
+   
     $request->validate([
         'metodo_pago' => 'required',
 

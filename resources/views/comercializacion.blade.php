@@ -126,10 +126,10 @@
     @auth
 
     @if(strtolower(auth()->user()->rol) !== 'admin')
-        <a href="/carrito" class="icono cart">
-            <i class="bi bi-bag"></i>
-            <span class="cart-count">0</span>
-        </a>
+        <a href="{{ route('cliente.carrito') }}" class="icono cart">
+    <i class="bi bi-bag"></i>
+    <span class="cart-count">{{ $cantidadCarrito ?? 0 }}</span>
+</a>
     @endif
 
 @else
@@ -149,7 +149,7 @@
 
 <div class="menu">
 
-<a href="/">Inicio</a>
+<a href="/inicio">Inicio</a>
 
 <div class="dropdown">
 <a href="/hombre">Hombre</a>
@@ -228,6 +228,6 @@ Una vez realizada la compra, el cliente recibirá un correo electrónico con los
 </section>
 
 @include('footer')
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

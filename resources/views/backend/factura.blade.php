@@ -306,17 +306,28 @@
 
         <div class="acciones">
 
-            <button onclick="window.print()" class="btn-modape">
-                🖨 Imprimir Factura
-            </button>
+    <button onclick="window.print()" class="btn-modape">
+        🖨 Imprimir Factura
+    </button>
 
-            <a href="{{ url('/inicio') }}" class="btn-modape">
-                🏠 Volver al Inicio
-            </a>
+    @auth
+        @if(strtolower(auth()->user()->rol) === 'admin')
 
-        </div>
+            <a href="{{ route('admin.pedidos') }}" class="btn-modape">
+          📦 Volver a Pedidos
+          </a>
 
-    </div>
+        @else
+
+            <a href="{{ route('cliente.pedidos') }}" class="btn-modape">
+            📋 Volver a Mis Pedidos
+        </a>
+
+        @endif
+    @endauth
+
+      </div>
+</div>
 
 </div>
 
