@@ -43,7 +43,7 @@
             <a href="/registro" class="link-dorado-login fw-bold">Registrate acá</a>
         </p>
         <div class="mt-3">
-            <a href="/" class="text-muted small"><i class="bi bi-arrow-left"></i> Volver a la tienda</a>
+            <a href="/inicio" class="text-muted small"><i class="bi bi-arrow-left"></i> Volver a la tienda</a>
         </div>
     </div>
 </div>
