@@ -9,6 +9,6 @@ class HomeController extends Controller{
     {
         $productos = Producto::where('destacado', 1)->get();
 
-        return view('home', compact('productos'));
-}
+        return view('inicio', compact('productos'));
+    }
 }

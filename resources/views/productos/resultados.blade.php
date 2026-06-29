@@ -4,7 +4,6 @@
 
 @section('content')
 
-<!-- BOTÓN VOLVER -->
 <a href="{{ url('/inicio') }}" class="btn btn-outline-dark mb-3 position-relative z-3">
     ⬅ Volver al inicio
 </a>
@@ -30,9 +29,20 @@
             ${{ number_format($producto->precio,0,',','.') }}
         </p>
 
-        <button class="btn-carrito">
-            Agregar al carrito
-        </button>
+    <form action="{{ route('carrito.agregar') }}"
+      method="POST"
+      class="form-agregar-carrito">
+
+    @csrf
+
+    <input type="hidden" name="producto_id" value="{{ $producto->id }}">
+    <input type="hidden" name="cantidad" value="1">
+
+    <button type="submit" class="btn-carrito">
+        Agregar al carrito
+    </button>
+
+    </form>
 
     </div>
 
@@ -45,5 +55,4 @@
 @endforelse
 
 </div>
-
 @endsection

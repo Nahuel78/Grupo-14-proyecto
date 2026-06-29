@@ -130,6 +130,7 @@ if (!$carrito) {
     
 
 }
+
     // Confirmar compra
 public function confirmar(Request $request)
 {

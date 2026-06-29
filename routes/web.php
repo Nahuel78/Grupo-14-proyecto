@@ -15,14 +15,8 @@ use Illuminate\Support\Facades\Auth;
 
 /*==== Links de las paginas ====*/
 
-Route::get('/inicio', function () {
-
-    session(['ultima_categoria' => url('/inicio')]);
-
-    $productos = Producto::where('destacado', 1)->get();
-
-    return view('inicio', compact('productos'));
-});
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/inicio', [HomeController::class, 'index']);
 
 Route::view('/quienes-somos', 'quienes');
 
@@ -35,160 +29,44 @@ Route::get('/contacto', function () {
 Route::view('/terminos', 'termino');
 
 /*==== Links categoria hombre ====*/
-Route::get('/hombre', function () {
-   session(['ultima_categoria' => url()->current()]);
-$productos = Producto::where('categoria', 'hombre')->get();
+Route::get('/hombre', [ProductoController::class, 'hombre']);
 
-    return view('hombre.index', compact('productos'));
-});
+Route::get('/hombre/ropa', [ProductoController::class, 'hombreRopa']);
 
-Route::get('/hombre/ropa', function () {
-session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Hombre')
-        ->where('subcategoria', 'ropa')
-        ->get();
+Route::get('/hombre/zapatillas', [ProductoController::class, 'hombreZapatillas']);
 
-    return view('hombre.ropa', compact('productos'));
-});
-
-Route::get('/hombre/zapatillas', function () {
-session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Hombre')
-        ->where('subcategoria', 'zapatillas')
-        ->get();
-
-    return view('hombre.zapatillas', compact('productos'));
-});
-
-Route::get('/hombre/botines', function () {
-session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Hombre')
-        ->where('subcategoria', 'botines')
-        ->get();
-
-    return view('hombre.botines', compact('productos'));
-});
+Route::get('/hombre/botines', [ProductoController::class, 'hombreBotines']);
 
 /*==== Links categoria mujer ====*/
-Route::get('/mujer', function () {
-    session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'mujer')->get();
-    return view('mujer.index', compact('productos'));
-});
+Route::get('/mujer', [ProductoController::class, 'mujer']);
 
-Route::get('/mujer/ropa', function () {
-session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Mujer')
-        ->where('subcategoria', 'ropa')
-        ->get();
+Route::get('/mujer/ropa', [ProductoController::class, 'mujerRopa']);
 
-    return view('mujer.ropa', compact('productos'));
-});
+Route::get('/mujer/zapatillas', [ProductoController::class, 'mujerZapatillas']);
 
-Route::get('/mujer/zapatillas', function () {
-    session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Mujer')
-        ->where('subcategoria', 'zapatillas')
-        ->get();
-
-    return view('mujer.zapatillas', compact('productos'));
-});
-
-Route::get('/mujer/accesorios', function () {
-    session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Mujer')
-        ->where('subcategoria', 'accesorios')
-        ->get();
-
-    return view('mujer.accesorios', compact('productos'));
-});
+Route::get('/mujer/accesorios', [ProductoController::class, 'mujerAccesorios']);
 
 /*==== Links categoria niño ====*/
-Route::get('/niños', function () {
-    session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'niños')->get();
-    return view('niños.index', compact('productos'));
-});
+Route::get('/niños', [ProductoController::class, 'ninos']);
 
-Route::get('/niños/ropa', function () {
-    session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Niños')
-        ->where('subcategoria', 'ropa')
-        ->get();
+Route::get('/niños/ropa', [ProductoController::class, 'ninosRopa']);
 
-    return view('niños.ropa', compact('productos'));
-});
+Route::get('/niños/zapatillas', [ProductoController::class, 'ninosZapatillas']);
 
-Route::get('/niños/zapatillas', function () {
-    session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Niños')
-        ->where('subcategoria', 'zapatillas')
-        ->get();
-
-    return view('niños.zapatillas', compact('productos'));
-});
-
-Route::get('/niños/botines', function () {
-    session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Niños')
-        ->where('subcategoria', 'botines')
-        ->get();
-
-    return view('niños.botines', compact('productos'));
-});
+Route::get('/niños/botines', [ProductoController::class, 'ninosBotines']);
 
 /*==== Links categoria accesorios ====*/
-Route::get('/accesorios', function () {
-    session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'accesorios')->get();
-    return view('accesorios.index', compact('productos'));
-});
+Route::get('/accesorios', [ProductoController::class, 'accesorios']);
 
-Route::get('/accesorios/mochila', function () {
-    session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Accesorios')
-        ->where('subcategoria', 'mochila')
-        ->get();
+Route::get('/accesorios/mochila', [ProductoController::class, 'accesoriosMochila']);
 
-    return view('accesorios.mochila', compact('productos'));
-});
+Route::get('/accesorios/medias', [ProductoController::class, 'accesoriosMedias']);
 
-Route::get('/accesorios/medias', function () {
-    session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Accesorios')
-        ->where('subcategoria', 'medias')
-        ->get();
+Route::get('/accesorios/pelotas', [ProductoController::class, 'accesoriosPelotas']);
 
-    return view('accesorios.medias', compact('productos'));
-});
+Route::get('/accesorios/gorras', [ProductoController::class, 'accesoriosGorras']);
 
-Route::get('/accesorios/pelotas', function () {
-    session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Accesorios')
-        ->where('subcategoria', 'pelotas')
-        ->get();
-
-    return view('accesorios.pelotas', compact('productos'));
-});
-
-Route::get('/accesorios/gorras', function () {
-    session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Accesorios')
-        ->where('subcategoria', 'gorras')
-        ->get();
-
-    return view('accesorios.gorras', compact('productos'));
-});
-
-Route::get('/accesorios/paletas', function () {
-    session(['ultima_categoria' => url()->current()]);
-    $productos = Producto::where('categoria', 'Accesorios')
-        ->where('subcategoria', 'paletas')
-        ->get();
-
-    return view('accesorios.paletas', compact('productos'));
-});
-
+Route::get('/accesorios/paletas', [ProductoController::class, 'accesoriosPaletas']);
 
 
 Route::middleware(['auth', 'rol:cliente'])->group(function () { 
@@ -222,7 +100,7 @@ Route::middleware(['auth', 'rol:cliente'])->group(function () {
           } 
           return view('backend.usuarios.compra-confirmada'); 
           })->name('compra.confirmada'); 
-          }); 
+}); 
 
 
 /* === Links de Sistema de Autenticación === */
@@ -287,23 +165,18 @@ Route::middleware(['auth', 'rol:admin'])->prefix('admin')->group(function () {
     Route::get('/perfil/editar', [AdminController::class, 'editarPerfil'])
         ->name('admin.perfil.editar');
 
-
-Route::put('/perfil/actualizar',
-    [AdminController::class, 'actualizarPerfil'])
-    ->name('admin.perfil.actualizar');
+    Route::put('/perfil/actualizar', [AdminController::class, 'actualizarPerfil'])
+        ->name('admin.perfil.actualizar');
 
     Route::get('/consultas', [ConsultaController::class, 'index'])
     ->name('admin.consultas');
 
-Route::put('/consultas/{id}/leer',
+    Route::put('/consultas/{id}/leer',
     [ConsultaController::class, 'marcarLeido'])
     ->name('admin.consultas.leer');
 
     Route::get('/clientes', [AdminController::class, 'clientes'])
     ->name('admin.clientes');
-
-    Route::put('/perfil/actualizar', [AdminController::class, 'actualizarPerfil'])
-        ->name('admin.perfil.actualizar');
 
        Route::put('/pedidos/{id}/estado', [AdminController::class, 'cambiarEstado'])
     ->name('admin.pedidos.estado');
