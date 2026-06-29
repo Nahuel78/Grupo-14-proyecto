@@ -95,10 +95,12 @@ public function destroy($id)
 {
     $producto = Producto::findOrFail($id);
 
-    $producto->delete();
+    // Baja lógica
+    $producto->activo = 0;
+    $producto->save();
 
     return redirect()->route('admin.productos')
-        ->with('success', 'Producto eliminado correctamente');
+        ->with('success', 'Producto dado de baja correctamente');
 }
 
 public function buscar(Request $request)
