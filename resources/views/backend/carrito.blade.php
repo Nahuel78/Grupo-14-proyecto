@@ -203,6 +203,47 @@ body{
     display:block;
 }
 
+.mensaje-error {
+    margin: 15px 0;
+    padding: 14px 18px;
+    background: #ffe5e5;
+    border-left: 6px solid #dc3545;
+    color: #721c24;
+    font-weight: 600;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: aparecer 0.4s ease;
+}
+.mensaje-success {
+    margin: 15px 0;
+    padding: 14px 18px;
+    background: #ffe5e5;
+    border-left: 6px solid #dc3545;
+    color: #721c24;
+    font-weight: 600;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: aparecer 0.4s ease;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 /* RESPONSIVE */
 @media (max-width:768px){
 
@@ -282,8 +323,21 @@ body{
 <div class="container-carrito">
 
     <h2 class="titulo-carrito">🛒 Mi Carrito</h2>
+
+    @if(session('success'))
+    <div id="mensaje-success" class="mensaje-success">
+        ❌ {{ session('success') }}
+    </div>
+@endif
+  @if(session('error'))
+    <div id="mensaje-error" class="mensaje-error">
+        ❌ {{ session('error') }}
+    </div>
+@endif
+    
     <div class="carrito-layout">
 
+     
     <div class="productos">
     @if($items->count() > 0)
 
@@ -370,21 +424,24 @@ body{
 
                         {{-- ACCIONES --}}
                         <td>
-                            <form action="{{ route('carrito.eliminar',$item->id) }}"
-                                  method="POST">
-                                @csrf
-                                @method('DELETE')
+                          <form action="{{ route('carrito.eliminar',$item->id) }}"
+      method="POST">
+    @csrf
+    @method('DELETE')
 
-                                <button type="submit" class="btn-eliminar">
-                                    Eliminar
-                                </button>
-                            </form>
+    <button type="submit" class="btn-eliminar">
+        Eliminar
+    </button>
+</form>
                         </td>
 
                     </tr>
 
                 @endforeach
 
+
+
+               
             </tbody>
         </table>
        </div>
@@ -436,3 +493,31 @@ body{
     ← Seguir comprando
 </a>
 </div>
+ <script>
+    setTimeout(() => {
+        const msg = document.getElementById('mensaje-error');
+
+        if (msg) {
+            msg.style.transition = "0.5s";
+            msg.style.opacity = "0";
+
+            setTimeout(() => {
+                msg.remove();
+            }, 500);
+        }
+    }, 3000); // 3 segundos
+</script>
+<script>
+    setTimeout(() => {
+        const msg = document.getElementById('mensaje-success');
+
+        if (msg) {
+            msg.style.transition = "0.5s";
+            msg.style.opacity = "0";
+
+            setTimeout(() => {
+                msg.remove();
+            }, 500);
+        }
+    }, 3000);
+</script>

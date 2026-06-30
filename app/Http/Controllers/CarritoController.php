@@ -48,12 +48,24 @@ class CarritoController extends Controller
  public function agregar(Request $request)
 {
     
-    $producto = Producto::findOrFail($request->producto_id);
-
     $request->validate([
         'producto_id' => 'required|exists:productos,id',
         'cantidad' => 'required|integer|min:1',
     ]);
+
+    $producto = Producto::findOrFail($request->producto_id);
+
+    if ($producto->stock <= 0) {
+
+    if ($request->ajax()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'No hay stock disponible'
+        ], 422);
+    }
+
+    return back()->with('error', 'No hay stock disponible');
+}
 
     $carrito = VentaCabecera::where('user_id', Auth::id())
     ->where('estado', 'carrito')
@@ -211,26 +223,23 @@ public function confirmar(Request $request)
    public function eliminar($id)
 {
     $item = VentaDetalle::findOrFail($id);
-
     $carrito = VentaCabecera::findOrFail($item->venta_id);
 
-    // bloquear si ya fue confirmada la compra
     if ($carrito->estado !== 'carrito') {
-        return back()->with('error', 'No puedes modificar una compra confirmada');
+        return response()->json([
+            'success' => false,
+            'message' => 'No puedes modificar una compra confirmada'
+        ], 422);
     }
 
-    //  eliminar item
     $item->delete();
 
-    // recalcular total
-    $carrito->total = VentaDetalle::where('venta_id', $carrito->id)
-        ->sum('subtotal');
-
+    $carrito->total = VentaDetalle::where('venta_id', $carrito->id)->sum('subtotal');
     $carrito->save();
 
-    return redirect()
-        ->route('cliente.carrito')
-        ->with('success', 'Producto eliminado del carrito');
+   return redirect()
+    ->route('cliente.carrito')
+    ->with('success', 'Producto eliminado del carrito');
 }
 
 public function cambiarCantidad(Request $request, $id)
@@ -252,10 +261,12 @@ public function cambiarCantidad(Request $request, $id)
     }
 
     // ❌ eliminar si llega a 0
-    if ($nuevaCantidad <= 0) {
-        $item->delete();
-        return back();
-    }
+  if ($nuevaCantidad <= 0) {
+
+    $item->delete();
+
+    return back()->with('error', 'El producto fue eliminado del carrito');
+}
 
     // 🚨 validar stock
     if ($nuevaCantidad > $producto->stock) {

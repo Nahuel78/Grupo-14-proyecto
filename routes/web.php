@@ -91,6 +91,8 @@ Route::middleware(['auth', 'rol:cliente'])->group(function () {
         //cantida de producto  
              Route::put('/carrito/cantidad/{id}', [CarritoController::class, 'cambiarCantidad'])
              ->name('carrito.cambiarCantidad');
+            //reactivar producto
+           
             
 
   // Vista de compra confirmada (protegida: redirige si no hay sesión) 
@@ -149,6 +151,9 @@ Route::middleware(['auth', 'rol:admin'])->prefix('admin')->group(function () {
 
     Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])
         ->name('admin.productos.destroy');
+    //Reactivar
+     Route::put('/productos/{id}/reactivar', [ProductoController::class, 'reactivar'])
+             ->name('admin.productos.reactivar');
 
     // PEDIDOS
     Route::get('/pedidos', [AdminController::class, 'pedidos'])

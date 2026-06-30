@@ -104,6 +104,7 @@
                         <th>Descripción</th>
                         <th>Precio</th>
                         <th>Stock</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
 
@@ -111,7 +112,9 @@
 
                 @forelse($productos as $producto)
 
-                    <tr class="fila-producto" data-id="{{ $producto->id }}">
+                   <tr class="fila-producto"
+                    data-id="{{ $producto->id }}"
+                   data-activo="{{ $producto->activo }}">
 
                         <td>{{ $producto->id }}</td>
 
@@ -138,6 +141,13 @@
                                 {{ $producto->stock }}
                             </span>
                         </td>
+                        <td>
+    @if($producto->activo)
+        <span class="badge bg-success">Activo</span>
+    @else
+        <span class="badge bg-danger">Inactivo</span>
+    @endif
+</td>
 
                     </tr>
 
@@ -182,6 +192,18 @@ document.querySelectorAll('.fila-producto').forEach(fila => {
 
         productoSeleccionado = this.dataset.id;
 
+        const activo = this.dataset.activo;
+
+if (activo == "1") {
+    btnEliminar.innerHTML = '<i class="bi bi-trash"></i> Dar de baja';
+    btnEliminar.classList.remove('btn-success');
+    btnEliminar.classList.add('btn-danger');
+} else {
+    btnEliminar.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Reactivar';
+    btnEliminar.classList.remove('btn-danger');
+    btnEliminar.classList.add('btn-success');
+}
+
         // activar botones
         btnEditar.classList.remove('btn-disabled');
         btnEliminar.classList.remove('btn-disabled');
@@ -197,16 +219,17 @@ btnEditar.addEventListener('click', function () {
     window.location.href = `/admin/productos/${productoSeleccionado}/editar`;
 });
 
-// ELIMINAR
+
+// BAJA / REACTIVAR
 btnEliminar.addEventListener('click', function () {
 
     if (!productoSeleccionado) return;
 
-    if (!confirm('¿Seguro que querés eliminar este producto?')) return;
+    const fila = document.querySelector('.table-primary');
+    const activo = fila.dataset.activo;
 
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = `/admin/productos/${productoSeleccionado}`;
 
     const csrf = document.createElement('input');
     csrf.type = 'hidden';
@@ -216,7 +239,22 @@ btnEliminar.addEventListener('click', function () {
     const method = document.createElement('input');
     method.type = 'hidden';
     method.name = '_method';
-    method.value = 'DELETE';
+
+    if (activo == "1") {
+
+        if (!confirm('¿Seguro que querés dar de baja este producto?')) return;
+
+        form.action = `/admin/productos/${productoSeleccionado}`;
+        method.value = 'DELETE';
+
+    } else {
+
+        if (!confirm('¿Seguro que querés reactivar este producto?')) return;
+
+        form.action = `/admin/productos/${productoSeleccionado}/reactivar`;
+        method.value = 'PUT';
+
+    }
 
     form.appendChild(csrf);
     form.appendChild(method);

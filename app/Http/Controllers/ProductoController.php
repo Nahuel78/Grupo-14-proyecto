@@ -7,213 +7,238 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
-    public function hombre(){
+    
+public function hombre()
+{
     session(['ultima_categoria' => url()->current()]);
 
-    $productos = Producto::where('categoria', 'Hombre')->get();
+    $productos = Producto::where('categoria', 'Hombre')
+        ->where('activo', 1)
+        ->get();
 
     return view('hombre.index', compact('productos'));
-    }
+}
 
-        public function hombreRopa()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function hombreRopa()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Hombre')
-            ->where('subcategoria', 'ropa')
-            ->get();
+    $productos = Producto::where('categoria', 'Hombre')
+        ->where('subcategoria', 'ropa')
+        ->where('activo', 1)
+        ->get();
 
-        return view('hombre.ropa', compact('productos'));
-    }
+    return view('hombre.ropa', compact('productos'));
+}
 
-    public function hombreZapatillas()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function hombreZapatillas()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Hombre')
-            ->where('subcategoria', 'zapatillas')
-            ->get();
+    $productos = Producto::where('categoria', 'Hombre')
+        ->where('subcategoria', 'zapatillas')
+        ->where('activo', 1)
+        ->get();
 
-        return view('hombre.zapatillas', compact('productos'));
-    }
+    return view('hombre.zapatillas', compact('productos'));
+}
 
-    public function hombreBotines()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function hombreBotines()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Hombre')
-            ->where('subcategoria', 'botines')
-            ->get();
+    $productos = Producto::where('categoria', 'Hombre')
+        ->where('subcategoria', 'botines')
+        ->where('activo', 1)
+        ->get();
 
-        return view('hombre.botines', compact('productos'));
-    }
+    return view('hombre.botines', compact('productos'));
+}
 
-        public function mujer()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function mujer()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Mujer')->get();
+    $productos = Producto::where('categoria', 'Mujer')
+        ->where('activo', 1)
+        ->get();
 
-        return view('mujer.index', compact('productos'));
-    }
+    return view('mujer.index', compact('productos'));
+}
 
-    public function mujerRopa()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function mujerRopa()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Mujer')
-            ->where('subcategoria', 'ropa')
-            ->get();
+    $productos = Producto::where('categoria', 'Mujer')
+        ->where('subcategoria', 'ropa')
+        ->where('activo', 1)
+        ->get();
 
-        return view('mujer.ropa', compact('productos'));
-    }
+    return view('mujer.ropa', compact('productos'));
+}
 
-    public function mujerZapatillas()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function mujerZapatillas()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Mujer')
-            ->where('subcategoria', 'zapatillas')
-            ->get();
+    $productos = Producto::where('categoria', 'Mujer')
+        ->where('subcategoria', 'zapatillas')
+        ->where('activo', 1)
+        ->get();
 
-        return view('mujer.zapatillas', compact('productos'));
-    }
+    return view('mujer.zapatillas', compact('productos'));
+}
 
-    public function mujerAccesorios()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function mujerAccesorios()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Mujer')
-            ->where('subcategoria', 'accesorios')
-            ->get();
+    $productos = Producto::where('categoria', 'Mujer')
+        ->where('subcategoria', 'accesorios')
+        ->where('activo', 1)
+        ->get();
 
-        return view('mujer.accesorios', compact('productos'));
-    }
+    return view('mujer.accesorios', compact('productos'));
+}
 
-    public function ninos()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function ninos()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Niños')->get();
+    $productos = Producto::where('categoria', 'Niños')
+        ->where('activo', 1)
+        ->get();
 
-        return view('niños.index', compact('productos'));
-    }
+    return view('niños.index', compact('productos'));
+}
 
-    public function ninosRopa()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function ninosRopa()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Niños')
-            ->where('subcategoria', 'ropa')
-            ->get();
+    $productos = Producto::where('categoria', 'Niños')
+        ->where('subcategoria', 'ropa')
+        ->where('activo', 1)
+        ->get();
 
-        return view('niños.ropa', compact('productos'));
-    }
+    return view('niños.ropa', compact('productos'));
+}
 
-    public function ninosZapatillas()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function ninosZapatillas()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Niños')
-            ->where('subcategoria', 'zapatillas')
-            ->get();
+    $productos = Producto::where('categoria', 'Niños')
+        ->where('subcategoria', 'zapatillas')
+        ->where('activo', 1)
+        ->get();
 
-        return view('niños.zapatillas', compact('productos'));
-    }
+    return view('niños.zapatillas', compact('productos'));
+}
 
-    public function ninosBotines()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function ninosBotines()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Niños')
-            ->where('subcategoria', 'botines')
-            ->get();
+    $productos = Producto::where('categoria', 'Niños')
+        ->where('subcategoria', 'botines')
+        ->where('activo', 1)
+        ->get();
 
-        return view('niños.botines', compact('productos'));
-    }
+    return view('niños.botines', compact('productos'));
+}
 
-        public function accesorios()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function accesorios()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Accesorios')->get();
+    $productos = Producto::where('categoria', 'Accesorios')
+        ->where('activo', 1)
+        ->get();
 
-        return view('accesorios.index', compact('productos'));
-    }
+    return view('accesorios.index', compact('productos'));
+}
 
-    public function accesoriosMochila()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function accesoriosMochila()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Accesorios')
-            ->where('subcategoria', 'mochila')
-            ->get();
+    $productos = Producto::where('categoria', 'Accesorios')
+        ->where('subcategoria', 'mochila')
+        ->where('activo', 1)
+        ->get();
 
-        return view('accesorios.mochila', compact('productos'));
-    }
+    return view('accesorios.mochila', compact('productos'));
+}
 
-    public function accesoriosMedias()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function accesoriosMedias()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Accesorios')
-            ->where('subcategoria', 'medias')
-            ->get();
+    $productos = Producto::where('categoria', 'Accesorios')
+        ->where('subcategoria', 'medias')
+        ->where('activo', 1)
+        ->get();
 
-        return view('accesorios.medias', compact('productos'));
-    }
+    return view('accesorios.medias', compact('productos'));
+}
 
-    public function accesoriosPelotas()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function accesoriosPelotas()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Accesorios')
-            ->where('subcategoria', 'pelotas')
-            ->get();
+    $productos = Producto::where('categoria', 'Accesorios')
+        ->where('subcategoria', 'pelotas')
+        ->where('activo', 1)
+        ->get();
 
-        return view('accesorios.pelotas', compact('productos'));
-    }
+    return view('accesorios.pelotas', compact('productos'));
+}
 
-    public function accesoriosGorras()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function accesoriosGorras()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Accesorios')
-            ->where('subcategoria', 'gorras')
-            ->get();
+    $productos = Producto::where('categoria', 'Accesorios')
+        ->where('subcategoria', 'gorras')
+        ->where('activo', 1)
+        ->get();
 
-        return view('accesorios.gorras', compact('productos'));
-    }
+    return view('accesorios.gorras', compact('productos'));
+}
 
-    public function accesoriosPaletas()
-    {
-        session(['ultima_categoria' => url()->current()]);
+public function accesoriosPaletas()
+{
+    session(['ultima_categoria' => url()->current()]);
 
-        $productos = Producto::where('categoria', 'Accesorios')
-            ->where('subcategoria', 'paletas')
-            ->get();
+    $productos = Producto::where('categoria', 'Accesorios')
+        ->where('subcategoria', 'paletas')
+        ->where('activo', 1)
+        ->get();
 
-        return view('accesorios.paletas', compact('productos'));
-    }
+    return view('accesorios.paletas', compact('productos'));
+}
 
 
 
+  public function gestionarProductos()
+{
+    $productos = Producto::all();
 
+    return view('backend.admin.productos', compact('productos'));
+}
 
+public function reactivar($id)
+{
+    $producto = Producto::findOrFail($id);
 
+    $producto->activo = 1;
+    $producto->save();
 
-
-
-
-
-
-
-    public function gestionarProductos()
-    {
-        $productos = Producto::all();
-
-        return view('backend.admin.productos', compact('productos'));
-    }
+    return redirect()->route('admin.productos')
+        ->with('success', 'Producto reactivado correctamente');
+}
 
     public function guardarProducto(Request $request)
     {

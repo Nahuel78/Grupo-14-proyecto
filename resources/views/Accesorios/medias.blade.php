@@ -209,19 +209,28 @@
            </p>
 
 
-           <form action="{{ route('carrito.agregar') }}"
-      method="POST"
-      class="form-agregar-carrito">
-    @csrf
+           @if($producto->stock > 0)
 
-    <input type="hidden" name="producto_id" value="{{ $producto->id }}">
-    <input type="hidden" name="cantidad" value="1">
+    <form action="{{ route('carrito.agregar') }}"
+          method="POST"
+          class="form-agregar-carrito">
+        @csrf
 
-    <button type="submit" class="btn-carrito">
-        Agregar al carrito
+        <input type="hidden" name="producto_id" value="{{ $producto->id }}">
+        <input type="hidden" name="cantidad" value="1">
+
+        <button type="submit" class="btn-carrito">
+            Agregar al carrito
+        </button>
+    </form>
+
+@else
+
+    <button class="btn-sin-stock" disabled>
+        Sin stock
     </button>
-</form>
 
+@endif
     </div>
 
 @endforeach
