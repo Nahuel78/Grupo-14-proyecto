@@ -185,41 +185,46 @@
     <div class="col-md-6 mb-3">
         <label class="form-label fw-bold">Nombre y Apellido</label>
         <input type="text"
-               name="nombre_envio"
-               class="form-control"
-               required>
+       name="nombre_envio"
+       class="form-control"
+       value="{{ Auth::user()->name }} {{ Auth::user()->apellido }}"
+       required>
     </div>
 
     <div class="col-md-6 mb-3">
         <label class="form-label fw-bold">Teléfono</label>
         <input type="text"
-               name="telefono_envio"
-               class="form-control"
-               required>
+       name="telefono_envio"
+       class="form-control"
+       value="{{ Auth::user()->telefono }}"
+       required>
     </div>
 
     <div class="col-md-6 mb-3">
         <label class="form-label fw-bold">Provincia</label>
         <input type="text"
-               name="provincia"
-               class="form-control"
-               required>
+       name="provincia"
+       class="form-control"
+       value="{{ old('provincia', Auth::user()->provincia) }}"
+       required>
     </div>
 
     <div class="col-md-6 mb-3">
         <label class="form-label fw-bold">Ciudad</label>
-        <input type="text"
-               name="ciudad"
-               class="form-control"
-               required>
+       <input type="text"
+       name="ciudad"
+       class="form-control"
+       value="{{ Auth::user()->ciudad }}"
+       required>
     </div>
 
     <div class="col-md-8 mb-3">
         <label class="form-label fw-bold">Dirección</label>
-        <input type="text"
-               name="direccion"
-               class="form-control"
-               required>
+       <input type="text"
+       name="direccion"
+       class="form-control"
+       value="{{ Auth::user()->direccion }}"
+       required>
     </div>
 
     <div class="col-md-4 mb-3">
@@ -239,12 +244,13 @@
     </div>
 
     <div class="col-md-6 mb-3">
-        <label class="form-label fw-bold">Código Postal</label>
-        <input type="text"
-               name="codigo_postal"
-               class="form-control"
-               required>
-    </div>
+    <label class="form-label fw-bold">Código Postal</label>
+    <input type="text"
+           name="codigo_postal"
+           class="form-control"
+           value="{{ Auth::user()->codigo_postal }}"
+           required>
+</div>
 
     <div class="col-12 mb-3">
         <label class="form-label fw-bold">Referencias para la entrega</label>

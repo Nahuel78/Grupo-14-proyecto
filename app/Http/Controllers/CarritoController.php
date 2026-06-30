@@ -201,25 +201,30 @@ public function confirmar(Request $request)
         $producto->stock -= $item->cantidad;
         $producto->save();
     }
+    $user = Auth::user();
 
+    // ✔ datos reutilizados del perfil
     $carrito->update([
     'estado' => 'pagado',
     'fecha_venta' => now(),
     'metodo_pago' => $request->metodo_pago,
 
-    'nombre_envio' => $request->nombre_envio,
+    'nombre_envio' => $request->nombre_envio ?? $user->name,
     'telefono_envio' => $request->telefono_envio,
-    'provincia' => $request->provincia,
-    'ciudad' => $request->ciudad,
-    'direccion' => $request->direccion,
+
+    'provincia' => $request->provincia ?? $user->provincia,
+    'ciudad' => $request->ciudad ?? $user->ciudad,
+    'direccion' => $request->direccion ?? $user->direccion,
     'numero' => $request->numero,
     'departamento' => $request->departamento,
-    'codigo_postal' => $request->codigo_postal,
+    'codigo_postal' => $request->codigo_postal ?? $user->codigo_postal,
+
     'referencias' => $request->referencias,
 ]);
 
     return redirect()->route('factura', $carrito->id);
 }
+
    public function eliminar($id)
 {
     $item = VentaDetalle::findOrFail($id);

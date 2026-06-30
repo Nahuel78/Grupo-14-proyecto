@@ -222,6 +222,7 @@ public function accesoriosPaletas()
 
 
 
+
   public function gestionarProductos()
 {
     $productos = Producto::all();
