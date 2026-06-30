@@ -166,7 +166,7 @@
 </div>
 
         <div>
-            <h4>Factura #{{ $venta->id }}</h4>
+            <h4>Detalle Compra: #{{ $venta->id }}</h4>
         </div>
 
     </div>

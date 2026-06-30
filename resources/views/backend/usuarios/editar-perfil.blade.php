@@ -57,7 +57,22 @@
                            value="{{ Auth::user()->name }}">
 
                 </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Apellido</label>
+                    <input type="text"
+                        name="apellido"
+                        class="form-control"
+                        value="{{ old('apellido', Auth::user()->apellido) }}">
+                </div>
 
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Teléfono</label>
+                    <input type="text"
+                        name="telefono"
+                        class="form-control"
+                        value="{{ old('telefono', Auth::user()->telefono) }}">
+                </div>
+                
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -70,6 +85,58 @@
                            value="{{ Auth::user()->email }}">
 
                 </div>
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Dirección
+                    </label>
+
+                    <input type="text"
+                        name="direccion"
+                        class="form-control"
+                        value="{{ old('direccion', Auth::user()->direccion) }}">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Ciudad
+                    </label>
+
+                    <input type="text"
+                        name="ciudad"
+                        class="form-control"
+                        value="{{ old('ciudad', Auth::user()->ciudad) }}">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Provincia
+                    </label>
+
+                    <input type="text"
+                        name="provincia"
+                        class="form-control"
+                        value="{{ old('provincia', Auth::user()->provincia) }}">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Código Postal
+                    </label>
+
+                    <input type="text"
+                        name="codigo_postal"
+                        class="form-control"
+                        value="{{ old('codigo_postal', Auth::user()->codigo_postal) }}">
+
+                </div>
+
                 <div class="mb-3">
 
                 <label class="form-label">

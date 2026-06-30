@@ -42,36 +42,41 @@ class ClienteController extends Controller
 
     public function editarPerfil()
 {
-    return view('backend.usuarios.editar-perfil');
+    $user = Auth::user();
+
+    return view('backend.usuarios.editar-perfil', compact('user'));
 }
 
 public function actualizarPerfil(Request $request)
 {
-   $request->validate([
-    'name' => 'required',
-    'email' => 'required|email|unique:users,email,' . Auth::id(),
-    'password' => 'nullable|confirmed|min:6'
-]);
+    $request->validate([
+        'name' => 'required',
+        'apellido' => 'nullable|string|max:255',
+        'telefono' => 'nullable|string|max:20',
+        'email' => 'required|email|unique:users,email,' . Auth::id(),
+        'direccion' => 'nullable|string|max:255',
+        'ciudad' => 'nullable|string|max:255',
+        'provincia' => 'nullable|string|max:255',
+        'codigo_postal' => 'nullable|string|max:20',
+        'password' => 'nullable|confirmed|min:6'
+    ]);
 
-    $usuario = Auth::user();
+    $user = Auth::user();
 
-    $usuario->name = $request->name;
-    $usuario->email = $request->email;
+    $user->name = $request->name;
+    $user->apellido = $request->apellido;
+    $user->telefono = $request->telefono;
+    $user->email = $request->email;
+    $user->direccion = $request->direccion;
+    $user->ciudad = $request->ciudad;
+    $user->provincia = $request->provincia;
+    $user->codigo_postal = $request->codigo_postal;
 
     if ($request->filled('password')) {
-        $usuario->password = Hash::make($request->password);
+        $user->password = Hash::make($request->password);
     }
 
-   $user = User::find(Auth::id());
-
-$user->name = $request->name;
-$user->email = $request->email;
-
-if ($request->filled('password')) {
-    $user->password = Hash::make($request->password);
-}
-
-$user->save();
+    $user->save();
 
     return redirect()
         ->route('cliente.perfil')

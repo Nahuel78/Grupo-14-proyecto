@@ -38,26 +38,30 @@
             <div class="row">
 
                 <div class="col-md-6">
-
-                    <label class="fw-bold">
-                        Nombre
-                    </label>
-
+                    <label class="fw-bold">Nombre</label>
                     <p>{{ Auth::user()->name }}</p>
-
                 </div>
 
                 <div class="col-md-6">
-
-                    <label class="fw-bold">
-                        Correo Electrónico
-                    </label>
-
-                    <p>{{ Auth::user()->email }}</p>
-
+                    <label class="fw-bold">Apellido</label>
+                    <p>{{ Auth::user()->apellido }}</p>
                 </div>
 
             </div>
+
+        <div class="row mt-3">
+
+            <div class="col-md-6">
+                <label class="fw-bold">Teléfono</label>
+                <p>{{ Auth::user()->telefono }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-bold">Email</label>
+                <p>{{ Auth::user()->email }}</p>
+            </div>
+
+        </div>
 
             <div class="row mt-3">
 
@@ -84,6 +88,45 @@
                 </div>
 
             </div>
+            <div class="row mt-3">
+
+    <div class="col-md-6">
+        <label class="fw-bold">
+            Dirección
+        </label>
+
+        <p>{{ Auth::user()->direccion }}</p>
+    </div>
+
+    <div class="col-md-6">
+        <label class="fw-bold">
+            Ciudad
+        </label>
+
+        <p>{{ Auth::user()->ciudad }}</p>
+    </div>
+
+</div>
+
+        <div class="row mt-3">
+
+            <div class="col-md-6">
+                <label class="fw-bold">
+                    Provincia
+                </label>
+
+                <p>{{ Auth::user()->provincia }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-bold">
+                    Código Postal
+                </label>
+
+                <p>{{ Auth::user()->codigo_postal }}</p>
+            </div>
+
+        </div>
 
             <hr>
 

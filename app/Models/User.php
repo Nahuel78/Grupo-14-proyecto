@@ -12,9 +12,15 @@ use Illuminate\Notifications\Notifiable;
 
 #[Fillable([
     'name',
+    'apellido',
+    'telefono',
     'email',
     'password',
-    'rol'
+    'rol',
+    'direccion',
+    'ciudad',
+    'provincia',
+    'codigo_postal'
 ])]
 
 #[Hidden(['password', 'remember_token'])]

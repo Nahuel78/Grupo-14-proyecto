@@ -196,18 +196,6 @@ class ProductoController extends Controller
         return view('accesorios.paletas', compact('productos'));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     public function gestionarProductos()
     {
         $productos = Producto::all();
